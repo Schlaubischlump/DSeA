@@ -1,0 +1,85 @@
+\documentclass[a4paper,11pt,twoside]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{ngerman, eucal, mathrsfs, amsfonts, bbm, amsmath, amssymb, stmaryrd,graphicx, array, geometry, listings, color}
+\geometry{left=25mm, right=15mm, bottom=25mm}
+\setlength{\parindent}{0em} 
+\setlength{\headheight}{0em} 
+\title{Datenstrukturen und effiziente Algorithmen\\ Blatt 4}
+\author{Markus Vieth, David Klopp, Christian Stricker}
+\date{\today}
+\newcommand{\limesS}{\text{lim sup}}
+\newcommand{\lsi}{\limesS_{n\rightarrow \infty}} %lim sup n nach inf
+\newcommand{\limesinf}{\text{lim}_{n\rightarrow \infty}}
+
+
+\begin{document}
+
+\maketitle
+\cleardoublepage
+\pagestyle{myheadings}
+\markboth{Markus Vieth,  David Klopp, Christian Stricker}{Markus Vieth, David Klopp, Christian Stricker}
+
+\section*{Nr.1}
+
+
+\section*{Nr.3}
+\subsection*{a)}
+\begin{tabular}{r|l}
+	$x$ & Ergebnisse: \\ \hline
+	$0$&$18$\\
+	$1$&$15$\\
+	$2$&$14$\\
+	$3$&$13$\\
+	$4$&$14$\\
+	$5$&$15$\\
+	$6$&$16$\\
+	$7$&$17$\\
+	$8$&$18$\\
+	$9$&$19$\\
+	$10$&$20$\\
+	$11$&$21$\\
+	$12$&$22$\\
+	$13$&$23$
+\end{tabular} \\
+
+Für $x=x_2=3$, also dem Median der Menge $\{x_1, x_2, x_3\}$, wird die Summe minimal.
+
+\pagebreak
+
+\subsection*{b)}
+
+Beh:\\ $\sum_{i=1}^{n} |x_i-x|$ wird minimal für $x = x_{k+1}$, d.h x := Median $\{x_1, ..., x_n\}$\\
+
+Bew: \\
+Sei die Menge aller $x_i$ sortiert. Teile die Summe in zwei gleich große Teilsummen, wobei Summe 1 kleiner als $x_{k+1}$ und Summe 2 größer als $x_{k+1} $ ist:
+\[\sum_{i=1}^{2k+1}|x_i-x|\]
+\[= \sum_{i=1}^{k}|x_i-x| + \sum_{i=k+2}^{2k+1}|x_i-x| + |x_{k+1}-x|\]
+\[= kx - \sum_{i=1}^{k}x_i -kx+ \sum_{i=k+2}^{2k+1}x_i + |x_{k+1}-x|\]
+\[= \sum_{i=k+2}^{2k+1}x_i - \sum_{i=1}^{k}x_i + |x_{k+1}-x|\]\\
+
+\underline{Für $x=x_k$}:
+\[= \sum_{i=k+2}^{2k+1}x_i - \sum_{i=1}^{k}x_i \] \\
+
+\underline{Für $x \neq x_k$:}\\
+Der Term  $|x_{k+1}-x|$ wird immer > 0 und somit größer als der Fall $x=x_k$, d.h  $\sum_{i=1}^{n} |x_i-x|$ ist genau dann minimal, wenn $x = x_{k+1}$ ist.
+
+\subsection*{c)}
+
+Beh:\\ $\sum_{i=1}^{n} (x_i-x)^2$ wird minimal für $x = x_{k+1}$, d.h x := Median $\{x_1, ..., x_n\}$\\
+
+Bew: \\
+\[f(x) = \sum_{i=1}^{n} (x_i -x)^2\]
+\[f'(x) = -\sum_{i=1}^{n} 2(x_i -x)\]
+\[f''(x) = \sum_{i=1}^{n} 2\]
+
+\underline{$f'(x)=0:$}\\
+\[-\sum_{i=1}^{n}2(x_i -x) = 0\]
+\[\Leftrightarrow -2nx + \sum_{i=1}^{n}2x_i = 0\]
+\[\Leftrightarrow 2\sum_{i=1}^{n}x_i = 2nx\]
+\[\Leftrightarrow \frac{1}{n} \cdot \sum_{i=1}^{n}x_i = x\]\\
+
+$x$ ist offensichtlich der Median. Da $f''(x)$ immer größer als Null ist, handelt es sich bei $x=x_{k+1}$ um ein Minimum.\\
+$q.e.d$
+
+\end{document}

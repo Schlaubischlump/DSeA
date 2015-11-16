@@ -1,0 +1,137 @@
+\documentclass[a4paper,11pt,twoside]{article}
+\usepackage[T1]{fontenc}
+\usepackage[latin1]{inputenc}
+\usepackage{ngerman, eucal, mathrsfs, amsfonts, bbm, amsmath, amssymb, stmaryrd,graphicx, array, geometry, listings, color}
+\geometry{left=25mm, right=15mm, bottom=25mm}
+\setlength{\parindent}{0em} 
+\setlength{\headheight}{0em} 
+\title{Datenstrukturen und effiziente Algorithmen\\ Blatt 1}
+\author{Markus Vieth, David Klopp, Christian Stricker}
+\date{\today}
+\newcommand{\limesS}{\text{lim sup}}
+\newcommand{\lsi}{\limesS_{n\rightarrow \infty}} %lim sup n nach inf
+\newcommand{\limesinf}{\text{lim}_{n\rightarrow \infty}}
+
+
+\begin{document}
+
+\maketitle
+\cleardoublepage
+\pagestyle{myheadings}
+\markboth{Markus Vieth,  David Klopp, Christian Stricker}{Markus Vieth, David Klopp, Christian Stricker}
+
+\section*{Nr.1}
+
+\subsection*{a)}
+1.) Invariante:
+Verschiebe jede Zahl solange nach hinten im Array, wie der Nachfolger kleiner ist als die aktuelle Zahl.
+\newline
+\newline
+2.) Schleifenbedingung:
+Solange mindestens eine Vertauschung stattgefunden hat, wiederhole die Schleife.
+\newline
+
+
+\subsection*{b)}
+\underline{Worst-Case:} Liste in umgekehrter Reihenfolge
+\newline
+=> 1. Verschiebe erstes Element um n-1 Stellen
+\newline
+=> 2. Verschiebe zweites Element um n-2 Stellen
+\newline
+=> ....
+\newline
+Hieraus ergibt sich:
+\newline 
+\[\sum^{n-1}_{k=0}k = (n-1)\cdot \frac{n}{2} = \frac{n^{2}-n}{2}   \in O(n^{2})\]
+
+
+\subsection*{c)}
+Kleine Elemente am Ende werden automatisch an den Anfang des Arrays bewegt, wenn die großen Elemente aufsteigen.
+\newline
+=> große Elemente am Anfang sind schlimmer, da diese den gesamten Array durchlaufen müssen.
+
+
+\subsection*{d)}
+Da der Algorithmus eine ''größer'' und keine ''größergleich'' Operation durchführt, ist dieser stabil.
+
+
+
+\newpage
+
+
+\section*{Nr.2}
+
+\subsection*{a)}
+\underline{I.A.:}    
+\qquad{n = 0}
+\[\sum^{0}_{k=1}2^{k}\cdot\left(k+1\right)=0\cdot2^{1}\]
+\[\Leftrightarrow 0 = 0\]
+\underline{I.B.:}    
+\[\sum^{n}_{k=1}2^{k}\cdot\left(k+1\right)=n\cdot2^{n+1}\]
+\underline{I.V.:}   
+\newline 
+\qquad{Die Behauptung gelte für ein festes n.}
+\newline
+\newline
+\underline{I.S.:}   
+\[\sum^{n+1}_{k=1}2^{k}\cdot\left(k+1\right)=\sum^{n}_{k=1}2^{k}\cdot\left(k+1\right) + 2^{n+1}(n+2)\]
+\[= 2^{n+1}(n+n+2)\]
+\[= 2\cdot2^{n+1}(n+1)\]
+\[= 2^{n+2}(n+1)\]
+\[q.e.d\]
+
+
+
+\subsection*{b)}
+\underline{I.A.:}    
+\qquad{n = 0}
+\[0=3\cdot0^{2}+0\]
+\[\Leftrightarrow 0 = 0\]
+\underline{I.B.:}    
+\[\sum^{2n}_{k=n+1}2k=3n^{2}+n\]
+\underline{I.V.:}   
+\newline 
+\qquad{Die Behauptung gelte für ein festes n.}
+\newline
+\newline
+\underline{I.S.:}   
+\[\sum^{2n+2}_{k=n+2}2k=\sum^{2n}_{k=n+1}2k-2(n+1)+2(2n+1)+2(2n+2)\]
+\[=3n^{2}+n+2(3n+2)\]
+\[=3(n^{2}+2n+1)+(n+1)\]
+\[=3(n+1)^{2}+(n+1)\]
+\[q.e.d\]
+
+
+\subsection*{c)}
+\underline{I.A.:}    
+\qquad{Vermutung: m = 1, wähle n = 0}
+\[0=0!-1\]
+\[\Leftrightarrow 0 = 1-1\]
+\[\Leftrightarrow 0 = 0\]
+\underline{I.B.:}    
+\[\sum^{n}_{k=1}k\cdot k!=(n+1)!-1\]
+\underline{I.V.:}   
+\newline 
+\qquad{Die Behauptung gelte für ein festes n.}
+\newline
+\newline
+\underline{I.S.:}   
+\[\sum^{n+1}_{k=1}k\cdot k!=\sum^{n}_{k=1}k\cdot k!+(n+1)(n+1)!\]
+\[= (n+1)! \cdot (1+n+1)-1\]
+\[= (n+1)! \cdot (n+2)-1\]
+\[= (n+2)!-1\]
+\[q.e.d\]
+
+\section*{Nr. 3}
+\subsection*{a)}
+\[\log_b a \cdot \log_c b -\log_c a = \log_c b^{\log_b a}-\log_c a= \log_c a-\log_c a =0\]
+\subsection*{b)}
+\[\log_b \left(\frac{a}{b}\right)^c-c\cdot\log_b a=c\cdot\log_b a- c\cdot\log_b b - c\cdot\log_b a = -c \log_b b = -c \]
+\subsection*{c)}
+\[2\log_b \sqrt{ab}+\log_2 \frac{1}{\sqrt{a}}\log_b 4 = 2\log_b (ab)^{\frac{1}{2}}+\log_2 a^{-\frac{1}{2}}\log_b 2^2 =\log_b (ab)-\log_2 a\cdot\log_b 2\]
+\[ = \log_b a + \log_b b - \log_b 2^{\log_2 a} = \log_b a +1 -\log_b a= 1  \]
+\subsection*{d)}
+\[\left(b^{\frac{1}{d}\cdot \log_b c}\right)^d\cdot\frac{1}{2}-\frac{1}{2}=\left(b^{\log_b c}\right)\cdot \frac{1}{c}-\frac{1}{2}=c\cdot\frac{1}{c}-\frac{1}{2}=\frac{1}{2} \]
+
+\end{document}

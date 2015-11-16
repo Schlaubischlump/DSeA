@@ -1,0 +1,107 @@
+\documentclass[a4paper,11pt,twoside]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{ngerman, eucal, mathrsfs, amsfonts, bbm, amsmath, amssymb, stmaryrd,graphicx, array, geometry, listings, color}
+\geometry{left=25mm, right=15mm, bottom=25mm}
+\setlength{\parindent}{0em} 
+\setlength{\headheight}{0em} 
+\title{Datenstrukturen und effiziente Algorithmen\\ Blatt 3}
+\author{Markus Vieth, David Klopp, Christian Stricker}
+\date{\today}
+\newcommand{\limesS}{\text{lim sup}}
+\newcommand{\lsi}{\limesS_{n\rightarrow \infty}} %lim sup n nach inf
+\newcommand{\limesinf}{\text{lim}_{n\rightarrow \infty}}
+
+
+\begin{document}
+
+\maketitle
+\cleardoublepage
+\pagestyle{myheadings}
+\markboth{Markus Vieth,  David Klopp, Christian Stricker}{Markus Vieth, David Klopp, Christian Stricker}
+
+\section*{Nr.1}
+\subsection*{b)}
+
+Durch das zufällige Auswählen des Pivotelements, erreicht der Algorithmus eine durchschnittliche Laufzeit in $O(n)$ (siehe Vorlesung vom 10.11.15). 
+Wenn immer das erste Element gewählt wird, ergibt sich:
+\[T(n)=n+\frac{1}{n}T(1)+\frac{n-1}{n}T(n-1)=\sum_{i=0}^{n}\frac{n^2-i}{n}=\frac{1}{2}\left(\frac{n^2-0}{n}+\frac{n^2-n}{n}\right)(n+1)\]
+\[=\frac{1}{2}(n+n-1)(n+1)=\frac{1}{2}(2n^2-n+2n+1)\in O(n^2)\supset O(n)\]
+
+\section*{Nr.2}
+\subsection*{a)}
+Aufgabe: $T(n) = 8T(\frac{n}{2})+7n^3, T(1)=1 $ \\
+
+Mastertheoreme Fall 3: $a = b^{\alpha}$ \\
+$\Rightarrow a=8, b=2, \alpha=3 $ \\
+$\Rightarrow$ Laufzeit:  $\theta (n^3\log(n))$
+
+
+\subsection*{b)}
+Aufgabe: $ T(n)=2 \cdot T(\frac{n}{2})+n\log n $ \\
+
+Akra-Bazzi \\
+$\Rightarrow a=2, b=2, \alpha=\log_2(2) =1 $ 
+
+\[ \Rightarrow \theta(n \cdot (1+\int_1^n \frac{x\log(x)}{x^2} dx )) \]
+\[= \theta(n \cdot (1+\int_1^n \frac{\log(x)}{x} dx )) \] 
+
+Nebenrechnung mit Partieller Integration: (Mit $\log(x) = \ln(x)$) \\
+\[ \int \frac{\ln(x)}{x} dx = \ln(x) \cdot \ln(x) - \int \frac{\ln(x)}{x} \]
+\[ \int \frac{\ln(x)}{x} dx = \ln(x) \cdot \ln(x) - \int \frac{\ln(x)}{x} \]
+\[ \int \frac{\ln(x)}{x} dx = \frac{1}{2} \cdot \ln(x)^2 \] \\
+
+Es ergibt sich somit:
+\[= \theta(n \cdot (1+ [\frac{1}{2} \ln(x)^2]_1^n)) \]
+\[= \theta(n \cdot (1+ \frac{1}{2} \ln(n)^2)) \]
+\[= \theta(n\log(n)^2) \]
+
+\pagebreak
+
+\section*{Nr.3}
+\subsection*{}
+
+Gegeben: $U(n) = PU_{n-1}-QU_{n-2} $ mit $U_0 = 0, U_1 = 1$ und $P=1, Q=-2$ \\
+
+Ansatz: \[ U(Z) = \sum_{n=0}^{\infty} U_nZ^n \]
+ \[= U_0Z^0 + U_1Z^1 + U(Z) + \sum_{n=2}^{\infty} (PU_{n-1}-QU_{n-2})Z^n \]
+ \[= Z +  \sum_{n=2}^{\infty} (U_{n-1}+2 \cdot U_{n-2})Z^n \]
+\[= Z +  \sum_{n=2}^{\infty} (U_{n-1}\cdot Z^n ) + 2 \cdot \sum_{n=2}^{\infty} (U_{n-2}\cdot Z^n) \]
+\[= Z+Z\sum_{n=2}^{\infty} (U_{n-1}\cdot Z^{n-1} ) - 0 + 2Z^2 \sum_{n=2}^{\infty} (U_{n-2}\cdot Z^{n-2} ) \]
+\[= Z+Z\sum_{n=0}^{\infty} (U_{n}\cdot Z^{n} ) - 0 + 2Z^2 \sum_{n=0}^{\infty} (U_{n}\cdot Z^{n} ) \]
+\[= Z+Z \cdot U(Z) + 2 \cdot Z^{2} \cdot U(Z) \]
+\[= \frac{-Z}{2Z^2 + Z -1} \] \\
+
+Nullstellen bestimmen: \\
+\[2Z^2 + Z  -1 = 0\]
+\[\Leftrightarrow Z^2+\frac{1}{2} \cdot Z - \frac{1}{2} = 0\]
+\[\Leftrightarrow Z = -\frac{1}{4} \pm \sqrt{\frac{1}{16} + \frac{1}{2} }\]
+\[\Leftrightarrow Z = \frac{1}{2} \vee Z = -1 \] \\
+
+\pagebreak
+
+Partialbruchzerlegung: \\
+\[ \frac{A}{Z-\frac{1}{2}} + \frac{B}{Z+1} \]
+\[\Leftrightarrow \frac{A(Z+1) + B(Z-\frac{1}{2})}{(Z-\frac{1}{2})(Z+1)} \]
+\[\Leftrightarrow  Z(A+B)+A-\frac{1}{2}B \] \\
+
+\[\Rightarrow A-\frac{1}{2}B = 0 \] 
+\[\Leftrightarrow A = \frac{1}{2}B \] 
+
+\[\Rightarrow A+B = -1 \] 
+\[\Leftrightarrow  \frac{1}{2}B + B = -1\]  \\
+
+\[\Rightarrow B = -\frac{2}{3} \] 
+\[\Rightarrow A = -\frac{1}{3} \] \\
+
+Hauptrechnung:
+\[U(Z) = \frac{-Z}{2Z^2 + Z -1} \]
+\[= (\frac{-\frac{1}{3}}{(Z-\frac{1}{2})} + \frac{-\frac{2}{3}}{(Z+1)}) \cdot \frac{1}{2} \]
+\[= \frac{1}{3} \cdot ( \frac{1}{(1-2Z)} - \frac{1}{(1+Z)} ) \]
+\[= \frac{1}{3} \cdot (\sum_{n=0}^{\infty} (2Z)^n - \sum_{n=0}^{\infty} (-Z)^n) \]
+\[= \frac{1}{3} \cdot \sum_{n=0}^{\infty} ( (2Z)^n - (-Z)^n) \]
+\[= \sum_{n=0}^{\infty} \frac{1}{3} \cdot ( 2^n - (-1)^n) \cdot Z^n \] \\
+
+\[\Rightarrow U_n =\frac{1}{3} (2^n - (-1)^n) \]
+
+\end{document}
