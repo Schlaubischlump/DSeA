@@ -21,6 +21,14 @@
 \markboth{Markus Vieth,  David Klopp, Christian Stricker}{Markus Vieth, David Klopp, Christian Stricker}
 
 \section*{Nr.1}
+\subsection*{Psoidocode:}
+Eingabe: Integer k für Anzahl an Farben, Integer l für Anzahl an Muster. Ein 2x2n Array. In der ersten Zeile stehen die Farben in Integer codiert, in der zweiten Zeile analog für die Muster(bei 5 verschiedenen Muster/Farben gibt es die Integer 0-4).\\
+Man iterriert über das Eingabearray und speichert die Anzahl der jeweiligen Farben in ein Array. Dann wird nochmal über das Array iterriert, wenn an der i-ten Stelle, die Socke mit falsche Farbe n steht, wird diese mit einer anderen Socke im n Bereich vertauscht.\\
+Danach wird für jeden Farbbereich analog zum Farbensortieren nach Muster sortiert(Anzahl der Muster bestimmen, an die richtige Stelle tauschen).\\
+Damit kommt eine Laufzeit von O(n+l+k)= O(n) zustande.\\
+O(4*n), da man 2 mal über das ganze Array iteririert, um die Anzahl (an Farben/Muster) zu bestimmen\\
+O(8*n), da höchstens n-mal vertauscht wird, 2n Zugriffe zum Zwischenspeichern, 4n Zugriffe zum Überschreiben und 2n Zugriffe für die Zwischenspeicherungen wieder zu speichern.\\
+Analog beim Mustertauschen.\\
 
 \section*{Nr.2}
 \subsection*{a)}
