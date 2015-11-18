@@ -149,3 +149,4 @@ pythontex-files-*/
 .DS_Store
 #Windows Zeug
 *.ini
+Thumbs.db
