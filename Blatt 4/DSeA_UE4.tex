@@ -114,7 +114,7 @@ Der Term  $|x_{k+1}-x|$ wird immer > 0 und somit größer als der Fall $x=x_k$, 
 
 \subsection*{c)}
 
-Beh:\\ $\sum_{i=1}^{n} (x_i-x)^2$ wird minimal für $x = x_{k+1}$, d.h x := Median $\{x_1, ..., x_n\}$\\
+Beh:\\ $\sum_{i=1}^{n} (x_i-x)^2$ wird minimal für $x = \frac{1}{n} \cdot \sum_{i=1}^{n}x_i$, d.h x := arithmetisches Mittel von $\{x_1, ..., x_n\}$\\
 
 Bew: \\
 \[f(x) = \sum_{i=1}^{n} (x_i -x)^2\]
@@ -127,7 +127,7 @@ Bew: \\
 \[\Leftrightarrow 2\sum_{i=1}^{n}x_i = 2nx\]
 \[\Leftrightarrow \frac{1}{n} \cdot \sum_{i=1}^{n}x_i = x\]\\
 
-$x$ ist offensichtlich der Median. Da $f''(x)$ immer größer als Null ist, handelt es sich bei $x=x_{k+1}$ um ein Minimum.\\
+Da $f''(x)$ immer größer als Null ist, handelt es sich bei $x = \frac{1}{n} \cdot \sum_{i=1}^{n}x_i$ um ein Minimum.\\
 $q.e.d$
 
 \end{document}
