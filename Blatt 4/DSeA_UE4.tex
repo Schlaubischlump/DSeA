@@ -1,10 +1,20 @@
 \documentclass[a4paper,11pt,twoside]{article}
+\usepackage{listings}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage{ngerman, eucal, mathrsfs, amsfonts, bbm, amsmath, amssymb, stmaryrd,graphicx, array, geometry, listings, color}
 \geometry{left=25mm, right=15mm, bottom=25mm}
 \setlength{\parindent}{0em} 
-\setlength{\headheight}{0em} 
+\setlength{\headheight}{0em}
+\lstset{language=java,
+					 texcl=true,
+           basicstyle=\ttfamily,
+           keywordstyle=\color{blue}\ttfamily,
+           stringstyle=\color{red}\ttfamily,
+           commentstyle=\color{green}\ttfamily,
+					 breaklines=true,
+					 inputencoding=utf8,
+          }
 \title{Datenstrukturen und effiziente Algorithmen\\ Blatt 4}
 \author{Markus Vieth, David Klopp, Christian Stricker}
 \date{\today}
@@ -21,7 +31,7 @@
 \markboth{Markus Vieth,  David Klopp, Christian Stricker}{Markus Vieth, David Klopp, Christian Stricker}
 
 \section*{Nr.1}
-\subsection*{Psoidocode:}
+\subsection*{Erklärung:}
 Eingabe: Integer k für Anzahl an Farben, Integer l für Anzahl an Muster. Ein 2x2n Array. In der ersten Zeile stehen die Farben in Integer codiert, in der zweiten Zeile analog für die Muster(bei 5 verschiedenen Muster/Farben gibt es die Integer 0-4).\\
 Man iterriert über das Eingabearray und speichert die Anzahl der jeweiligen Farben in ein Array. Dann wird nochmal über das Array iterriert, wenn an der i-ten Stelle, die Socke mit falsche Farbe n steht, wird diese mit einer anderen Socke im n Bereich vertauscht.\\
 Danach wird für jeden Farbbereich analog zum Farbensortieren nach Muster sortiert(Anzahl der Muster bestimmen, an die richtige Stelle tauschen).\\
@@ -29,6 +39,10 @@ Damit kommt eine Laufzeit von O(n+l+k)= O(n) zustande.\\
 O(4*n), da man 2 mal über das ganze Array iteririert, um die Anzahl (an Farben/Muster) zu bestimmen\\
 O(8*n), da höchstens n-mal vertauscht wird, 2n Zugriffe zum Zwischenspeichern, 4n Zugriffe zum Überschreiben und 2n Zugriffe für die Zwischenspeicherungen wieder zu speichern.\\
 Analog beim Mustertauschen.\\
+
+\subsection*{Code:}
+\lstinputlisting {Suche.java}
+
 
 \section*{Nr.2}
 \subsection*{a)}
