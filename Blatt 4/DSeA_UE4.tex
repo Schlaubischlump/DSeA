@@ -106,17 +106,19 @@ Für $x=x_2=3$, also dem Median der Menge $\{x_1, x_2, x_3\}$, wird die Summe mi
 Beh:\\ $\sum_{i=1}^{n} |x_i-x|$ wird minimal für $x = x_{k+1}$, d.h x := Median $\{x_1, ..., x_n\}$\\
 
 Bew: \\
-Sei die Menge aller $x_i$ sortiert. Teile die Summe in zwei gleich große Teilsummen, wobei Summe 1 kleiner als $x_{k+1}$ und Summe 2 größer als $x_{k+1} $ ist:
-\[\sum_{i=1}^{2k+1}|x_i-x|\]
-\[= \sum_{i=1}^{k}|x_i-x| + \sum_{i=k+2}^{2k+1}|x_i-x| + |x_{k+1}-x|\]
-\[= kx - \sum_{i=1}^{k}x_i -kx+ \sum_{i=k+2}^{2k+1}x_i + |x_{k+1}-x|\]
-\[= \sum_{i=k+2}^{2k+1}x_i - \sum_{i=1}^{k}x_i + |x_{k+1}-x|\]\\
+Sei die Menge aller $x_i$ sortiert, sonst führe eine Permutation aus, so das die Menge aller $x_i$ sortiert ist. \\
+%Teile die Summe in zwei gleich lange Teilsummen, wobei Summe 1 alle $x_i$ kleiner als $x_{k+1}$ und Summe 2 alle $x_i$ größer als $x_{k+1} $ abdeckt:\\
+\underline{1. Fall $x \neq x_i~\forall~ i\in[1,n]:$}
+\[\sum_{i=1}^{2k+1}|x_i-x|= \sum_{i=1}^{j-1}|x_i-x| + \sum_{i=j+1}^{2k+1}|x_i-x| + |x_{j}-x|,~j\in[1,n]\]
+\underline{2. Fall $\exists~ j\in[1,n]\setminus\{k\}:~x = x_j:$}\\
+\[\sum_{i=1}^{2k+1}|x_i-x|= \sum_{i=1}^{j-1}|x_i-x| + \sum_{i=j+1}^{2k+1}|x_i-x| + |x_{j}-x|= \sum_{i=1}^{j-1}|x_i-x| + \sum_{i=j+1}^{2k+1}|x_i-x|\]
+\[=(j-1)x-\sum_{i=1}^{j-1}x_i-(2k+2-j-1)x+\sum_{i=j+1}^{2k+1}x_i=(j-1)x-(2k-j+1)x+\sum_{i=j+1}^{2k+1}x_i -\sum_{i=1}^{j-1}x_i\]
+\[=(2j-2k-2)x+\sum_{i=j+1}^{2k+1}x_i -\sum_{i=1}^{j-1}x_i=2(j-1-k)x+\sum_{i=j+1}^{2k+1}x_i -\sum_{i=1}^{j-1}x_i\leq \text{1. Fall} \]
+\underline{2. Fall ist minimal, wenn $(j-1-k)=0 \Leftrightarrow j = k+1$}
+\[\sum_{i=1}^{2k+1}|x_i-x|=2(k+1-1-k)x+\sum_{i=k+1+1}^{2k+1}x_i -\sum_{i=1}^{k+1-1}x_i=2(0)x+\sum_{i=k+2}^{2k+1}x_i -\sum_{i=1}^{k}x_i= \sum_{i=k+2}^{2k+1}x_i - \sum_{i=1}^{k}x_i\]
 
-\underline{Für $x=x_{k+1}$}:
-\[= \sum_{i=k+2}^{2k+1}x_i - \sum_{i=1}^{k}x_i \] \\
-
-\underline{Für $x \neq x_{k+1}$:}\\
-Der Term  $|x_{k+1}-x|$ wird immer > 0 und somit größer als der Fall $x=x_k$, d.h  $\sum_{i=1}^{n} |x_i-x|$ ist genau dann minimal, wenn $x = x_{k+1}$ ist.
+%\underline{Für $x \neq x_{k+1}$:}\\
+%Der Term  $|x_{k+1}-x|$ wird immer > 0 und somit größer als der Fall $x=x_k$, d.h  $\sum_{i=1}^{n} |x_i-x|$ ist genau dann minimal, wenn $x = x_{k+1}$ ist.
 
 \subsection*{c)}
 
