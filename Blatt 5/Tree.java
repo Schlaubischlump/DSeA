@@ -58,31 +58,33 @@ class Tree<T extends Comparable<T>> extends AbstractTree<T> {
 		for (int k = 2; k <= 6; k++ ) {
 			sum = 0;
 			for (int i = 0; i < 10; i++) {
-				//numbers = new ArrayList<Integer>();
+				numbers = new ArrayList<Integer>();
 				random = new Random();
 				int nMax = (int)Math.pow(10.0, (double)k);
 				
-				Tree<Integer> tree = new Tree<Integer>(random.nextInt(nMax));
+				//Tree<Integer> tree = new Tree<Integer>(random.nextInt(nMax));
 				for (int n=1;n <nMax;n++ ) {
-					//numbers.add(n);
-					int ranNum = random.nextInt(nMax);
-					if (tree.isIn(ranNum))
-						n--;
-					else
-						tree.insert(ranNum);
+					numbers.add(n);
+					//int ranNum = random.nextInt(nMax);
+					//if (tree.isIn(ranNum))
+						//n--;
+					//else
+						//tree.insert(ranNum);
 				}
-				//int index = random.nextInt(numbers.size());
-				//Tree<Integer> tree = new Tree<Integer>(numbers.get(index));
-				//numbers.remove(index);
-				//for(int n = 1; n < nMax; n++) {
-				//while(numbers.size()>0) {
-					//index = random.nextInt(numbers.size());
-					//tree.insert(numbers.get(index));
-					//numbers.remove(index);
-				//}
-				System.out.println(tree.maxDepth());
+				int index = random.nextInt(numbers.size());
+				Tree<Integer> tree = new Tree<Integer>(numbers.get(index));
+				numbers.remove(index);
+				for(int n = 1; n < nMax; n++) {
+				while(numbers.size()>0) {
+					index = random.nextInt(numbers.size());
+					tree.insert(numbers.get(index));
+					numbers.remove(index);
+				}
+				}
+				System.out.print(".");//tree.maxDepth());
 				sum +=tree.maxDepth();
 			}
+			System.out.println();
 			System.out.println("k = "+k+" durchschnittliche Tiefe = "+sum/10);
 		}
 		
