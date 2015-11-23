@@ -1,11 +1,8 @@
 // Wrapper class, there is no need for customization
 class Tree<T extends Comparable<T>> extends AbstractTree<T> {
-
-	Node<T> currentNode = (Node<T>) root;
 	
 	public Tree(T key) {
 		root = new Node<T>(key);
-		this.currentNode = (Node<T>) root;
 	}
 
 	public boolean insert(T key) {
