@@ -1,0 +1,29 @@
+\documentclass[a4paper,11pt,twoside]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{ngerman, eucal, mathrsfs, amsfonts, bbm, amsmath, amssymb, stmaryrd,graphicx, array, geometry, listings, color}
+\geometry{left=25mm, right=15mm, bottom=25mm}
+\setlength{\parindent}{0em} 
+\setlength{\headheight}{0em} 
+\title{Theoretische Grundlagen der Informatik II\\ Blatt 5}
+\author{Markus Vieth, David Klopp, Christian Stricker}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\cleardoublepage
+\pagestyle{myheadings}
+\markboth{Markus Vieth,  David Klopp, Christian Stricker}{Markus Vieth, David Klopp, Christian Stricker}
+
+\section*{Aufgabe 2}
+\underline{Anmerkung: } Pfeile ohne Endknoten deuten einen beliebig großen Teilbaum an. Teilbäume bei Knoten D wurden vergessen, können natürlich auch existieren.
+\subsection*{a)} Ersetze z mit seinem rechten Kind. Da z kein linkes Kind besitzt, ist das Löschen von z fertig.
+\subsection*{b)}Ersetze z mit dem linken Kind. Da z kein rechtes Kind besitzt, ist das Löschen von z fertig.
+\subsection*{c)} Hänge den linken Teilbaum von z an y und tausche y mit z.
+\subsection*{d)} Suche das kleinste Element y vom rechten Teilbaum von z. Setze y als Parent vom rechten Kind von z und das rechte Kind von z als rechtes Kind von y. Danach ersetze z mit y und setze das linke Kind von z an die Stelle vom linken Kind von y. Das Löschen ist fertig.
+
+
+
+
+\end{document}
