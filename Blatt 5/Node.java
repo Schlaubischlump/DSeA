@@ -56,6 +56,7 @@ class Node<T extends Comparable<T>> extends AbstractNode<T>{
   }
 
   public void inorder() {
+	// linker Teilbaum 
 	  if (this.left != null )
 		  this.left.postorder();
 
