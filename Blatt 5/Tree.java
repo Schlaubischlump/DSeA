@@ -9,23 +9,6 @@ class Tree<T extends Comparable<T>> extends AbstractTree<T> {
 	}
 
 	public boolean insert(T key) {
-		if(this.currentNode.key.compareTo(key) == 0)
-			return root.insert(key);
-		else if(this.currentNode.key.compareTo(key) < 0)
-			if(this.currentNode.right == null){
-				this.currentNode.right = new Node<T>(key);
-				return root.insert(key);
-			}
-			else this.currentNode = (Node<T>) this.currentNode.left;
-		else if(this.currentNode.key.compareTo(key) > 0)
-			if(this.currentNode.left == null){
-				this.currentNode.left = new Node<T>(key);
-				return root.insert(key);
-			}
-			else this.currentNode = (Node<T>) this.currentNode.left;
-			
-			insert(key);
-			this.currentNode = (Node<T>) root;
 		return root.insert(key);
 	}
 
