@@ -6,7 +6,8 @@ class Node<T extends Comparable<T>> extends AbstractNode<T>{
 
   public boolean insert (T key)
   {
-	  int direction = key.compareTo(this.key);		
+	  int direction = key.compareTo(this.key);	
+	  
 	  // use direction to choose if left or right, zero means equality
 	  if (direction < 0)  {
 		  	if (this.left != null)
@@ -85,11 +86,17 @@ class Node<T extends Comparable<T>> extends AbstractNode<T>{
 	  
 	  if (left == null && right == null)
 		  return 1;
-	  /*if (left == null)
+	  if (left == null)
 		  return right.maxDepth()+1;
+	  
+	  int leftD = left.maxDepth();
+	  
 	  if (right == null)
-		  return left.maxDepth()+1;
-	  */
-	  return (left!= null)&&(right==null || left.maxDepth()>right.maxDepth()) ? left.maxDepth()+1 : right.maxDepth()+1 ;
+		  return leftD+1;
+	 
+	  int rightD = right.maxDepth();
+	  
+	  //return (left!= null)&&(right==null || left.maxDepth()>right.maxDepth()) ? left.maxDepth()+1 : right.maxDepth()+1 ;
+	  return leftD>rightD ? leftD+1 : rightD+1 ;
   }		
 }
