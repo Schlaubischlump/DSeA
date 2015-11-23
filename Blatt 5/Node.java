@@ -15,7 +15,7 @@ class Node<T extends Comparable<T>> extends AbstractNode<T>{
 		  		this.left = new Node<T>(key);
 		  		return true;
 		  	}
-	  } else {
+	  } else if (direction > 0) {
 		  if (this.right != null)
 			  this.right.insert(key);
 		  else {
@@ -44,14 +44,40 @@ class Node<T extends Comparable<T>> extends AbstractNode<T>{
   }
 
   public void preorder() {
+	  System.out.println(this.key);
 	  
+	  // linker Teilbaum 
+	  if (this.left != null )
+		  this.left.postorder();
+
+	  // rechter Teilbaum
+	  if (this.right != null )
+		  this.right.postorder();
   }
 
   public void inorder() {
+	  if (this.left != null )
+		  this.left.postorder();
+
+	  System.out.println(this.key);
 	  
+	  // rechter Teilbaum
+	  if (this.right != null )
+		  this.right.postorder();
   }
 
-  public void postorder(){}
+  public void postorder() 
+  {
+	  // linker Teilbaum 
+	  if (this.left != null )
+		  this.left.postorder();
+
+	  // rechter Teilbaum
+	  if (this.right != null )
+		  this.right.postorder();
+
+	  System.out.println(this.key);
+  }
 
 
   public int maxDepth(){
