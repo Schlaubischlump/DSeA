@@ -82,8 +82,14 @@ class Node<T extends Comparable<T>> extends AbstractNode<T>{
 
 
   public int maxDepth(){
-
-    // Should be a bit more sophisticated
-    return 0;
+	  
+	  if (left == null && right == null)
+		  return 1;
+	  /*if (left == null)
+		  return right.maxDepth()+1;
+	  if (right == null)
+		  return left.maxDepth()+1;
+	  */
+	  return (left!= null)&&(right==null || left.maxDepth()>right.maxDepth()) ? left.maxDepth()+1 : right.maxDepth()+1 ;
   }		
 }
