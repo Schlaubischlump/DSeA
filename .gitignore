@@ -169,6 +169,6 @@ hs_err_pid*
 
 ###########################
 #IntelliJ Zeug
-.idea/*
+.idea/
 *.iml
-out/*
+out/
