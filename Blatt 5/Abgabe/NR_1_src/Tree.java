@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.Random;
 
 // Wrapper class, there is no need for customization
@@ -53,51 +52,49 @@ class Tree<T extends Comparable<T>> extends AbstractTree<T> {
 		T.postorder();
 		
 
-		for (int k = 2; k <= 6; k++ ) {
+		for (int k = 2; k <= 6; k++ ) { //Cases 10^2,10^3,10^4,10^5,10^6
+		
 			final int[] sum = new int[10];
 			int nMax = (int)Math.pow(10.0, (double)k);
 
 			final int[] test = new int[nMax];
+			for (int i=0; i < test.length; i++)	//Fills array with numbers from 1-10^k
+				test[i] = i+1;	
 
-			for (int i=0; i < test.length; i++)
-				test[i] = i+1;
-
-
-
-			Thread[] threads = new Thread[10];
+			Thread[] threads = new Thread[10];	//10 tests
+			
 			for (int i = 0; i < 10; i++) {
 				final int j = i;
 				threads[i] = new Thread(new Runnable() {
 					@Override
 					public void run() {
-
-						int[] numbers = test.clone();
+						
+						int[] numbers = test.clone();	//Working copy
 
 						Random random = new Random();
 
-						for (int i = 0; i < numbers.length; i++) {
-							int p = random.nextInt(numbers.length);
+						
+						for (int i = 0; i < numbers.length; i++) { //swapping numbers
+							int toSwap = random.nextInt(numbers.length);
 							int temp = numbers[i];
-							numbers[i] = numbers[p];
-							numbers[p] = temp;
+							numbers[i] = numbers[toSwap];
+							numbers[toSwap] = temp;
 						}
 
-						Tree<Integer> tree = new Tree<Integer>(numbers[0]);
-						//System.out.print(";");
-						
+						Tree<Integer> tree = new Tree<Integer>(numbers[0]);	//put numbers in Tree					
 						for(int n = 1; n < nMax; n++) {
 							tree.insert(numbers[n]);
 						}
+						
 						System.out.print(".");
-						sum[j] =tree.maxDepth();
-						//System.out.print("+");
+						sum[j] =tree.maxDepth();//save maxDepth
 												
 					}
 					
 				});
-				threads[i].start();
+				threads[i].start();	//start thread
 			}
-			for (Thread thread: threads)
+			for (Thread thread: threads) //wait till all threads finished
 				try {
 					thread.join();
 				} catch (InterruptedException e) {
@@ -106,7 +103,7 @@ class Tree<T extends Comparable<T>> extends AbstractTree<T> {
 				}
 			
 			int result = 0;
-			for (int i: sum)
+			for (int i: sum)	
 				result += i;
 			
 			System.out.println();
