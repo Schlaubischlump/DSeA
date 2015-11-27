@@ -96,7 +96,6 @@ class Node<T extends Comparable<T>> extends AbstractNode<T>{
 	 
 	  int rightD = right.maxDepth();
 	  
-	  //return (left!= null)&&(right==null || left.maxDepth()>right.maxDepth()) ? left.maxDepth()+1 : right.maxDepth()+1 ;
 	  return leftD>rightD ? leftD+1 : rightD+1 ;
   }		
 }
