@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.Random;
 
 // Wrapper class, there is no need for customization
@@ -52,100 +51,50 @@ class Tree<T extends Comparable<T>> extends AbstractTree<T> {
 		System.out.println("---------Postorder--------------");
 		T.postorder();
 		
+
+		for (int k = 2; k <= 6; k++ ) { //Cases 10^2,10^3,10^4,10^5,10^6
 		
-		
-		//ArrayList<Integer> numbersOrigin;
-		//Random random;
-		
-		//int[] sum;
-		
-		for (int k = 2; k <= 6; k++ ) {
 			final int[] sum = new int[10];
-			//numbersOrigin = new ArrayList<Integer>();
-			//random = new Random();
-			final int nMax = (int)Math.pow(10.0, (double)k);
+			int nMax = (int)Math.pow(10.0, (double)k);
+
+			final int[] test = new int[nMax];
+			for (int i=0; i < test.length; i++)	//Fills array with numbers from 1-10^k
+				test[i] = i+1;	
+
+			Thread[] threads = new Thread[10];	//10 tests
 			
-			//for (int n=1;n <nMax;n++ ) {
-				//numbersOrigin.add(n);
-				//int ranNum = random.nextInt(nMax);
-				//if (tree.isIn(ranNum))
-					//n--;
-				//else
-					//tree.insert(ranNum);
-			//}
-			
-			
-			/*for (int i = 0; i < 10; i++) {
-				//Tree<Integer> tree = new Tree<Integer>(random.nextInt(nMax));
-				ArrayList<Integer> numbers = new ArrayList<Integer>(numbersOrigin);
-				int index = random.nextInt(numbers.size());
-				Tree<Integer> tree = new Tree<Integer>(numbers.get(index));
-				numbers.remove(index);
-				System.out.print(";");//Tree<Integer> tree = new Tree<Integer>(random.nextInt(nMax));
-				ArrayList<Integer> numbers = new ArrayList<Integer>(numbersOrigin);
-				int index = random.nextInt(numbers.size());
-				Tree<Integer> tree = new Tree<Integer>(numbers.get(index));
-				numbers.remove(index);
-				System.out.print(";");
-				
-				//for(int n = 1; n < nMax; n++) {
-				while(numbers.size()>0) {
-					index = random.nextInt(numbers.size());
-					tree.insert(numbers.get(index));
-					numbers.remove(index);
-				//}
-				}
-				System.out.print(".");//tree.maxDepth());
-				sum +=tree.maxDepth();
-				System.out.print("+");
-				
-				//for(int n = 1; n < nMax; n++) {
-				while(numbers.size()>0) {
-					index = random.nextInt(numbers.size());
-					tree.insert(numbers.get(index));
-					numbers.remove(index);
-				//}
-				}
-				System.out.print(".");//tree.maxDepth());
-				sum +=tree.maxDepth();
-				System.out.print("+");
-			}
-			*/
-			Thread[] threads = new Thread[10];
 			for (int i = 0; i < 10; i++) {
 				final int j = i;
 				threads[i] = new Thread(new Runnable() {
 					@Override
 					public void run() {
+						
+						int[] numbers = test.clone();	//Working copy
 
 						Random random = new Random();
-						ArrayList<Integer> numbers = new ArrayList<Integer>();
-						for (int n=1;n <nMax;n++ ) {
-							numbers.add(n);
+
+						
+						for (int i = 0; i < numbers.length; i++) { //swapping numbers
+							int toSwap = random.nextInt(numbers.length);
+							int temp = numbers[i];
+							numbers[i] = numbers[toSwap];
+							numbers[toSwap] = temp;
+						}
+
+						Tree<Integer> tree = new Tree<Integer>(numbers[0]);	//put numbers in Tree					
+						for(int n = 1; n < nMax; n++) {
+							tree.insert(numbers[n]);
 						}
 						
-						int index = random.nextInt(numbers.size());
-						Tree<Integer> tree = new Tree<Integer>(numbers.get(index));
-						numbers.remove(index);
-						System.out.print(";");
-						
-						//for(int n = 1; n < nMax; n++) {
-						while(numbers.size()>0) {
-							index = random.nextInt(numbers.size());
-							tree.insert(numbers.get(index));
-							numbers.remove(index);
-						//}
-						}
-						System.out.print(".");//tree.maxDepth());
-						sum[j] =tree.maxDepth();
-						System.out.print("+");
+						System.out.print(".");
+						sum[j] =tree.maxDepth();//save maxDepth
 												
 					}
 					
 				});
-				threads[i].start();
+				threads[i].start();	//start thread
 			}
-			for (Thread thread: threads)
+			for (Thread thread: threads) //wait till all threads finished
 				try {
 					thread.join();
 				} catch (InterruptedException e) {
@@ -154,7 +103,7 @@ class Tree<T extends Comparable<T>> extends AbstractTree<T> {
 				}
 			
 			int result = 0;
-			for (int i: sum)
+			for (int i: sum)	
 				result += i;
 			
 			System.out.println();
