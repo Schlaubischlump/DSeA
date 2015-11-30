@@ -1,2 +1,2 @@
 # DSeA
-Abgaben für DSeA
+DSeA Abgaben
