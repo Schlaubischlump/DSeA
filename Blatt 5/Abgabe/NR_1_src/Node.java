@@ -11,14 +11,14 @@ class Node<T extends Comparable<T>> extends AbstractNode<T>{
 	  // use direction to choose if left or right, zero means equality
 	  if (direction < 0)  {
 		  	if (this.left != null)
-		  		this.left.insert(key);
+		  		return this.left.insert(key);
 		  	else {
 		  		this.left = new Node<T>(key);
 		  		return true;
 		  	}
 	  } else if (direction > 0) {
 		  if (this.right != null)
-			  this.right.insert(key);
+			  return this.right.insert(key);
 		  else {
 			  this.right = new Node<T>(key);
 			  return true;
