@@ -24,7 +24,8 @@
 \section*{Aufgabe 2}
 Füge rekursive den Wurzelknoten von $T_2$ an den größten Knoten in $T_1$. Beim wiederhochspringen der Rekursion wird die Höhe der Teilbäume verglichen (Da jeder Knoten seine Höhe kennt, reicht eine einfache Addition um die richtige Höhe des Knotens im $T_1$ zu bestimmen) und notfalls rotiert. Es muss nur ab dem größten Knoten des $T_1$ Baumes der Gesamtbaum ausgeglichen werden, da die Teilbäume des größten Knoten von $T_1$ schon ausgeglichen sind. \\
 Laut Vorlesung ist der Gesamtbaum ausgeglichen, wenn der Rotier-Algorithmus rekursive einmal durchgelaufen ist. \\
-Die Laufzeit ist O(log(n)), da einmal der größte Knoten in $T_1$ gesucht wird. 
+Die Laufzeit ist O(log(n)), da einmal der größte Knoten in $T_1$ gesucht wird. \\
+Da $h_1 \leq h_2$ gilt: $\log(m) \leq \log(n) \Rightarrow O(\log(n)+\log(m)) = O(\log(n)) $
 
 
 \end{document}
