@@ -1,3 +1,4 @@
+
 \documentclass[a4paper,11pt,twoside]{article}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
@@ -6,7 +7,7 @@
 \geometry{left=25mm, right=15mm, bottom=25mm}
 \setlength{\parindent}{0em} 
 \setlength{\headheight}{0em} 
-\title{Theoretische Grundlagen der Informatik II\\ Blatt 5}
+\title{Datenstrukturen und effiziente Algorithmen\\ Blatt 5}
 \author{Markus Vieth, David Klopp, Christian Stricker}
 \date{\today}
 \definecolor{middlegray}{rgb}{0.5,0.5,0.5}
@@ -44,6 +45,8 @@
 \lstinputlisting[language=JAVA]{NR_1_src/Node.java}
 \subsubsection*{Tree.java}
 \lstinputlisting[language=JAVA]{NR_1_src/Tree.java}
+\subsubsection*{zu c)}
+Die worst-case Eingabe ist eine sortierte Zahlenfolge der Länge n. In diesem Fall beträgt die maximale Tiefe n.
 \subsubsection*{zu d)}
 \[k = 2 \text{ : durchschnittliche Tiefe }= 13\]
 \[k = 3 \text{ : durchschnittliche Tiefe }= 21\]
@@ -65,9 +68,10 @@ Es sollen Duplikate gefunden werden.\\
 \includegraphics*[scale=0.2]{Images/A.png}
 \subsection*{b)}Ersetze z mit dem linken Kind. Da z kein rechtes Kind besitzt, ist das Löschen von z fertig.\\
 \includegraphics*[scale=0.2]{Images/B.png}
-\subsection*{c)} Hänge den linken Teilbaum von z an y und tausche y mit z. \\
+\subsection*{c)} Tausche y mit z und hänge den linken Teilbaum von z an y. \\
 \includegraphics*[scale=0.2]{Images/C.png}
 \subsection*{d)} Suche das kleinste Element y vom rechten Teilbaum von z. Setze y als Parent vom rechten Kind von z und das rechte Kind von z als rechtes Kind von y. Danach ersetze z mit y und setze das linke Kind von z an die Stelle vom linken Kind von y. Das Löschen ist fertig. \\
+\underline{Anmerkung}: Möglicher Teilbaum an y wäre relevant gewesen, fehlt aber. \\
 \includegraphics*[scale=0.2]{Images/D_step_1.png} \\
 \includegraphics*[scale=0.2]{Images/D_step_2.png} \\
 \includegraphics*[scale=0.2]{Images/D_step_3.png}
