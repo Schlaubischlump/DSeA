@@ -53,7 +53,12 @@ Zweistufiges Hashing mit universellen Hashfunktionen.
 Äußere Hashfunktion $h(k)=((a\cdot b) \mod{p})\mod{m}$
 \[ a=3,~~b=42,~~p=101,~~m=9 \]
 \[ h(10)= \underset{=72}{ \underbrace{ (3\cdot 10+42\mod101) } }\mod{9}=0 \]
-%Grafik
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.7\linewidth]{14/Grafik/Hashing}
+\caption{Perfekte Hashtabelle}
+\label{fig:Hashing}
+\end{figure}
 Um zu garantieren, dass keine Kollision auf der zweiten Ebene auftreten, lassen wir die Größe von $S_j$ gerade $n_j^2$ sein ($n_j\neq \#$Schlüssel$\mapsto j$Slot).\\
 Wir verwenden für die Hashfunktion der ersten Ebene eine Funktion aus $\mathcal{H}_{p,m}$. Schlüssel die im j-ten Slot werden in der sekundären Hashtabelle $S_j$ der Größe $m_j$ mittels $h_j$ gehasht.  $h_j\in\mathcal{H}_{p,m}$
 \paragraph{Wir zeigen:} 2 Dinge:

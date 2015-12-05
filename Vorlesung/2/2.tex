@@ -1,0 +1,18 @@
+\chapter{Vorlesung 2}
+\section*{Heapsort (Fortsezung)}
+%Grafik
+\begin{lstlisting}
+heapify ( int[] a, int i, int n) {
+  while (2i + 1 < n) {		//linkes Kind von i existiert
+    int j = 2i + 1;
+    if ( 2i +2 < n)  		//rechtes Kind von i existiert
+      if ( a[j] < a[j+1])
+        j = j + 1;  		//j steht für Indes des größten Kindes
+    if ( a[i] > a[j])  		//Vater größer als Kind
+      break;  			//Abbruch, weil heap bereits erfüllt
+    swap(a,i,j); 		//Tausch zwischen Vater und Kind
+    i = j;
+  }
+}
+\end{lstlisting}
+%Geht weiter
