@@ -1,6 +1,7 @@
 \chapter{Vorlesung 2}
 \section*{Heapsort (Fortsezung)}
 %Grafik
+\subsection{Pseudocode}
 \begin{lstlisting}
 heapify ( int[] a, int i, int n) {
   while (2i + 1 < n) {		//linkes Kind von i existiert
@@ -15,4 +16,24 @@ heapify ( int[] a, int i, int n) {
   }
 }
 \end{lstlisting}
-%Geht weiter
+\subsubsection{1. Phase: Bottom-up Strategie zum Heapaufbau}
+\begin{lstlisting}
+for ( int i = n/2; i >= 0; i--)
+  heapify(a,i,n);
+\end{lstlisting}
+\subsubsection{2. Pahse: Sortierphase}
+\begin{lstlisting}
+for ( int i = n-1; i >= 0; i--) {
+  swap(a,0,i);
+  heapify(a,0,i);
+}
+\end{lstlisting}
+\subsection{Korrektheitsbetrachtung}
+\begin{description}
+	\item[Invariante beim Heapaufbau:] Beim Durchlauf der for-Schleife wird die Heapeigenschaft vom unteren Baumlevel bis zur Wurzel hergestellt.
+	\item[Invariante für Sortierphase:] Nach jedem weiteren Durchlauf der for-Schleife findet ein weiteres Element am Feldende seinen "`richtigen Platz"'.
+\end{description}
+\subsection{Laufzeitanalyse}
+$T(n)=$ Zahl der Elementvergleiche.
+\subsubsection{Analyse Heapaufbau:}
+\[  \]%Fortsetzung folgt
