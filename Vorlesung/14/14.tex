@@ -30,7 +30,7 @@ Aus $(*2)$ folgt:
 \[ r-a\cdot k = b\mod{p} ~~\text{Bijektion zwischen (k,l) und (a,b)}\]
 Daher ist die Wahrscheinlichkeit, dass zwei Schlüssel $h\neq l$ kollidieren, gerade die Wahrscheinlichkeit, dass $r\equiv s \mod{m}$, falls $r\neq S$ zufällig gewählt (aus $\mathbb{Z}/p\mathbb{Z}$).\\
 Für gegebenes $r$ gibt es unter den übrigen $p-1$ Werten für $s$ höchstens $\lceil \frac{p-1}{m} \rceil \leq \lceil \frac{p}{m} \rceil -1$ Möglichkeiten, sodass $s\neq r\mod{p}$ aber $r=s\mod{m}$
-\subsection{Abschätung nach oben}
+\subsection{Abschätzung nach oben}
 \[\lceil \frac{p}{m} \rceil -1  \leq \frac{(p+m-1)}{m}-1 = \frac{p-1}{m} \text{ Kollisionsmöglichkeiten} \]
 Die Wahrscheinlichkeit, dass $r$ und $s$ kollidieren $\mod{m}$ Kollisionsmöglichkeiten / Gesamtzahl der Werte
 \[ =\frac{p-1}{m}\cdot\frac{1}{p-1}=\frac{1}{m} \]
@@ -63,7 +63,7 @@ Um zu garantieren, dass keine Kollision auf der zweiten Ebene auftreten, lassen 
 Wir verwenden für die Hashfunktion der ersten Ebene eine Funktion aus $\mathcal{H}_{p,m}$. Schlüssel die im j-ten Slot werden in der sekundären Hashtabelle $S_j$ der Größe $m_j$ mittels $h_j$ gehasht.  $h_j\in\mathcal{H}_{p,m}$
 \paragraph{Wir zeigen:} 2 Dinge:
 \begin{enumerate}
-	\item Wie versichernwir, dass die zweite Hashfunktion keine Kollision hat.
+	\item Wie versichern wir, dass die zweite Hashfunktion keine Kollision hat.
 	\item Der erwartete Speicherbedarf ist $O(n)$
 \end{enumerate}
 \paragraph{zu 1.}
@@ -97,4 +97,4 @@ Da unsere Hashfunktion universell ist, ist die erwartete Zahl dieser Paare:
 Somit
 \[ E\left[ \sum_{j=0}^{m-1} n_j^2\right] \leq n+2\frac{n-1}{2}=2n-1<2n \]
 \paragraph{Korollar}
-Speichern wir $n$ Schlüssel in einer Hashtabelle der Größe $m=n$ mit einer zufälligen universellen Hashfunktion und setzen die Größe der Hashtabellen der zweiten Ebene auf $m_j=n_j^2$ für $j=0, m=1$, so ist der Platzverbrauch des perfekten Hashings weniger als $2n$. Die Wahrscheinlichkeit, dass der Platzverbruach der zweiten Hashtabellen $\geq 4n$ ist, ist $\leq \frac{1}{2}$ ohne Beweis.
+Speichern wir $n$ Schlüssel in einer Hashtabelle der Größe $m=n$ mit einer zufälligen universellen Hashfunktion und setzen die Größe der Hashtabellen der zweiten Ebene auf $m_j=n_j^2$ für $j=0, m=1$, so ist der Platzverbrauch des perfekten Hashings weniger als $2n$. Die Wahrscheinlichkeit, dass der Platzverbrauch der zweiten Hashtabellen $\geq 4n$ ist, ist $\leq \frac{1}{2}$ ohne Beweis.
