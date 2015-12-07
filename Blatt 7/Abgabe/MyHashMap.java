@@ -1,8 +1,4 @@
 import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.HashMap;
-import java.util.TreeMap;
 
 class Point implements Comparable<Point> {
   public int x,y;
@@ -14,15 +10,14 @@ class Point implements Comparable<Point> {
 
   @Override
   public int hashCode() {
+	// randomisiere mich
     long z = x << 16 + y;
     long p = 2147483647L; // Primzahl < 2^31
-    long a = 1189436865L; // zufällig 0 < a < p
-    long b = 1206511853L; // zufällig 0 <= b < p
-    // hier m = p
-
-    // Für ein m != p muss da dieser Stelle noch modulo m
-    // gerechnet werden
-    return (int)((a * z + b) % p);
+    long a = 1189436865L; // zufÃ¤llig 0 < a < p
+    long b = 1206511853L; // zufÃ¤llig 0 <= b < p
+    long m = 65536;
+    
+    return (int)(((a * z + b) % p)%m);
   }
 
   @Override
@@ -42,41 +37,138 @@ class Point implements Comparable<Point> {
   }
 };
 
-public class MapTest {
-  public static void main(String[] args) {
 
-    List<Point> P = new LinkedList<Point>();
-    P.add(new Point(1,2));
-    P.add(new Point(0,0));
-    P.add(new Point(1,2));
-
-    // Anlegen der HashMap, welche einen 2D Punkt auf eine Ganzzahl abbildet
-    HashMap<Point,Integer> H = new HashMap<Point,Integer>();
-
-    // Fügt den Punkt p mit einem Index der HashMap zu, falls dieser noch
-    // nicht enthalten ist.
-    int i = 0;
-    for(Point p: P) 
-      if (!H.containsKey(p))
-        H.put(p,i++);
-
-    // Gibt die (Key, Value) Paare aus, die oben hinzugefügt wurden
-    for(Map.Entry<Point,Integer> e: H.entrySet())
-      System.out.println(e.getKey().x+" "+e.getKey().y+" "+e.getValue());
-
-    // Selbes für die TreeMap
-    TreeMap<Point,Integer> T = new TreeMap<Point,Integer>();
-
-    // Fügt den Punkt p mit einem Index der TreeMap zu, falls dieser noch
-    // nicht enthalten ist.
-    i = 0;
-    for(Point p: P) 
-      if (!T.containsKey(p))
-        T.put(p,i++);
-
-    // Gibt die (Key, Value) Paare aus, die oben hinzugefügt wurden
-    for(Map.Entry<Point,Integer> e: T.entrySet())
-      System.out.println(e.getKey().x+" "+e.getKey().y+" "+e.getValue());
-
-  }
+// Hilfklasse
+class Entry<K, V> {
+	private K key;
+	private V value;
+	
+	public Entry(K key, V value) {
+		this.key = key;
+		this.value = value;
+	}
+	
+	public K key()
+	{
+		return this.key;
+	}
+	
+	public V value()
+	{
+		return this.value;
+	}
+	
+	public void setValue(V value) {
+		this.value = value;
+	}
 }
+
+
+/*
+ * Da der Zugriff auf einen Index in einem Array in O(1) funktioniert, kann eine LinkedList in O(1) erhalten werden.
+ * Das Iteririeren Ã¼ber die gesamte Liste benÃ¶tigt hÃ¶chstens O(Anzahl Kollisionen)
+ */
+
+
+public class MyHashMap {
+	// nicht schÃ¶n aber Java erlaubt keine Arrays von generischen Typen
+	private Object[] values = new Object[65536]; 
+	private int size = 0;
+
+	public void put(Point key, Integer value) {
+		int index = key.hashCode();
+		
+		// Wir kÃ¶nnen uns an dieser Stelle sicher sein, dass das Objekt eine LinkedList mit entsprechendem Entry ist, 
+		// da wir keinen Zugriff von auÃŸen auf das Array erlauben 
+		@SuppressWarnings("unchecked")
+		LinkedList<Entry<Point, Integer>> list = (LinkedList<Entry<Point, Integer>>) this.values[index];
+		
+		// Wenn die Liste noch nicht existiert
+		if (list == null) {
+			list = new LinkedList<Entry<Point, Integer>>();
+			this.values[index] = list;
+		}
+				
+		// Wenn das Element mit dem gegeben SchlÃ¼ssel existiert, dann Ã¼berschreiben den Wert
+		boolean containsKey = false;
+		for (Entry<Point, Integer> e : list) {
+			if (e.key().equals(key)) {
+				e.setValue(value);
+				containsKey = true;
+				break;
+			}
+		}
+		
+		// fÃ¼ge an das Ende der Liste ein Entry Element bestehend aus Wert und Punkt ein, wenn das Element noch nicht existiert.
+		if (containsKey == false) {
+			Entry<Point, Integer> item = new Entry<Point, Integer>(key, value);
+			list.add(item);
+		}
+		
+		size ++;
+	}
+	
+	
+	public int size() {
+		return size;
+	}
+	
+	
+	public Integer get(Point p) {
+		int index = p.hashCode();
+		
+		@SuppressWarnings("unchecked")
+		LinkedList<Entry<Point, Integer>> list = (LinkedList<Entry<Point, Integer>>) this.values[index];
+		
+		// Wenn die liste existiert, iteriere Ã¼ber alle Elemente der Liste und vergleiche die Objekte
+		if (list != null)
+			for (Entry<Point, Integer> e : list)
+				if (e.key().equals(p))
+					return e.value();
+		
+		// nichts gefunden
+		return null;
+	}
+	
+	
+	public Point remove(Point p) {
+		int index = p.hashCode();
+		
+		// Element suchen und entfernen 
+		// Ã¤hnlich zu get
+		@SuppressWarnings("unchecked")
+		LinkedList<Entry<Point, Integer>> list = (LinkedList<Entry<Point, Integer>>) this.values[index];
+		if (list != null)
+			for (Entry<Point, Integer> e : list)
+				if (e.key().equals(p)) {
+					size --;
+					list.remove(e);
+					return p;
+				}
+		return null;
+	}
+	
+	
+	public static void main(String[] args) {
+		//test
+		MyHashMap test = new MyHashMap();
+		
+		Point p1 = new Point(4,0);
+		Point p2 = new Point(2,3);
+		Point p3 = new Point(2,1);
+		Point p4 = new Point(6,2);
+		
+		test.put(p1, 1);
+		test.put(p2, 2);
+		test.put(p3, 3);
+		test.put(p4, 4);
+		test.put(p1, 5);
+		
+		System.out.println(test.remove(p2));
+		System.out.println(test.get(p1));
+		System.out.println(test.get(p2));
+		System.out.println(test.get(p3));
+		System.out.println(test.get(p4));
+	}
+}
+
