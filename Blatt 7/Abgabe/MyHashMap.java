@@ -203,14 +203,14 @@ public class MyHashMap<K, V> {
     
 
     public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException {
-    	double diff = 0;
-    	double result = 0;
-    	for (int z = 0; z < 100; z++)
-    		for (int r = 0; r < 2; r++) {
-    			int sum = 0;
-    			for (int v = 0; v < 100; v++) {
+    	//double diff = 0;
+    	//double result = 0;
+    	//for (int z = 0; z < 100; z++)
+    		//for (int r = 0; r < 2; r++) {
+    			//int sum = 0;
+    			//for (int v = 0; v < 100; v++) {
 
-    				Point.newHash(r==0);
+    				//Point.newHash(r==0);
     				MyHashMap<Point, Integer> h = new MyHashMap<Point, Integer>();
 
     				ArrayList<Point[]> s = new ArrayList<Point[]>();
@@ -232,7 +232,7 @@ public class MyHashMap<K, V> {
     				PrintWriter out = new PrintWriter("hash.txt");
 
     				//1. Laufzeit: O(1)
-    				//System.out.println("Anzahl der Punkte: "+h.size());
+    				System.out.println("Anzahl der Punkte: "+h.size());
     				//2. Laufzeit: O(n^2)
     				for (int j = 0; j < h.size(); j++) { // O(n)
     					for (Entry<Point, Integer> e : h.entrySet()) // O(n)
@@ -247,9 +247,9 @@ public class MyHashMap<K, V> {
     				out.close();
     				in.close();
 
-    				sum += h.n;
+    				//sum += h.n;
     				//System.out.println(h.n);
-    			}
+    			/*}
     			if (r == 0) {
     				System.out.println("randomisiert: "+sum/100.0);
     				diff = sum/100.0;
@@ -261,7 +261,7 @@ public class MyHashMap<K, V> {
     				diff = 0;
     			}
     		}
-    	System.out.print("Schintt: "+result);
+    	System.out.print("Schintt: "+result);*/
     }
 }
 
