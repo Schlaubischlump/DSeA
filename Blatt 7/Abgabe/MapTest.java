@@ -92,16 +92,16 @@ public class MapTest {
 			System.out.println(e.getKey().x + " " + e.getKey().y + " " + e.getValue());
 
 		//Aufgabe a)
-		//1.
-		//Hash
+        //Hash
+		//1. Laufzeit: O(1)
 		System.out.println("Anzahl der Punkte: "+H.size());
-		//2.
-		for (int j = 0; j < H.size(); j++) {
-			for (Map.Entry<Point, Integer> e : H.entrySet())
-				if ( e.getValue().equals(j))
-					out.println(e.getKey().x+"  "+e.getKey().y);
+		//2. Laufzeit: O(n^2)
+		for (int j = 0; j < H.size(); j++) { // O(n)
+			for (Map.Entry<Point, Integer> e : H.entrySet()) // O(n)
+				if ( e.getValue().equals(j)) // O(1)
+					out.println(e.getKey().x+"  "+e.getKey().y); // O(1)
 		}
-		//3.
+		//3. O(n)
 		for ( int j = 0; j < S.size(); j++) {
 			out.println(H.get(S.get(j)[0])+", "+H.get(S.get(j)[1]));
 		}
@@ -137,18 +137,18 @@ public class MapTest {
 			System.out.println(e.getKey().x + " " + e.getKey().y + " " + e.getValue());
 
 		//Aufgabe a)
-		//1.
-		//Tree
+        //Tree
+		//1. O(1)
 		System.out.println("Anzahl der Punkte: "+T.size());
-		//2.
-		for (int j = 0; j < T.size(); j++) {
-			for (Map.Entry<Point, Integer> e : T.entrySet())
-				if ( e.getValue().equals(j))
-					out.println(e.getKey().x+"  "+e.getKey().y);
+		//2. O(n)
+		for (int j = 0; j < T.size(); j++) { // O(n)
+			for (Map.Entry<Point, Integer> e : T.entrySet()) // O(n)
+				if ( e.getValue().equals(j)) // O(1)
+					out.println(e.getKey().x+"  "+e.getKey().y); // O(1)
 		}
-		//3.
+		//3. O(log(n))
 		for ( int j = 0; j < S.size(); j++) {
-			out.println(T.get(S.get(j)[0])+", "+T.get(S.get(j)[1]));
+			out.println(T.get(S.get(j)[0])+", "+T.get(S.get(j)[1])); // O(log(n))
 		}
 		
 		
