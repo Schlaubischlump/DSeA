@@ -3,14 +3,18 @@ import java.util.Random;
 
 class Point implements Comparable<Point> {
   public int x,y;
-  Random random = new Random();
+  static Random random = new Random();
+  static final long p = 2147483647L; // Primzahl < 2^31
+  static long a = nextLong(random,p-1)+1; // zufällig 0 < a < p
+  static long b = nextLong(random,p); // zufällig 0 <= b < p
+  static final long m = 65536;
 
   Point(int a,int b) { 
     x = a;
     y = b;
   }
   
-  long nextLong(Random rndm, long n) {
+  static long nextLong(Random rndm, long n) {
 	  // error checking and 2^x checking removed because not necessary.
 	  // modified version of nextInt(int range)
 	  long bits, val;
@@ -25,11 +29,8 @@ class Point implements Comparable<Point> {
   public int hashCode() {
 	// randomisiere mich
     long z = x << 16 + y;
-    long p = 2147483647L; // Primzahl < 2^31
-    long a = nextLong(random,p-1)+1; // zufällig 0 < a < p
-    long b = nextLong(random,p); // zufällig 0 <= b < p
-    long m = 65536;
-    System.out.println("Koordinaten: "+x+" "+y+" hashcode: "+(((a * z + b) % p)%m)+" a = "+a+" b = "+b);
+    
+    //System.out.println("Koordinaten: "+x+" "+y+" hashcode: "+(((a * z + b) % p)%m)+" a = "+a+" b = "+b);
     
     return (int)(((a * z + b) % p)%m);
   }
