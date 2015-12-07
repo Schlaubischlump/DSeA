@@ -1,11 +1,24 @@
 import java.util.LinkedList;
+import java.util.Random;
 
 class Point implements Comparable<Point> {
   public int x,y;
+  Random random = new Random();
 
   Point(int a,int b) { 
     x = a;
     y = b;
+  }
+  
+  long nextLong(Random rndm, long n) {
+	  // error checking and 2^x checking removed because not necessary.
+	  // modified version of nextInt(int range)
+	  long bits, val;
+	  do {
+		  bits = (rndm.nextLong() << 1) >>> 1;
+		  val = bits % n;
+	  } while (bits-val+(n-1) < 0L);
+	  return val;
   }
 
   @Override
@@ -13,9 +26,10 @@ class Point implements Comparable<Point> {
 	// randomisiere mich
     long z = x << 16 + y;
     long p = 2147483647L; // Primzahl < 2^31
-    long a = 1189436865L; // zufällig 0 < a < p
-    long b = 1206511853L; // zufällig 0 <= b < p
+    long a = nextLong(random,p-1)+1; // zufällig 0 < a < p
+    long b = nextLong(random,p); // zufällig 0 <= b < p
     long m = 65536;
+    System.out.println("Koordinaten: "+x+" "+y+" hashcode: "+(((a * z + b) % p)%m)+" a = "+a+" b = "+b);
     
     return (int)(((a * z + b) % p)%m);
   }
