@@ -16,14 +16,24 @@ class Point implements Comparable<Point> {
     static final long p = 2147483647L; // Primzahl < 2^31
     static long a = nextLong(random,p-1)+1; // zufällig 0 < a < p
     static long b = nextLong(random,p); // zufällig 0 <= b < p
-    static final long m = 65536;
+    //static final long m = (long)Math.pow(2, 16);
+    static final long m = 33;
+    public static void newHash(boolean rndm) {
+    	if (rndm) {
+    		a = nextLong(random,p-1)+1; // zufällig 0 < a < p
+        	b = nextLong(random,p); // zufällig 0 <= b < p
+    	} else {
+    	    a = 1189436865L; // zufällig 0 < a < p
+    	    b = 1206511853L; // zufällig 0 <= b < p
+    	}
+    }
     
     Point(int a,int b) {
         x = a;
         y = b;
     }
     
-    static long nextLong(Random rndm, long n) {
+    private static long nextLong(Random rndm, long n) {
         // error checking and 2^x checking removed because not necessary.
         // modified version of nextInt(int range)
         long bits, val;
@@ -39,8 +49,8 @@ class Point implements Comparable<Point> {
         // randomisiere mich
         long z = x << 16 + y;
         
-        //System.out.println("Koordinaten: "+x+" "+y+" hashcode: "+(((a * z + b) % p)%m)+" a = "+a+" b = "+b);
-        
+        if (((a * z + b) % p)%m < 0)
+        	return (int)((((a * z + b) % p)%m)+m);
         return (int)(((a * z + b) % p)%m);
     }
     
@@ -102,6 +112,7 @@ public class MyHashMap<K, V> {
     // nicht schön aber Java erlaubt keine Arrays von generischen Typen
     private Object[] values = new Object[65536];
     private int size = 0;
+    public int n = 0; //Anuahl der Kollisionen
     
     public void put(K key, V value) {
         int index = key.hashCode();
@@ -115,6 +126,7 @@ public class MyHashMap<K, V> {
         if (list == null) {
             list = new LinkedList<Entry<K, V>>();
             this.values[index] = list;
+            n--;
         }
         
         // Wenn das Element mit dem gegeben Schlüssel existiert, dann überschreiben den Wert
@@ -132,6 +144,7 @@ public class MyHashMap<K, V> {
             Entry<K, V> item = new Entry<K, V>(key, value);
             list.add(item);
             entrySet.add(item);
+            n++;
         }
         
         size ++;
@@ -188,43 +201,67 @@ public class MyHashMap<K, V> {
         return null;
     }
     
-    
+
     public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException {
-        MyHashMap<Point, Integer> h = new MyHashMap<Point, Integer>();
-        
-        ArrayList<Point[]> s = new ArrayList<Point[]>();
-        Scanner in = new Scanner(new InputStreamReader(new FileInputStream("input.txt"),"UTF-8"));
-        
-        int i = 0;
-        while (in.hasNextLine()) {
-            Point a = new Point(in.nextInt(), in.nextInt());
-            Point b = new Point(in.nextInt(), in.nextInt());
-            if (!h.containsKey(a))
-                h.put(a, i++);
-            if (!h.containsKey(b))
-                h.put(b, i++);
-            s.add(new Point[]{a,b});
-        }
-        
-        // Analyse 
-        
-        PrintWriter out = new PrintWriter("hash.txt");
-        
-        //1. Laufzeit: O(1)
-        System.out.println("Anzahl der Punkte: "+h.size());
-        //2. Laufzeit: O(n^2)
-        for (int j = 0; j < h.size(); j++) { // O(n)
-            for (Entry<Point, Integer> e : h.entrySet()) // O(n)
-                if (e.getValue().equals(j)) // O(1)
-                    out.println(e.getKey().x+"  "+e.getKey().y); // O(1)
-        }
-        //3. O(n)
-        for ( int j = 0; j < s.size(); j++) {
-            out.println(h.get(s.get(j)[0])+", "+h.get(s.get(j)[1]));
-        }
-        
-        out.close();
-        in.close();
+    	double diff = 0;
+    	double result = 0;
+    	for (int z = 0; z < 100; z++)
+    		for (int r = 0; r < 2; r++) {
+    			int sum = 0;
+    			for (int v = 0; v < 100; v++) {
+
+    				Point.newHash(r==0);
+    				MyHashMap<Point, Integer> h = new MyHashMap<Point, Integer>();
+
+    				ArrayList<Point[]> s = new ArrayList<Point[]>();
+    				Scanner in = new Scanner(new InputStreamReader(new FileInputStream("input.txt"),"UTF-8"));
+
+    				int i = 0;
+    				while (in.hasNextLine()) {
+    					Point a = new Point(in.nextInt(), in.nextInt());
+    					Point b = new Point(in.nextInt(), in.nextInt());
+    					if (!h.containsKey(a))
+    						h.put(a, i++);
+    					if (!h.containsKey(b))
+    						h.put(b, i++);
+    					s.add(new Point[]{a,b});
+    				}
+
+    				// Analyse 
+
+    				PrintWriter out = new PrintWriter("hash.txt");
+
+    				//1. Laufzeit: O(1)
+    				//System.out.println("Anzahl der Punkte: "+h.size());
+    				//2. Laufzeit: O(n^2)
+    				for (int j = 0; j < h.size(); j++) { // O(n)
+    					for (Entry<Point, Integer> e : h.entrySet()) // O(n)
+    						if (e.getValue().equals(j)) // O(1)
+    							out.println(e.getKey().x+"  "+e.getKey().y); // O(1)
+    				}
+    				//3. O(n)
+    				for ( int j = 0; j < s.size(); j++) {
+    					out.println(h.get(s.get(j)[0])+", "+h.get(s.get(j)[1]));
+    				}
+
+    				out.close();
+    				in.close();
+
+    				sum += h.n;
+    				//System.out.println(h.n);
+    			}
+    			if (r == 0) {
+    				System.out.println("randomisiert: "+sum/100.0);
+    				diff = sum/100.0;
+    			} else {
+    				System.out.println("normal: "+sum/100.0);
+    				diff -= sum/100.0;
+    				System.out.println("ran-norm = "+diff);
+    				result += diff;
+    				diff = 0;
+    			}
+    		}
+    	System.out.print("Schintt: "+result);
     }
 }
 
