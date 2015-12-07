@@ -2,8 +2,13 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -69,7 +74,7 @@ public class MapTest {
 		HashMap<Point, Integer> H = new HashMap<Point, Integer>();
 		
 		PrintWriter out = new PrintWriter("hash.txt");
-		Scanner in = new Scanner(new FileReader("input.txt"));
+		Scanner in = new Scanner(new InputStreamReader(new FileInputStream("input.txt"),"UTF-8"));
 		// Fügt den Punkt p mit einem Index der HashMap zu, falls dieser noch
 		// nicht enthalten ist.
 		/*int i = 0;
