@@ -1,11 +1,13 @@
 \documentclass[a4paper,11pt,twoside]{scrreprt}
 \usepackage[export]{adjustbox}
 \usepackage[T1]{fontenc}
+\usepackage{float}
 \usepackage[utf8]{inputenc}
 \usepackage{ngerman, eucal, mathrsfs, amsfonts, bbm, amsmath, amssymb, stmaryrd,graphicx, array, geometry, listings, color, multicol, wrapfig}
 \usepackage{graphicx}
 \usepackage{epstopdf}
 \usepackage[official]{eurosym}
+\usepackage{listings}
 \DeclareUnicodeCharacter{20AC}{\EUR{}}
 \geometry{left=25mm, right=15mm, bottom=25mm}
 \setlength{\parindent}{0em} 
@@ -14,6 +16,7 @@
 \author{Markus Vieth, David Klopp, Christian Stricker}
 \date{\today}
 \DeclareUnicodeCharacter{20AC}{\EUR{}}
+\newcommand{\RM}[1]{\MakeUppercase{\romannumeral #1}}
 \renewcommand{\thefootnote}{\Roman{footnote}}
 \newcommand{\satz}{\paragraph*{Satz:}}
 
@@ -32,7 +35,7 @@
 
 \input{1/1}
 \input{2/2}
-%\input{11/11}
+\input{11/11}
 \input{12/12}
 \input{13/13}
 \input{14/14}
