@@ -1,5 +1,13 @@
 \chapter{Vorlesung 16}
-\animategraphics[width=\linewidth, autoplay, loop]{12}{16/Grafik/Diagramm}{1}{7}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\linewidth]{16/Grafik/Diagramm}
+\caption{Beispiel}
+\label{fig:Diagramm}
+\end{figure}
+
+
 \subsubsection{Definition: Länge kürzesten Weges}
 $\delta(s,v)=$ Länge eines kürzesten Weges vom Startknoten $s$ zum Knoten $v$.\\
 Setze $\delta(s,v)=\infty$, falls v nicht erreichbar von s aus.
@@ -7,7 +15,13 @@ Setze $\delta(s,v)=\infty$, falls v nicht erreichbar von s aus.
 Nach Ablauf von BFS\footnote{Breitensuche} gilt 
 \[ \forall v\in V: ~ d[v]=\delta(s,v) \]
 \subsubsection{Lemma 1: Dreiecksungleichung für kürzeste Wege}
-%Grafik
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.7\linewidth]{16/Grafik/Dreiecksungleichung}
+\caption{}
+\label{fig:Dreiecksungleichung}
+\end{figure}
+
 \subsubsection{Lemma 2}
 Zu jedem Zeitpunkt im Verlauf von BFS gilt:
 \[ \forall v\in V:~ d[v] \geq \delta(s,v)\]
@@ -45,9 +59,14 @@ Betrachte die Situation bei Bearbeitung von $u'$:
 \paragraph{2. Fall}
 $v$ ist in diesem Moment weiß.
 \[ d[v]>\delta(s,u')+1=d[u']+1=\footnote{wegen Wahl von $v$; d-Wert von $u'$ muss also korrekt sein}d[v] \lightning \]
+\clearpage
 \paragraph{3. Fall}
+\begin{wrapfigure}{r}{0.4\linewidth}
+	\includegraphics[width=\linewidth]{16/Grafik/Beweis}
+	\caption{}
+	\label{fig:Beweis}
+\end{wrapfigure}
 $v$ ist grau.
-%grafik
 \[ d[v]>\delta(s,u')+1=d[u']+1\geq d[u]+1=d[v] \]
 $d[u]\leq d[u']$, weil $u$ vor $u'$ aus $Q$ entfernt $\lightning$
 \begin{flushright}
@@ -56,11 +75,27 @@ $d[u]\leq d[u']$, weil $u$ vor $u'$ aus $Q$ entfernt $\lightning$
 \section{Kürzeste Wege Algorithmen}
 \subsection{Dijkstra-Algorithmus}
 \[ G=(V,E)~~w:E\rightarrow \mathbb{R}^+_0 \]
-%Grafik
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.3\linewidth]{16/Grafik/Dijkstra}
+\caption{}
+\label{fig:Dijkstra}
+\end{figure}
+
 Sei $p=(s=v_0,v_1,v_2,\ldots,v_k)$
-%Grafik
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.3\linewidth]{16/Grafik/Dijkstra2}
+	\caption{}
+	\label{fig:Dijkstra2}
+	\end{figure}
 \[ w(p) = \sum_{i=0}^{k-1}w(v_i,v_{i+1})=\delta(s,v_k) \]
-%Grafik
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.3\linewidth]{16/Grafik/dijkstra3}
+	\caption{}
+	\label{fig:Dijkstra3}
+	\end{figure}
 \[ \delta(s,v)\leq \delta(s,U)+w(u,v) \]
 \begin{lstlisting}
 relax(u,v,w) {
@@ -73,5 +108,5 @@ relax(u,v,w) {
 Betrachte Algorithmen zur kürzesten Wege Berechnung, die Distanzwerte nur mit Hilfe dieser relax-Funktion verändern, dann gilt:
 \[ d[v] \geq \delta(s,v)~~\forall v\in V \]
 \paragraph{Beweis}
-\[ d[v] = d[u]+w(u,v) \geq\footnote{Induktions Annahme} \delta(s,u)+w(u,v) \geq \delta(s,v) \]
+\[ d[v] = d[u]+w(u,v) \overset{I.A.}{\geq} \delta(s,u)+w(u,v) \geq \delta(s,v) \]
 Induktion über Zahl der reflex-Aufrufe
