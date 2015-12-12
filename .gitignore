@@ -144,6 +144,11 @@ pythontex-files-*/
 *.bak
 *.sav
 
+#####################
+#Dia Zeug
+*~
+*.autosave
+
 ###############################
 #Mac Zeug
 .DS_Store
