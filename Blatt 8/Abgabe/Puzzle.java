@@ -152,6 +152,15 @@ class Puzzle {
 		return -1;
 	}
 	
+	public int maxTiefe(int n) {
+		int max = -1;
+		StringBuilder temp = new StringBuilder();
+		for (int i = 0; i < n; i++)
+			temp.append(i+"");
+		String allPermutations = permutation(temp.toString());
+	}
+
+	
 	private static String swap (String string, int first, int last) {
 		char[] temp = string.toCharArray();
 		if (first < 0 || first >= string.length() || last < 0 || last >= string.length())
