@@ -106,13 +106,13 @@ class Puzzle {
 			ArrayList<Integer> edge = edges.get(index);
 			for ( int i = 0; i < edge.size(); i++) {
 				String next = swap(u,index, edge.get(i));
-				if (this.correct(next))
-					return true;
 				if (visited.get(next) == null || visited.get(next) == false) {
 					visited.put(next, true);
-					pi.put(u, next);
+					pi.put(next, u);
 					queue.push(next);
 				}
+				if (this.correct(next))
+					return true;
 			}
 		}
 		return false;
@@ -133,19 +133,19 @@ class Puzzle {
 			ArrayList<Integer> edge = edges.get(index);
 			for ( int i = 0; i < edge.size(); i++) {
 				String next = swap(u,index, edge.get(i));
+				if (visited.get(next) == null || visited.get(next) == false) {
+					visited.put(next, true);
+					pi.put(next, u);
+					queue.push(next);
+				}
 				if (this.correct(next)) {
 					int sum = 0;
 					String test = next;
-					while (test != start) {
+					while (!test.equals(start)) {
 						sum++;
 						test = pi.get(test);
 					}
 					return sum;
-				}
-				if (visited.get(next) == null || visited.get(next) == false) {
-					visited.put(next, true);
-					pi.put(u, next);
-					queue.push(next);
 				}
 			}
 		}
@@ -164,9 +164,8 @@ class Puzzle {
 	
 	private boolean correct (String solution) {
 		int l = solution.length();
-		char[] temp = solution.toCharArray();
 		for ( int i = 1; i < l; i++) {
-			if ( temp[i-1] >= temp[i])
+			if ( Integer.parseInt(solution.charAt(i-1)+"") >= Integer.parseInt(solution.charAt(i)+""))
 				return false;
 		}
 		return true;
@@ -174,7 +173,6 @@ class Puzzle {
 	
 	public static void main (String... args) throws FileNotFoundException {
 		Puzzle test = new Puzzle("in");
-		System.out.println(Puzzle.swap("123",0,1));
 		System.out.println(test.loesbar());
 		System.out.println(test.tiefe());
 	}
