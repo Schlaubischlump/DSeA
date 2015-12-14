@@ -3,65 +3,80 @@ class MyQueue<E> {
 	E[] queue;
 	int head;
 	int tail;
+	//int size;
+	boolean empty;
 	
 	@SuppressWarnings("unchecked")
 	public MyQueue ( int size) {
 		queue =(E[])new Object[size];
 		this.head = 0;
 		this.tail = 0;
+		//this.size = 0;
+		this.empty = true;
 	}
 	
 	public boolean push(E e) {
 		
-		if (tail == (head-1)%queue.length)
+		if (this.size()== queue.length)
 			return false;
-		else if (head == tail)
+		else if (this.size() != 0)
+			tail = (tail+1)%queue.length;
+		if (empty) {
+			empty = false;
 			head = 0;
-		tail = (tail+1)%queue.length;
+			tail = 0;
+		}
 		queue[tail] = e;
+		//size++;
 		return true;
 	}
 	
 	public E pop() {
-		if (head == tail)
+		//if (this.size() == 0)
+		if (empty)
 			return null;
-		head = (head-1)%queue.length;
-		return queue[head];
+		if (head == tail)
+			empty = true;
+		E temp = queue[head];
+		head = (head+1)%queue.length;
+		//size--;
+		return temp;
 		
 	}
 	
 	public int size() {
-		if (tail == head)
+		if (empty)
 			return 0;
-		return (tail-head+queue.length)%queue.length+1;
+		if (tail > head)
+			return tail-head+1;
+		if (head > tail)
+			return queue.length-head+tail+1;
+		return 1;
+		//return (tail+head)%(queue.length+1);
+		//return size;
 	}
 	
 	public void print() {
-		for (int i = head; i <this.size(); i++)
-			System.out.print(queue[i]+"  ");
+		for (int i = 0; i <this.size(); i++)
+			System.out.print(queue[(i+head)%queue.length]+"  ");
 		System.out.println();
 	}
 	
 	public static void main (String... args) {
 		MyQueue<Integer> test = new MyQueue<Integer>(4);
 
-		System.out.println(test.size());
+		test.push(4);
 		test.push(5);
-		System.out.println(test.size());
-		test.push(5);
-		System.out.println(test.size());
 		test.push(0);
-		System.out.println(test.size());
 		test.push(3);
-		System.out.println(test.size());
-		test.print();
 
-		System.out.println(test.pop());
-		System.out.println(test.pop());
+		test.pop();
+		test.pop();
 		
 		test.push(2);
 		test.push(10);
-		
+
 		test.print();
+
 	}
 }
