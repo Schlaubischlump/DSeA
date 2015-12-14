@@ -93,16 +93,6 @@ class Puzzle {
 	}
 	
 	public boolean loesbar () {
-		
-		return true;
-	}
-	
-	private static String switch (String string, int first, int last) {
-	char[] temp = string.toCharArray();
-	if (first < 0 || first >= string.length() || last < 0 || last >= string.length())
-		throw new IndexOutOfBoundsException();
-	}
-	public void breitensuche() {
 		HashMap<String, Boolean> visited = new HashMap<>();
 		MyQueue<String> queue = new MyQueue<>(n*n*n*n);
 		HashMap<String, String> pi = new HashMap<>();
@@ -113,35 +103,39 @@ class Puzzle {
 		queue.push(start);
 		while(queue.size() != 0) {
 			String u = queue.pop();
-			ArrayList<Integer> edge = edges.get(u.indexOf("0"));
+			int index = u.indexOf("0");
+			ArrayList<Integer> edge = edges.get(index);
 			for ( int i = 0; i < edge.size(); i++) {
-				String next = u.
+				String next = swap(u,index, edge.get(i));
+				if (this.correct(next))
+					return true;
+				if (visited.get(next) != true) {
+					visited.put(next, true);
+					pi.put(u, next);
+					queue.push(next);
+				}
 			}
 		}
-
-forall ( v in V\{S}) {
-  col[v]=white;    // Farbe  weiß = unbekannt, grau = bekannt, schwarz = vollkommen bekannt
-  d[v] = infinity; // Distanz
-  pi[v] = NULL;    // pi ist Vorgänger
-}
-col[s] = grey;     // s ist Startknoten
-d[s] = 0;
-pi[s] = null;
-
-Queue Q;
-Q.push(s);
-while(!Q.empty()) {
-  u = Q.pop();
-  forall( (u,v) in E) {
-    if (col[v] == white) {
-      col[v] == grey;
-      d[v] = d[u]+1;
-      pi[v] = u;
-      Q.push(v);
-    }
-  }
-  col[u] = black;
-}
+		return false;
 	}
 	
+	private static String swap (String string, int first, int last) {
+		char[] temp = string.toCharArray();
+		if (first < 0 || first >= string.length() || last < 0 || last >= string.length())
+			throw new IndexOutOfBoundsException();
+		char firstChar = temp[first];
+		temp[first] = temp[last];
+		temp[last] = firstChar;
+		return temp.toString();
+	}
+	
+	private boolean correct (String solution) {
+		int l = solution.length();
+		char[] temp = solution.toCharArray();
+		for ( int i = 1; i < l; i++) {
+			if ( temp[i-1] >= temp[i])
+				return false;
+		}
+		return true;
+	}
 }
