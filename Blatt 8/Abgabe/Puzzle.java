@@ -119,6 +119,40 @@ class Puzzle {
 		return false;
 	}
 	
+	public int tiefe () {
+		HashMap<String, Boolean> visited = new HashMap<>();
+		MyQueue<String> queue = new MyQueue<>(n*n*n*n);
+		HashMap<String, String> pi = new HashMap<>();
+		
+		visited.put(start, true);
+		pi.put(start, null);
+		
+		queue.push(start);
+		while(queue.size() != 0) {
+			String u = queue.pop();
+			int index = u.indexOf("0");
+			ArrayList<Integer> edge = edges.get(index);
+			for ( int i = 0; i < edge.size(); i++) {
+				String next = swap(u,index, edge.get(i));
+				if (this.correct(next)) {
+					int sum = 0;
+					String test = next;
+					while (test != start) {
+						sum++;
+						test = pi.get(test);
+					}
+					return sum;
+				}
+				if (visited.get(next) != true) {
+					visited.put(next, true);
+					pi.put(u, next);
+					queue.push(next);
+				}
+			}
+		}
+		return -1;
+	}
+	
 	private static String swap (String string, int first, int last) {
 		char[] temp = string.toCharArray();
 		if (first < 0 || first >= string.length() || last < 0 || last >= string.length())
