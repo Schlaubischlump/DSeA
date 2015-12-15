@@ -14,7 +14,7 @@ Zweistufiges Verfahren:
 \caption[Perfektes Hashing]{Perfektes Hashing}
 \label{fig:PHsching}
 \end{figure}
-\section{Graphen-Algorithmen}
+\part{Graphen-Algorithmen}
 \subsection{Einführung}
 \[ G=(V,E)~~~V\text{ vertices, }E\text{ edges}~~~E\subseteq V \times V \]
 
@@ -118,7 +118,7 @@ pi[s] = null;
 	FIFO &$~$ & FILO \\
 	First-In-First-Out &$~$& First-In-First-Out 
 \end{tabular}
-\begin{wrapfigure}{o}{0.4\textwidth}
+\begin{wrapfigure}{r}{0.4\textwidth}
 	\includegraphics[width=\linewidth]{15/Grafik/CodeBild}
 	\caption{Grafik zum Beispielcode}
 	\label{fig:CodeBild}
@@ -144,4 +144,4 @@ while(!Q.empty()) {
 \[ \mathcal{O}(|V|+|E|) \]
 \paragraph{Begründung:}
 Jeder von $s$ aus erreichbare Knoten wird nur einmal in die Queue aufgenommen und auch ihr entfernt. Für jeden Knoten muss nur einmal seine Adjazenzliste durchlaufen werden.
-\[  \Rightarrow \mathcal{O}\left(|V|+\sum_{v \in V}\text{outdeg}(v) \right) \]
+\[  \Rightarrow \mathcal{O}\left(|V|+\sum_{v \in V}\text{outdeg}(v) \right) \]\vspace{-200pt}

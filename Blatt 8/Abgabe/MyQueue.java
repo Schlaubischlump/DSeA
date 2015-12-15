@@ -1,18 +1,18 @@
 class MyQueue<E> {
 	
-	E[] queue;
-	int head;
-	int tail;
-	//int size;
-	boolean empty;
+	private E[] queue;
+	private int head;
+	private int tail;
+	int size;
+	//private boolean empty;
 	
 	@SuppressWarnings("unchecked")
 	public MyQueue ( int size) {
 		queue =(E[])new Object[size];
 		this.head = 0;
 		this.tail = 0;
-		//this.size = 0;
-		this.empty = true;
+		this.size = 0;
+		//this.empty = true;
 	}
 	
 	public boolean push(E e) {
@@ -21,39 +21,39 @@ class MyQueue<E> {
 			return false;
 		else if (this.size() != 0)
 			tail = (tail+1)%queue.length;
-		if (empty) {
-			empty = false;
+		if (size == 0) {
+			//empty = false;
 			head = 0;
 			tail = 0;
 		}
 		queue[tail] = e;
-		//size++;
+		size++;
 		return true;
 	}
 	
 	public E pop() {
-		//if (this.size() == 0)
-		if (empty)
+		if (this.size() == 0)
+		//if (empty)
 			return null;
-		if (head == tail)
-			empty = true;
+		//if (head == tail)
+			//empty = true;
 		E temp = queue[head];
 		head = (head+1)%queue.length;
-		//size--;
+		size--;
 		return temp;
 		
 	}
 	
 	public int size() {
-		if (empty)
-			return 0;
-		if (tail > head)
-			return tail-head+1;
-		if (head > tail)
-			return queue.length-head+tail+1;
-		return 1;
+		//if (empty)
+			//return 0;
+		//if (tail > head)
+			//return tail-head+1;
+		//if (head > tail)
+			//return queue.length-head+tail+1;
+		//return 1;
 		//return (tail+head)%(queue.length+1);
-		//return size;
+		return size;
 	}
 	
 	public void print() {
@@ -69,9 +69,13 @@ class MyQueue<E> {
 		test.push(5);
 		test.push(0);
 		test.push(3);
+		test.print();
 
 		test.pop();
 		test.pop();
+		test.pop();
+		test.pop();
+		test.print();
 		
 		test.push(2);
 		test.push(10);

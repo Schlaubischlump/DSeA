@@ -4,6 +4,7 @@
 \usepackage{float}
 \usepackage[utf8]{inputenc}
 \usepackage[section]{placeins}
+\usepackage{hyperref}
 \usepackage{ngerman, eucal, mathrsfs, amsfonts, bbm, amsmath, amssymb, stmaryrd,graphicx, array, geometry, listings, color, multicol, wrapfig, ulem, float, subcaption}
 \usepackage{graphicx}
 \usepackage{epstopdf}
@@ -20,13 +21,26 @@
 \newcommand{\RM}[1]{\MakeUppercase{\romannumeral #1}}
 \renewcommand{\thefootnote}{\Roman{footnote}}
 \newcommand{\satz}{\paragraph*{Satz:}}
-
+\hypersetup{
+	unicode = true,
+	pdfborder = {0 0 0},
+	linktoc = all,
+	colorlinks,
+	linkcolor = black,
+	citecolor = black,
+	filecolor = black,
+	urlcolor = blue
+	}
 \lstset{
 	literate={ö}{{\"o}}1
 	{ä}{{\"a}}1
 	{ü}{{\"u}}1
 	{ß}{{\ss}}1
 	{/pi}{{$\Pi$}}1
+	{/inf}{{$\infty$}}1
+	{/eIn}{{$\in$}}1
+	{/cup}{{$\cup$}}1
+	{/leer}{{$\emptyset$}}1
 }
 \begin{document}
 \maketitle
@@ -43,5 +57,6 @@
 \input{14/14}
 \input{15/15}
 \input{16/16}
+\input{17/17}
 
 \end{document}

@@ -99,7 +99,7 @@ Sei $p=(s=v_0,v_1,v_2,\ldots,v_k)$
 \[ \delta(s,v)\leq \delta(s,U)+w(u,v) \]
 \begin{lstlisting}
 relax(u,v,w) {
-  if(d[v] > d[w]+w(u,v) ) {
+  if(d[v] > d[u]+w(u,v) ) {
     d[v] = d[u] + w(u,v);
     /pi[v] = u;
   }
