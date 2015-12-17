@@ -1,30 +1,30 @@
 class MyQueue<E> {
 	
-	private E[] queue;
+	private final E[] queue;
 	private int head;
 	private int tail;
-	int size;
+	private int size;
 	//private boolean empty;
 	
 	@SuppressWarnings("unchecked")
 	public MyQueue ( int size) {
 		queue =(E[])new Object[size];
-		this.head = 0;
-		this.tail = 0;
+		this.head = -1;
+		this.tail = -1;
 		this.size = 0;
 		//this.empty = true;
 	}
 	
 	public boolean push(E e) {
 		
-		if (this.size()== queue.length)
+		if ((tail+1)%queue.length == head)
 			return false;
-		else if (this.size() != 0)
+		else if (this.size() == 0) {
+			head++;
+			tail++;
+		}
+		else {
 			tail = (tail+1)%queue.length;
-		if (size == 0) {
-			//empty = false;
-			head = 0;
-			tail = 0;
 		}
 		queue[tail] = e;
 		size++;
@@ -32,15 +32,17 @@ class MyQueue<E> {
 	}
 	
 	public E pop() {
-		if (this.size() == 0)
-		//if (empty)
-			return null;
-		//if (head == tail)
-			//empty = true;
-		E temp = queue[head];
-		head = (head+1)%queue.length;
+		E value = null;
+		if (head == tail) {
+			value = queue[head];
+			tail = -1;
+			head = -1;
+		} else if (size != 0) {
+			value = queue[head];
+			head = (head+1)%queue.length;
+		}
 		size--;
-		return temp;
+		return value;
 		
 	}
 	

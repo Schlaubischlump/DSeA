@@ -229,7 +229,7 @@ class Puzzle {
 	}
 	
 	public static void main (String... args) throws FileNotFoundException {
-		Puzzle test = new Puzzle("in");
+		Puzzle test = new Puzzle("in.txt");
 		System.out.println(test.loesbar());
 		System.out.println(test.tiefe());
 		System.out.println(Puzzle.maxTiefe(3));
