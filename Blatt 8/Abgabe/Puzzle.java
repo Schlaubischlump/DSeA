@@ -36,9 +36,6 @@ class Puzzle {
 		this(filepath, 3, createHash(3));
 	}
 	
-	private Puzzle (char[] puzzle, int n) {
-		this(puzzle, n, createHash(n));
-	}
 	
 	private Puzzle (char[] puzzle, int n, HashMap<Integer, ArrayList<Integer>> edges) {
 		start = String.copyValueOf(puzzle);
@@ -46,9 +43,6 @@ class Puzzle {
 		this.edges = edges;
 	}
 	
-	private void setStart(String start) {
-		this.start = start;
-	}
 	public String convert (int[][] arr) {
 		StringBuilder string = new StringBuilder();
 		for (int i = 0; i < arr.length; i++)
@@ -105,8 +99,8 @@ class Puzzle {
 						temp.add(j+1+i*n);
 					} else {
 						temp.add(j+(i-1)*n);
-						temp.add(j+(i+1)*n);
 						temp.add(j+1+i*n);
+						temp.add(j+(i+1)*n);
 					}
 				} else if (j == n-1) {
 					if (i == 0) {
@@ -118,13 +112,13 @@ class Puzzle {
 						temp.add(j-1+i*n);
 					} else {
 						temp.add(j+(i-1)*n);
-						temp.add(j+(i+1)*n);
 						temp.add(j-1+i*n);
+						temp.add(j+(i+1)*n);
 					}
 				} else {
 					if (i == 0) {
-						temp.add(j+1+n*i);
 						temp.add(j-1+n*i);
+						temp.add(j+1+n*i);
 						temp.add(j+(i+1)*n);
 						
 					} else if( i == n-1) {
@@ -133,9 +127,9 @@ class Puzzle {
 						temp.add(j+1+n*i);
 					} else {
 						temp.add(j+(i-1)*n);
-						temp.add(j+(i+1)*n);
 						temp.add(j-1+i*n);
 						temp.add(j+1+n*i);
+						temp.add(j+(i+1)*n);
 					}
 				}	
 			}
@@ -232,6 +226,14 @@ class Puzzle {
 		Puzzle test = new Puzzle("in");
 		System.out.println(test.loesbar());
 		System.out.println(test.tiefe());
-		System.out.println(Puzzle.maxTiefe(3));
+		//System.out.println(Puzzle.maxTiefe(3));
+		HashMap<Integer, ArrayList<Integer>> map = Puzzle.createHash(3);
+		for (int i = 0; i < 9; i++) {
+			System.out.println("Feld "+i);
+			for (int j = 0; j < map.get(i).size(); j++) {
+				System.out.print(map.get(i).get(j)+" ");
+			}
+			System.out.println();
+		}
 	}
 }
