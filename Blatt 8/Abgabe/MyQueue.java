@@ -35,10 +35,12 @@ class MyQueue<E> {
 		E value = null;
 		if (head == tail) {
 			value = queue[head];
+			queue[head] = null;
 			tail = -1;
 			head = -1;
 		} else if (size != 0) {
 			value = queue[head];
+			queue[head] = null;
 			head = (head+1)%queue.length;
 		}
 		size--;
@@ -73,7 +75,6 @@ class MyQueue<E> {
 		test.push(3);
 		test.print();
 
-		test.pop();
 		test.pop();
 		test.pop();
 		test.pop();

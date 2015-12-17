@@ -12,10 +12,12 @@ class Puzzle {
 	HashMap<Integer, ArrayList<Integer>> edges = new HashMap<Integer, ArrayList<Integer>>();
 	int n;
 	String start;
+	private final int queueSize;
 	
-	public Puzzle (String filepath, int n, HashMap<Integer, ArrayList<Integer>> edges) throws FileNotFoundException {
+	public Puzzle (String filepath, int n) throws FileNotFoundException {
 		this.n = n;
-		this.edges = edges;
+		this.edges = createHash(n);;
+		this.queueSize = fak(n*n);
 		Scanner input = new Scanner(new FileReader(filepath));
 		arr = new int[n][n];
 		StringBuilder loesung = new StringBuilder();
@@ -33,14 +35,15 @@ class Puzzle {
 	}
 	
 	public Puzzle (String filepath) throws FileNotFoundException{
-		this(filepath, 3, createHash(3));
+		this(filepath, 3);
 	}
 	
 	
-	private Puzzle (char[] puzzle, int n, HashMap<Integer, ArrayList<Integer>> edges) {
-		start = String.copyValueOf(puzzle);
+	private Puzzle (String puzzle, int n, HashMap<Integer, ArrayList<Integer>> edges) {
+		start = puzzle;
 		this.n = n;
 		this.edges = edges;
+		this.queueSize = fak(n*n);
 	}
 	
 	public String convert (int[][] arr) {
@@ -53,7 +56,7 @@ class Puzzle {
 	
 	public boolean loesbar () {
 		HashSet<String> visited = new HashSet<>();
-		MyQueue<String> queue = new MyQueue<>(n*n*n*n);
+		MyQueue<String> queue = new MyQueue<>(this.queueSize);
 		HashMap<String, String> pi = new HashMap<>();
 		
 		//visited.put(start, true);
@@ -81,6 +84,12 @@ class Puzzle {
 		return false;
 	}
 	
+	private static int fak(int n) {
+		/*if (n < 2)
+			return n;
+		return fak(n-1)*n;*/
+		return 362880;
+	}
 	private static HashMap<Integer, ArrayList<Integer>> createHash(int n) {
 
 		//Erstelle Hashmap
@@ -138,7 +147,7 @@ class Puzzle {
 	public int tiefe () {
 		//HashMap<String, Boolean> visited = new HashMap<>();
 		HashSet<String> visited = new HashSet<>();
-		MyQueue<String> queue = new MyQueue<>(n*n*n*n);
+		MyQueue<String> queue = new MyQueue<>(this.queueSize);
 		HashMap<String, String> pi = new HashMap<>();
 		HashMap<String, Integer> d = new HashMap<>();
 		String loesung = null;
@@ -154,9 +163,7 @@ class Puzzle {
 			ArrayList<Integer> edge = edges.get(index);
 			for ( int i = 0; i < edge.size(); i++) {
 				String next = swap(u,index, edge.get(i));
-				//if (visited.get(next) == null || visited.get(next) == false) {
 				if (!visited.contains(next)) {
-					//visited.put(next, true);
 					visited.add(next);
 					pi.put(next, u);
 					queue.push(next);
@@ -181,23 +188,23 @@ class Puzzle {
 		for (int i = 0; i < n; i++)
 			temp.append(i+"");
 		HashMap<Integer, ArrayList<Integer>> edges = createHash(breite);
-		return maxTiefe(temp.toString().toCharArray(), max, breite, n, edges);
+		return maxTiefe("", temp.toString(), max, breite, n, edges);
 	}
 	
-	private static int maxTiefe(char[] perm, int max,int breite, int n, HashMap<Integer, ArrayList<Integer>> edges) throws FileNotFoundException {
-		if ( n == 1) {
-			int temp = new Puzzle(perm, breite, edges).tiefe();
+	private static int maxTiefe(String pre, String perm, int max,int breite, int n, HashMap<Integer, ArrayList<Integer>> edges) throws FileNotFoundException {
+		if ( n == 0) {
+			int temp = new Puzzle(pre, breite, edges).tiefe();
 			return Math.max(temp, max);
 		}
 		int result = max;
 		for (int i = 0; i < n; i++) {
-			swap(perm, i, n-1);
-			result = Math.max(maxTiefe(perm, result, breite, n-1, edges), result);
-			swap(perm, i, n-1);
+			
+			result = Math.max(maxTiefe(pre + perm.charAt(i),perm.substring(0, i)+ perm.substring(i+1, n), result, breite, n-1, edges), result);
 		}
+		if (n > 4 )
+			System.out.print("-");
 		return result;
 	}
-
 	
 	private static String swap (String string, int first, int last) {
 		char[] temp = string.toCharArray();
@@ -226,14 +233,6 @@ class Puzzle {
 		Puzzle test = new Puzzle("in.txt");
 		System.out.println(test.loesbar());
 		System.out.println(test.tiefe());
-		//System.out.println(Puzzle.maxTiefe(3));
-		HashMap<Integer, ArrayList<Integer>> map = Puzzle.createHash(3);
-		for (int i = 0; i < 9; i++) {
-			System.out.println("Feld "+i);
-			for (int j = 0; j < map.get(i).size(); j++) {
-				System.out.print(map.get(i).get(j)+" ");
-			}
-			System.out.println();
-		}
+		System.out.println(Puzzle.maxTiefe(3));
 	}
 }
