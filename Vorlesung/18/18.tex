@@ -66,21 +66,24 @@ Durch die Operation $d_{ij} = \min(d_{ij}, d_{ik}+d_{kj})$ wird die Invariante s
 \end{description}
 \section{Johnson-Algorithmus}
 \paragraph{Idee:} Neugewichtung der Kanten, so dass keine negativen Kantengewichte mehr vorhanden sind. Anschließend $|V|$-mal Dijkstra-Algorithmus ausführen.
-\paragraph{Naiver Ansatz}
-\begin{figure}[h]
+
+\paragraph{Naiver Ansatz}$~~$\\
+
+\begin{figure}[H]
 \centering
 \includegraphics[width=0.7\linewidth]{18/Grafik/Diagramm3}
 \caption{Naiver Ansatz, kürzester Weg wird zerstört}
 \label{fig:Diagramm3}
 \end{figure}
+\pagebreak
 \paragraph{Neuer Ansatz}
 \[ w'(u,v) =\pot\footnote{Potentialfunktion}(u)-\pot(v)+w(u,v)\geq 0 \]
 Mit dieser Neugewichtung gilt, dass kürzeste Wege bzgl. $w$ den kürzesten Wegen bzgl. $w'$ entsprechen.
 \[ p:s=v_0\rightarrow v_1\rightarrow v_2\rightarrow \ldots v_i\rightarrow v_{i+1}\rightarrow\ldots v_k=t \]
-\[ w'(p) = \sum_{i = 0}^{k-1} w'(v_i, v_{i+1}) = 
-\sum_{i=0}^{k-1}\left[ \pot(v_i)-1\pot(v_{i+1}) +w(v_i, v_{i+1}) \right] \overset{Teleskopsumme}{=}= \pot(v_0)-\pot(v_k)+\sum_{i = 1}^{k-1} w(v_i,v_{i+1}) = \pot(s)-\pot(t)+w(p) \]
+\[ w'(p) = \sum_{i = 0}^{k-1} w'(v_i, v_{i+1}) = \sum_{i=0}^{k-1}\left[ \pot(v_i)-1\pot(v_{i+1}) +w(v_i, v_{i+1}) \right] \]
+\[ \overset{Teleskopsumme}{=}\pot(v_0)-\pot(v_k)+\sum_{i = 1}^{k-1} w(v_i,v_{i+1}) = \pot(s)-\pot(t)+w(p) \]
 \paragraph{d.h.}
-Alle kürzesten Wege $s \rightsquigarrow t$ unterscheiden sich bzgl. $w'$ im vergleich zu $w$ nur um eine feste additive Konstante $\pot(s)-\pot(t)$
+Alle kürzesten Wege $s \rightsquigarrow t$ unterscheiden sich bzgl. $w'$ im Vergleich zu $w$ nur um eine feste additive Konstante $\pot(s)-\pot(t)$
 \[ \pot(u)-\pot(v)+w(u,v) \geq 0 \]
 \[ \pot(v)\leq \pot(u)+w(u,v)\footnote{Dreiecksungleichung} \]
 %Grafik4
@@ -89,7 +92,7 @@ Alle kürzesten Wege $s \rightsquigarrow t$ unterscheiden sich bzgl. $w'$ im ver
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.7\linewidth]{18/Grafik/Diagramm5}
-\caption{Grafik}
+\caption{Die blau makierten Kanten haben die Länge 0}
 \label{fig:Diagramm5}
 \end{figure}
 

@@ -167,6 +167,9 @@ class Puzzle {
 	
 	//Ermittelt die Tiefe/Entfernung der Lösung
 	public int tiefe () {
+		if (!this.loesbar2())
+			return -1;
+		
 		//HashMap<String, Boolean> visited = new HashMap<>();
 		HashSet<String> visited = new HashSet<>();
 		MyQueue<String> queue = new MyQueue<>(this.queueSize);
@@ -219,7 +222,7 @@ class Puzzle {
 		return maxTiefe("", temp.toString(), max, breite, n, edges);
 	}
 	
-	//Vorischt extrem lange Laufzeit
+	//Vorischt extrem lange Laufzeit (>9h)
 	private static int maxTiefe(String pre, String perm, int max,int breite, int n, 
 			HashMap<Integer, ArrayList<Integer>> edges) throws FileNotFoundException {
 		
@@ -266,9 +269,26 @@ class Puzzle {
 		return true;
 	}
 	
+	//Alternative, schnellere Variante für den lösbar Test
+	public boolean loesbar2() {
+		int n = 0;
+		for (int i = 0; i < start.length(); i++) {
+			int num = Integer.parseInt(start.charAt(i)+"");
+			for (int j = 0; j < i; j++) {
+				int num2 = Integer.parseInt(start.charAt(j)+"");
+				if (num2 > num)
+					n++;
+			}
+		}
+		int m = start.indexOf('0')+1;
+		int soll = start.length();
+		return (n+m)%2 == soll%2;
+	}
+	
 	//Ein paar Test
 	public static void main (String... args) throws FileNotFoundException {
 		Puzzle test = new Puzzle("in.txt");
+		//System.out.println(test.loesbar2());
 		System.out.println(test.loesbar());  //Gibt für das Beispiel aus dem Blatt korrekt false zurück
 		System.out.println(test.tiefe());
 		System.out.println(Puzzle.maxTiefe(3));  //Sollte 31 zurückgeben
