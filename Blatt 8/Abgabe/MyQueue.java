@@ -4,26 +4,26 @@ class MyQueue<E> {
 	private int head;
 	private int tail;
 	private int size;
-	//private boolean empty;
 	
+	//Erzeuge Objekt
 	@SuppressWarnings("unchecked")
 	public MyQueue ( int size) {
 		queue =(E[])new Object[size];
 		this.head = -1;
 		this.tail = -1;
 		this.size = 0;
-		//this.empty = true;
 	}
+	
 	
 	public boolean push(E e) {
 		
-		if ((tail+1)%queue.length == head)
+		if ((tail+1)%queue.length == head)  //Falls Tail direkt hinter Head, ist die Queue voll
 			return false;
-		else if (this.size() == 0) {
+		else if (this.size() == 0) {  //wenn leer, wurden die Pointer resetet
 			head++;
 			tail++;
 		}
-		else {
+		else {  //fange von vorne an, wenn hinten angekommen
 			tail = (tail+1)%queue.length;
 		}
 		queue[tail] = e;
@@ -31,41 +31,38 @@ class MyQueue<E> {
 		return true;
 	}
 	
+	
 	public E pop() {
 		E value = null;
-		if (head == tail) {
+		//Wenn Head gleich Tail, dann befindet sich nur ein Element in der Queue, 
+		//nach dem pop kann diese resetet werden
+		if (head == tail) {  
 			value = queue[head];
-			queue[head] = null;
+			queue[head] = null;  //Lösche verweise, damit Garbage Collector arbeiten kann
 			tail = -1;
 			head = -1;
-		} else if (size != 0) {
+		} else if (size != 0) {  //wenn ein Element vorhanden ist, nimm es und lösch es 
 			value = queue[head];
 			queue[head] = null;
 			head = (head+1)%queue.length;
 		}
 		size--;
-		return value;
+		return value; 
 		
 	}
 	
 	public int size() {
-		//if (empty)
-			//return 0;
-		//if (tail > head)
-			//return tail-head+1;
-		//if (head > tail)
-			//return queue.length-head+tail+1;
-		//return 1;
-		//return (tail+head)%(queue.length+1);
 		return size;
 	}
 	
+	//Gibt Queue von Head bis Tail aus
 	public void print() {
 		for (int i = 0; i <this.size(); i++)
 			System.out.print(queue[(i+head)%queue.length]+"  ");
 		System.out.println();
 	}
 	
+	//Aufgabe 1 c)
 	public static void main (String... args) {
 		MyQueue<Integer> test = new MyQueue<Integer>(4);
 
@@ -73,12 +70,9 @@ class MyQueue<E> {
 		test.push(5);
 		test.push(0);
 		test.push(3);
-		test.print();
 
 		test.pop();
 		test.pop();
-		test.pop();
-		test.print();
 		
 		test.push(2);
 		test.push(10);
