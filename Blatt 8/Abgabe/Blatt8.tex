@@ -1,0 +1,72 @@
+\documentclass[a4paper,11pt,twoside]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{ngerman, eucal, mathrsfs, amsfonts, bbm, amsmath, amssymb, stmaryrd,graphicx, array, geometry, listings, color}
+\usepackage{graphicx}
+\usepackage[official]{eurosym}
+\DeclareUnicodeCharacter{20AC}{\EUR{}}
+\geometry{left=25mm, right=15mm, bottom=25mm}
+\setlength{\parindent}{0em} 
+\setlength{\headheight}{0em} 
+\title{Datenstrukturen und effiziente Algorithmen\\ Blatt 8}
+\author{Markus Vieth, David Klopp, Christian Stricker}
+\date{\today}
+
+
+\definecolor{middlegray}{rgb}{0.5,0.5,0.5}
+\definecolor{lightgray}{rgb}{0.8,0.8,0.8}
+\definecolor{orange}{rgb}{0.8,0.3,0.3}
+\definecolor{yac}{rgb}{0.6,0.6,0.1}
+\definecolor{green}{rgb}{0,.5,0}
+\lstset{
+	basicstyle=\scriptsize\ttfamily,
+	keywordstyle=\bfseries\ttfamily\color{blue},
+	stringstyle=\color{orange}\ttfamily,
+	commentstyle=\color{green}\ttfamily,
+	emph={@Override}, 
+	emphstyle=\color{green}\texttt,
+	emph={[2]Node,T,Comparable,AbstractNode,System, Thread,Random, Tree, Integer, Math, String, InterruptedException, Map, Entry, Point, TreeMap, PrintWriter, Scanner, FileReader, FileInputStream, FileNotFoundException, InputStreamReader, UnsupportedEncodingException, DecimalFormat, ArrayList, HashSet, LinkedList, IOException, HashMap, MapTest, MyHashMap},
+	emphstyle={[2]\color{yac}\texttt},
+	showstringspaces=false,
+	flexiblecolumns=false,
+	tabsize=2,
+	numbers=left,
+	numberstyle=\tiny,
+	numberblanklines=false,
+	stepnumber=1,
+	numbersep=10pt,
+	xleftmargin=15pt
+}
+
+\lstset{literate=
+	{á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+	{Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+	{à}{{\`a}}1 {è}{{\`e}}1 {ì}{{\`i}}1 {ò}{{\`o}}1 {ù}{{\`u}}1
+	{À}{{\`A}}1 {È}{{\'E}}1 {Ì}{{\`I}}1 {Ò}{{\`O}}1 {Ù}{{\`U}}1
+	{ä}{{\"a}}1 {ë}{{\"e}}1 {ï}{{\"i}}1 {ö}{{\"o}}1 {ü}{{\"u}}1
+	{Ä}{{\"A}}1 {Ë}{{\"E}}1 {Ï}{{\"I}}1 {Ö}{{\"O}}1 {Ü}{{\"U}}1
+	{â}{{\^a}}1 {ê}{{\^e}}1 {î}{{\^i}}1 {ô}{{\^o}}1 {û}{{\^u}}1
+	{Â}{{\^A}}1 {Ê}{{\^E}}1 {Î}{{\^I}}1 {Ô}{{\^O}}1 {Û}{{\^U}}1
+	{œ}{{\oe}}1 {Œ}{{\OE}}1 {æ}{{\ae}}1 {Æ}{{\AE}}1 {ß}{{\ss}}1
+	{ű}{{\H{u}}}1 {Ű}{{\H{U}}}1 {ő}{{\H{o}}}1 {Ő}{{\H{O}}}1
+	{ç}{{\c c}}1 {Ç}{{\c C}}1 {ø}{{\o}}1 {å}{{\r a}}1 {Å}{{\r A}}1
+	{€}{{\EUR}}1 {£}{{\pounds}}1
+}
+
+\begin{document}
+
+\maketitle
+\cleardoublepage
+\pagestyle{myheadings}
+\markboth{Markus Vieth,  David Klopp, Christian Stricker}{Markus Vieth, David Klopp, Christian Stricker}
+
+\section*{Aufgabe 1}
+\subsection*{a)}
+Vor dem Einfügen der ersten Elements, werden \textrm{head} und \textrm{tail} aus 0 gesetzt. Anschließend wird das neue Element an der Stelle \textrm{head} eingefügt. Bei den folgenden Elementen wird Tail um 1 erhöht und wenn noch Platz in der Queue ist, wird das neue Element an der neuen Stelle auf die \textrm{tail} zeigt eingefügt. Bei Pop wird erst das Element auf das \textrm{head} zeigt gespeichert, dann wird der Platz auf null gesetzt. Anschließend wird \textrm{head} um 1 erhöht, damit es auf das nächste Element zeigt. Zum Schluss wird das gespeicherte Element zurückgegeben. Wird nun ein neues Element der Queue hinzugefügt werden und \textrm{tail} bereits auf das letzte Element im Array zeigen, so wird \textrm{tail} bei der +1 Operation durch eine Modulo-Operation mit der Größere des Arrays wieder auf den im letzten Schritt freien Anfang gesetzt. Dies kann beliebig fortgesetzt werden.
+\clearpage
+\part*{Anhang}
+\section{MapTest.java}
+\lstinputlisting[language=JAVA]{MyQueue.java}
+\section{MyHashMap.java}
+\lstinputlisting[language=JAVA]{Puzzle.java}
+\end{document}
