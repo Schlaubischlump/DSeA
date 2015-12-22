@@ -1,5 +1,19 @@
 \chapter{Vorlesung 7}
 
 \section{Quicksort}
+\[T(n)= \frac{1}{n} \sum_{i=1}^n T(i-1) + T(n-i) + n ~~~\in O(n\log(n))\] 
 
 \section{Quickselect}
+\[T(n) = n+\frac{1}{n} \sum_{i=1}^{n} max(T(i-1), T(n-i))\]
+
+\paragraph{Behauptung} Select $\in O(n)$, also $T(n) = c \cdot n$
+\paragraph{Beweis} Induktion
+\[T(n)=n+\frac{1}{n} \sum_{i=1}^n max(c(i-1), c(n-i))\]
+\[=n+\frac{1}{n} \cdot c \sum_{i=1}^n max((i-1), (n-i))\]
+\[=n+\frac{1}{n} \cdot c \cdot 2 (\sum_{i=1}^{n-1} i  -  \sum_{i=1}^{\frac{n}{c}-1} i )\]
+\[=n+\frac{1}{n} \cdot c \cdot Z (\frac{(n-1)n}{Z} - \frac{(\frac{n}{2}-1)\frac{1}{2}}{Z})\]
+\[=n+\frac{1}{n}c(n(n-1)-\frac{n}{2}(\frac{n}{2}-1)) = n + \frac{1}{n}\cdot c (n^2-n-\frac{n^2}{4}+\frac{n}{2})\]
+\[=n + \frac{1}{n} c (\frac{3}{4} n^2 - \frac{1}{2}n) = n + c( \frac{3}{4} n - \frac{1}{2})\]
+\[\Rightarrow cn = n+c(\frac{3}{4}n-\frac{1}{2}) = n+\frac{3}{4}cn-\frac{1}{2}c\]
+\[\Rightarrow cn \geq n + \frac{3}{4} cn \Leftrightarrow c \geq 4 \]
+\[q.e.d\]
