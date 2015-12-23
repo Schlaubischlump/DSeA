@@ -1,19 +1,18 @@
 \chapter{Vorlesung 6}
-
+\vspace{-30pt}
 \section{Quicksort}
-
+\vspace{-20pt}
 \subsection{Pseudo-Code}
+\vspace{-30pt}
 \lstinputlisting[language=C]{6/Code/quicksort.c}
-
-\subsubsection*{}
-\begin{wrapfigure}[3]{l}{0.4\linewidth}
-\vspace{-40pt}
+\begin{wrapfigure}[3]{l}{0.7\linewidth}
+\vspace{-70pt}
 \includegraphics[width=\linewidth]{6/Grafik/img1.png}
 \includegraphics[width=\linewidth]{6/Grafik/img2.png}
 \caption{}
 \end{wrapfigure}
 
-\vspace{30pt}
+\vspace{0pt}
 \textbf{Schleifen-Invariante:}\\
 $a[k] > p~~\text{für}~~j <k<rechts$\\
 $a[k] \leq p ~~\text{für}~~links<k<i$ 
@@ -40,18 +39,17 @@ Mit der Ableitung der geometrischen Reihe, $\frac{1}{(1-x)^2}$ folgt:\\
 \subsection{Laufzeitanalyse}
 $T(n) =$ Erwartungswert der Laufzeit von Quicksort bei zufällig gleichverteilter Eingabe-Partition.
 \[T(n) = n + \sum_{i=1}^n (T(i-1) + T(n-i)) \cdot \frac{1}{n} \]
-
-\begin{wrapfigure}[2]{l}{0.4\linewidth}
-\vspace{-40pt}
+\vspace{20pt}
+\begin{wrapfigure}[4]{l}{0.6\linewidth}
+\vspace{-60pt}
 \includegraphics[width=\linewidth]{6/Grafik/img3.png}
 \caption{}
+\vspace{300pt}
 \end{wrapfigure}
-
-\vspace{30pt}
-Unter der Annahme, dass keine gleich großen Elemente existieren.
-\vspace{50pt}
-
-$ T(1) = 0 $
+Unter der Annahme, dass keine gleich großen Elemente existieren.\\
+\\
+$T(1) = 0 $
+\pagebreak
 
 \paragraph{Lösen durch Einsetzten}
 \[T(n) = n + \frac{2}{n} \sum_{i=1}^n T(i-1) \]
