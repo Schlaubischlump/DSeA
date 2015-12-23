@@ -25,8 +25,8 @@ $t_{max} \geq \log_2(n!) = \Omega(n \log n) =  \log_2(n!) \leq t_{mean}$
 
 \paragraph{Herleitung}
 \[ \ln(n!) = \ln(n(n-1) \cdot (n-2) \cdot ... \cdot 2 \cdot 1) = \ln(n)+\ln(n-1)+...+1\]
-\[ = \sum^{n}_{i=1} ln(i) \geq \int_1^n \ln(x) dx = [x\ln(x)-x]_1^{n} = n\ln(n)-n+1\]\\
-\[\Rightarrow n! \geq e^{n\ln(n)-n+1} = e \cdot e^{-n} \cdot (e^{\ln(n)})^n = e \cdot e^{-n} \cdot n = e(\frac{n}{e})^n \] 
+\[ = \sum^{n}_{i=1} ln(i) \geq \int_1^n \ln(x) dx = \left[x\ln(x)-x \right]_1^{n} = n\ln(n)-n+1\]\\
+\[\Rightarrow n! \geq e^{n\ln(n)-n+1} = e \cdot e^{-n} \cdot \left(e^{\ln(n)}\right)^n = e \cdot e^{-n} \cdot n = e\left(\frac{n}{e}\right)^n \] 
 Stirling $n! \approx \sqrt{2 \pi n} (\frac{n}{e})^n$
 
 \newpage
@@ -65,10 +65,10 @@ Verfahre analog für rechts.\\
 \[\sum_b T_b = \sum_l (T_l+1) + \sum_r (T_r+1) \geq m_1+m_2 + m_1 \log_2(m_1) + m_2 \log_2(m_2) \]
 
 Unter der Annahme, dass das Minimum bei $\frac{m}{2}$ liegt:
-\[m_1 \log_2(m_1) + m_2 \log_2(m_2) \geq \frac{m}{2} \log_2(\frac{m}{2}) \cdot 2 = m \log_2(\frac{m}{2}) ~~~\text{mit (2)} \] 
+\[m_1 \log_2(m_1) + m_2 \log_2(m_2) \geq \frac{m}{2} \log_2 \left(\frac{m}{2} \right) \cdot 2 = m \log_2 \left(\frac{m}{2} \right) ~~~\text{mit (2)} \] 
 
 Es folgt somit: 
-\[ t_{mean} = \frac{1}{m} \sum_b T_b \geq  \frac{1}{m}(m+m\log_2( \frac{m}{2})) = 1+ \log_2( \frac{m}{2}) = 1+ \log_2(m) -1 = \log_2(m) \]
+\[ t_{mean} = \frac{1}{m} \sum_b T_b \geq  \frac{1}{m}\left(m+m\log_2\left( \frac{m}{2}\right)\right) = 1+ \log_2\left( \frac{m}{2}\right) = 1+ \log_2(m) -1 = \log_2(m) \]
 \[q.e.d\]
 
 \newpage

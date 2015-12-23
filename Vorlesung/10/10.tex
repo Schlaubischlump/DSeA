@@ -51,8 +51,8 @@ $T_n ~\hat{=}~$ maximale Tiefe eines randomisierten Suchbaums mit $\{1,...,n\}$ 
 \[\Rightarrow X_n = 2 \cdot max\{X_{i-1}, X_{n-1}\} \] \\
 
 \textbf{Mit der Abschätzung: $max\{2^{T_1}, 2^{T_2}\} \leq 2^{T_1} + 2^{T_2}$ folgt:}
-\[E(X_n) = E(\sum^n_{i=1} \frac{1}{n} \cdot  2 \cdot max\{X_{i-1}, X_{n-1}\}) \]
-\[= \frac{2}{n} \sum^n_{i=1} E(max\{X_{i-1}, X_{n-1}\}) \leq \frac{2}{n} \sum^n_{i=1} E(X_{i-1} + X_{n-1}) = \frac{2}{n} \sum^n_{i=1} [E(X_{i-1}) + E(X_{n-i})] \leq \frac{4}{n} \sum^{n-1}_{i=0} E(X_i)\] 
+\[E(X_n) = E \left(\sum^n_{i=1} \frac{1}{n} \cdot  2 \cdot max\{X_{i-1}, X_{n-1}\} \right) \]
+\[= \frac{2}{n} \sum^n_{i=1} E \left(max\{X_{i-1}, X_{n-1}\} \right) \leq \frac{2}{n} \sum^n_{i=1} E \left(X_{i-1} + X_{n-1} \right) = \frac{2}{n} \sum^n_{i=1} \left[E(X_{i-1}) + E(X_{n-i}) \right] \leq \frac{4}{n} \sum^{n-1}_{i=0} E(X_i)\] 
 
 \[ n \cdot E(X_n) = 4 \cdot \sum^{n-1}_{i=0} E(X_i) ~~~(1)\]
 \[ (n-1) \cdot E(X_{n-1}) = 4 \cdot \sum^{n-2}_{i=0} E(X_i) ~~~(2)\]

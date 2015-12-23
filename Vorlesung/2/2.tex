@@ -1,6 +1,6 @@
 \chapter{Vorlesung}
 \section*{Heapsort (Fortsetzung)}
-%Grafik
+
 \section{Pseudocode}
 \begin{lstlisting}
 heapify ( int[] a, int i, int n) {
@@ -76,7 +76,7 @@ $k :=$ Zahl der Schichten
 \begin{mdframed}
 \paragraph{Nebenrechnung}
 \begin{flalign*}
-&\sum_{i=1}^{k-1} i \cdot x^{i-1} = \frac{d}{dx} (\sum_{i=0}^{k-1} x^i) = \frac{d}{dx} (\frac{x^k-1}{x-1}) &\\
+&\sum_{i=1}^{k-1} i \cdot x^{i-1} = \frac{d}{dx} \left(\sum_{i=0}^{k-1} x^i \right) = \frac{d}{dx} \left(\frac{x^k-1}{x-1} \right) &\\
 & = \frac{kx^{k-1}(x-1)-(x^k-1)}{(x-1)^2} &\\
 &\text{mit}~x=2~\text{folgt:}~~~~~k\cdot 2^{k-1}-2^k+1&
 \end{flalign*}\\

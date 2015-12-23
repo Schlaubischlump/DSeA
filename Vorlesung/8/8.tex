@@ -3,17 +3,18 @@
 
 \section{Verallgemeinerung von Akra-Brazzi}
 
-\[T_n = [\sum_{i=1}^k a_i T(\frac{n}{b_i})] + g(n) \]
+\[T_n = \left[\sum_{i=1}^k a_i T(\frac{n}{b_i}) \right] + g(n) \]
 \paragraph{Beispiel}
-\[T_n = 1\cdot T(\frac{n}{3})+1\cdot T(\frac{2n}{3}) + n \]
-\[T_n = \theta(n^{\alpha}(1+\int_1^n\frac{g(x)}{x^{1+\alpha}} dx))  \]
+\[T_n = 1\cdot T\left(\frac{n}{3}\right)+1\cdot T\left(\frac{2n}{3}\right) + n \]
+\[T_n = \theta\left(n^{\alpha}\left(1+\int_1^n\frac{g\left(x\right)}{x^{1+\alpha}} dx\right)\right)  \]
+
 
 \paragraph{Klassisch} $\alpha = \log_b(a)$, $\frac{a}{b^{\alpha}} = 1$
 \paragraph{Jetzt} Bestimmte $\alpha$ so, dass gilt:
 \[\sum_{i=1}^k \frac{a_i}{b_i^{\alpha}} = 1 \]
 \[a_1 = a_2 = 1, ~~~~ b_1 = 3, ~~~~ b_2 = \frac{3}{2}, ~~~~ g(n) = n \]
  \[\frac{1}{3}^{\alpha} + \frac{2}{3}^{\alpha} \overset{!}{=} 1 \Rightarrow \alpha = 1 \]
-\[T(n) = \Theta(n(1+\int_1^n \frac{x}{x^{1+1}} dx)) = \Theta(n\ln(n)) \]
+\[T(n) = \Theta \left(n \left(1+\int_1^n \frac{x}{x^{1+1}} dx\right) \right) = \Theta(n\ln(n)) \]
 
 
 \section{Median der Mediane}
@@ -39,7 +40,7 @@ Teile die n Elemente in 5-er Gruppen. Bestimme innerhalb jeder Gruppe den Median
 Wähle zu Beginn den Median der Mediane als Pivot Elemente. Unterteile nun die Folge anhand von $p$ in zwei Teilfolgen und verfahre von nun an analog zur randomisierten Variante von k-Select.
 
 \subsection{Laufzeitanalyse für den worst-case}
-\[T(n) = T(\frac{n}{5})+n+T(\frac{7n}{10}) \]
+\[T(n) = T\left(\frac{n}{5}\right)+n+T \left(\frac{7n}{10} \right) \]
 \[A_1 = \frac{n}{5},~~~~A_2 = n,~~~~A_3= \frac{7n}{10}\]
 $A_1$ = Laufzeit zur rekursiven Bestimmung des Medians der Mediane\\
 $A_2$ = Laufzeit zur Aufteilung in Teilfolgen\\
@@ -48,10 +49,10 @@ $A_3$ = Laufzeit für den Aufruf von k-Select  für größere Teilfolgen, die ab
 Wende die verallgemeinerte Form von Akra-Brazzi an:\\
 $g(n)=n, ~~~a_1=a_2=1, ~~~b_1=5, ~~~b_2=\frac{10}{7}$\\
 \paragraph{Bestimme}
-\[\alpha = (\frac{1}{5})^{\alpha} + (\frac{7}{10})^{\alpha} = 1\]
-\[\Leftrightarrow (\frac{2}{10})^{\alpha} + (\frac{7}{10})^{\alpha} = 1\]
+\[\alpha = \left(\frac{1}{5}\right)^{\alpha} + \left(\frac{7}{10}\right)^{\alpha} = 1\]
+\[\Leftrightarrow \left(\frac{2}{10}\right)^{\alpha} + \left(\frac{7}{10}\right)^{\alpha} = 1\]
 \[\Rightarrow 0 < \alpha < 1 \]
-\[n^{\alpha}(1+\int_1^n \frac{x}{x^{1+\alpha}} dx) = n^{\alpha}(1+\int_1^n x^{-\alpha} dx) = n^{\alpha}(1+[\frac{1}{1-\alpha} x^{-\alpha+1}]_1^n) = n^{\alpha}(1+\frac{1}{1-\alpha} (n^{-\alpha+1}-1))\]
+\[n^{\alpha}\left(1+\int_1^n \frac{x}{x^{1+\alpha}} dx\right) = n^{\alpha}\left(1+\int_1^n x^{-\alpha} dx\right) = n^{\alpha}\left(1+[\frac{1}{1-\alpha} x^{-\alpha+1}]_1^n\right) = n^{\alpha}\left(1+\frac{1}{1-\alpha} \left(n^{-\alpha+1}-1\right)\right)\]
 
 \newpage
 

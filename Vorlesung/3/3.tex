@@ -64,11 +64,11 @@ $T(n) = 2T(\frac{n}{2}) + n -1 \approx 2T(\frac{n}{2}) + n ~~~\text{mit} T(1) = 
 \end{mdframed}
 
 \begin{flalign*}
-&T(n) = 2 \cdot 2 T(\frac{n}{2}) + n \stackrel{\text{(1)}}{=} 2 ( 2 T(\frac{n}{4}) + \frac{n}{2}) + n ) = 4 T(\frac{n}{4}) + 2n&\\
-&~~~~~~~\stackrel{\text{(2)}}{=} 4 \cdot (2T(\frac{n}{8}) + \frac{n}{4}) + 2n = 8T(\frac{n}{8}) + 3n = ... = 2^i \cdot T(\frac{n}{2^i})  + in&\\
+&T(n) = 2 \cdot 2 T \left(\frac{n}{2} \right) + n \stackrel{\text{(1)}}{=} 2 \left( 2 T \left(\frac{n}{4} + \frac{n}{2}\right) + n \right) = 4 T\left(\frac{n}{4} \right) + 2n&\\
+&~~~~~~~\stackrel{\text{(2)}}{=} 4 \cdot \left(2T \left(\frac{n}{8}\right) + \frac{n}{4} \right) + 2n = 8T\left(\frac{n}{8} \right) + 3n = ... = 2^i \cdot T \left(\frac{n}{2^i} \right)  + in&\\
 \\
-&T(\frac{n}{2}) = 2 T(\frac{n}{4}) + \frac{n}{2}~~~~~~(1)& \\
-&T(\frac{n}{4}) = 2 T(\frac{n}{8}) + \frac{n}{4}~~~~~~(2)& \\
+&T\left(\frac{n}{2} \right) = 2 T\left(\frac{n}{4}\right) + \frac{n}{2}~~~~~~(1)& \\
+&T\left(\frac{n}{4} \right) = 2 T\left(\frac{n}{8}\right) + \frac{n}{4}~~~~~~(2)& \\
 &....&\\
 &T(1) = 0&
 \end{flalign*}
@@ -76,20 +76,21 @@ $T(n) = 2T(\frac{n}{2}) + n -1 \approx 2T(\frac{n}{2}) + n ~~~\text{mit} T(1) = 
 
 \paragraph{Rekursionsende} $\frac{n}{2^i} = 1 \Leftrightarrow 2^i = n \Leftrightarrow i = \log_2(n)$\\
 \begin{flalign*}
-&T(n) = 2^{\log_2(n)} T(\frac{n}{2^{\log_2(n)}}) + n \log_2(n) = n T(1) + \log_2(n) = \log_2(n)&
+&T(n) = 2^{\log_2(n)} T\left(\frac{n}{2^{\log_2(n)}} \right) + n \log_2(n) = n T(1) + \log_2(n) = \log_2(n)&
 \end{flalign*}
 
 
 \paragraph{Abstraktion} \text{} \\
 $T(n) =$ Laufzeit eines Divide \& Conquer Algorithmus der ein Problem dadurch löst, das es in $a$ Teilprobleme der Größe $\frac{n}{b}$ zerlegt wird, die rekursiv gelöst werden und anschließend kombiniert werden.\\
 
-$T(n) = a\cdot T(\frac{n}{b}) + n^{\alpha} ~~~~~\alpha > 0~~~~~~\text{mit}~T(1) = 0$\\ 
+$T(n) = a\cdot T\left(\frac{n}{b} \right) + n^{\alpha} ~~~~~\alpha > 0~~~~~~\text{mit}~T(1) = 0$\\ 
 
 
 \begin{flalign*}
-&T(n) = a T(\frac{n}{b}) + n^{\alpha}  \stackrel{\text{(1)}}{=} a^2 T(\frac{n}{b^2}) + a(\frac{n}{b})^{\alpha} + n^{\alpha}&\\
-&(1)~~~~~T(\frac{n}{b}) = a T(\frac{n}{b^2}) + (\frac{n}{b})^{\alpha}  \stackrel{\text{(2)}}{=} a^3 T(\frac{n}{b^3}) + a^2(\frac{n}{b^2})^{\alpha}  + a^1(\frac{n}{b^1})^{\alpha} +  a^0(\frac{n}{b^0})^{\alpha}&\\
-&(2)~~~~~T(\frac{n}{b^2}) = a T(\frac{n}{b^3}) + (\frac{n}{b^2})^{\alpha}  = a^i T(\frac{n}{b^i}) + \sum_{j=0}^{i-1} a^j (\frac{n}{b^j})^{\alpha} =  a^i T(\frac{n}{b^i}) + n^{\alpha} \sum_{j=0}^{i-1} (\frac{a}{b^{\alpha}})^j~~\text{mit}~i= \log_b(n) \land x = \frac{a}{b^{\alpha}}&\\
+&T(n) = a T\left(\frac{n}{b}\right) + n^{\alpha}  \stackrel{\text{(1)}}{=} a^2 T\left(\frac{n}{b^2}\right) + a\left(\frac{n}{b}\right)^{\alpha} + n^{\alpha}&\\
+&(1)~~~~~T\left(\frac{n}{b}\right) = a T\left(\frac{n}{b^2}\right) + \left(\frac{n}{b}\right)^{\alpha}  \stackrel{\text{(2)}}{=} a^3 T\left(\frac{n}{b^3}\right) + a^2\left(\frac{n}{b^2}\right)^{\alpha}  + a^1\left(\frac{n}{b^1}\right)^{\alpha} +  a^0\left(\frac{n}{b^0}\right)^{\alpha}&\\
+&(2)~~~~~T\left(\frac{n}{b^2}\right) = a T\left(\frac{n}{b^3}\right) + \left(\frac{n}{b^2}\right)^{\alpha}  = a^i T\left(\frac{n}{b^i}\right) + \sum_{j=0}^{i-1} a^j \left(\frac{n}{b^j}\right)^{\alpha} =  a^i T\left(\frac{n}{b^i}\right) + n^{\alpha} \sum_{j=0}^{i-1} \left(\frac{a}{b^{\alpha}}\right)^j&\\
+&~~\text{mit}~i= \log_b(n) \land x = \frac{a}{b^{\alpha}}&\\
 &...&\\
 &T(1) = 0&
 \end{flalign*}

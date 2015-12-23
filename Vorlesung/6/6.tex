@@ -31,9 +31,9 @@ $a[k] \leq p ~~\text{für}~~links<k<i$
 
 \subsubsection{Fairer Würfel (Erste Sechs):} X sei Zufallsvariable  $~\hat{=}~$ Zahl der benötigten Würfe bis zum Auftreten der ersten 6.
 \[x_i \in N\]
-\[E(X) = \sum_{i=1}^{\infty} i \cdot Pr(X=i) = \frac{1}{6} \cdot \sum_{i=1}^{\infty} i \cdot (\frac{5}{6})^{i-1} \]
+\[E(X) = \sum_{i=1}^{\infty} i \cdot Pr(X=i) = \frac{1}{6} \cdot \sum_{i=1}^{\infty} i \cdot \left(\frac{5}{6} \right)^{i-1} \]
 Mit der Ableitung der geometrischen Reihe, $\frac{1}{(1-x)^2}$ folgt:\\
-\[= \frac{1}{6} \cdot (\frac{1}{(1-\frac{5}{6})^2}) = 6 \]
+\[= \frac{1}{6} \cdot \left(\frac{1}{ \left(1-\frac{5}{6} \right)^2} \right) = 6 \]
 \end{mdframed}
 
 
@@ -53,15 +53,14 @@ $T(1) = 0 $
 \pagebreak
 
 \paragraph{Lösen durch Einsetzten}
-\[T(n) = n + \frac{2}{n} \sum_{i=1}^n T(i-1) \]
-\[ \Leftrightarrow T(n) = n + \frac{2}{n} \sum_{i=0}^{n-1} T(i) \]
+\[T(n) = n + \frac{2}{n} \sum_{i=1}^n T(i-1) = n + \frac{2}{n} \sum_{i=0}^{n-1} T(i)\]
 \[ \Leftrightarrow n \cdot T(n) = n^2 + 2 \sum_{i=0}^{n-1} T(i) \]
 \[ \Leftrightarrow 2(n-1) \cdot T(n-1) = (n-1)^2 + 2 \sum_{i=0}^{n-2} T(i) \]
 \[ \Leftrightarrow (1)-(2) n T(1)-(n-1) T(n-1) = n2 -(n-1)^2 + 2 T(n-1) \]
 \[ \Leftrightarrow n T(n) = (n+1) T(n-1) + 2n-1 \]
-\[ \Leftrightarrow T(n) \leq \frac{n+1}{n} T(n-1) + 2 \leq \frac{n+1}{2} (\frac{n}{n+1} \cdot T(n-2) + 2) + 2 \]
+\[ \Leftrightarrow T(n) \leq \frac{n+1}{n} T(n-1) + 2 \leq \frac{n+1}{2} \left(\frac{n}{n+1} \cdot T(n-2) + 2 \right) + 2 \]
 \[ = \frac{n+1}{n-1} T(n-2) + \frac{n+1}{n} \cdot 2 + 2\]
-\[ \leq \frac{n+1}{n-1} (\frac{n-1}{n-2} T(n-3) +2 ) + \frac{n+1}{n} \cdot 2 + 2 \cdot 1\]
+\[ \leq \frac{n+1}{n-1} \left(\frac{n-1}{n-2} T(n-3) +2 \right) + \frac{n+1}{n} \cdot 2 + 2 \cdot 1\]
 \[= \frac{n+1}{n-2} T(n-3) + 2 \cdot \frac{n+1}{n-1} + 2 \cdot \frac{n+1}{n} + 2 \cdot \frac{n+1}{n+1} \]
 \[ \Rightarrow T(n) \leq \frac{n+1}{n-(k-1)} T(n-k) + 2(n+1) \sum_{i=1}^{k-2} \frac{1}{n-i} ~~~\text{endet für k = n-1}\]
 \[ T(n) = 2(n+1) \sum_{i=-1}^{n-3} \frac{1}{n-i} = 2(n+1) \sum_{j=3}^{n+1} \frac{1}{j} \leq 2 (n+1) H_{n+1} \in O(n \log n) ~~~\text{mit j=n-i} \] 
