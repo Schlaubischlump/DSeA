@@ -33,6 +33,12 @@
 	filecolor = black,
 	urlcolor = blue
 	}
+	
+\newtoggle{InString}{}
+\togglefalse{InString}
+\newcommand*{\ColorIfNotInString}[1]{\iftoggle{InString}{#1}{\color{blue}#1}}%
+\newcommand*{\ProcessQuote}[1]{#1\iftoggle{InString}{\global\togglefalse{InString}}{\global\toggletrue{InString}}}%
+
 \lstset{
 	literate={ö}{{\"o}}1
 	{ä}{{\"a}}1
@@ -45,7 +51,21 @@
 	{/leer}{{$\emptyset$}}1
 	{<=}{{$\leq$}}1
 	{>=}{{$\geq$}}1
+	{"}{{{\ProcessQuote{"}}}}1
+    	{'}{{{\ProcessQuote{'}}}}1
+	{0}{{{\ColorIfNotInString{0}}}}1
+    	{1}{{{\ColorIfNotInString{1}}}}1
+    	{2}{{{\ColorIfNotInString{2}}}}1
+    	{3}{{{\ColorIfNotInString{3}}}}1
+    	{4}{{{\ColorIfNotInString{4}}}}1
+   	{5}{{{\ColorIfNotInString{5}}}}1
+    	{6}{{{\ColorIfNotInString{6}}}}1
+    	{7}{{{\ColorIfNotInString{7}}}}1
+    	{8}{{{\ColorIfNotInString{8}}}}1
+    	{9}{{{\ColorIfNotInString{9}}}}1
 }
+
+
 \lstset{
   tabsize=4,
   captionpos=b,
@@ -62,13 +82,25 @@
   showstringspaces=false,
   emph=[1]%
   {%
-  	forall,
+	infinity,
   }, 
   emphstyle=[1]{\color{blue}},
   emph=[2]%
   {%
+    	forall,
+	while,
+	if,
+	else,
+	for,
+	return,
+	new,
   	NULL,
 	null,
+	int, 
+	double, 
+	float,
+	class,
+	void,
   }, 
   emphstyle=[2]{\color{Magenta}},
 }
