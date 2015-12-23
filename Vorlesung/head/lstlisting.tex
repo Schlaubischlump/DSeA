@@ -1,0 +1,80 @@
+\usepackage{listings}
+
+\newcommand\digitstyle{\color{blue}}
+\makeatletter
+\newcommand{\ProcessDigit}[1]
+{%
+	\ifnum\lst@mode=\lst@Pmode\relax%
+	{\digitstyle #1}%
+	\else
+	#1%
+	\fi
+}
+
+\lstset{
+	literate={ö}{{\"o}}1
+	{ä}{{\"a}}1
+	{ü}{{\"u}}1
+	{ß}{{\ss}}1
+	{/pi}{{$\Pi$}}1
+	{/inf}{{$\infty$}}1
+	{/eIn}{{$\in$}}1
+	{/cup}{{$\cup$}}1
+	{/leer}{{$\emptyset$}}1
+	{<=}{{$\leq$}}1
+	{>=}{{$\geq$}}1
+	{0}{{{\ProcessDigit{0}}}}1
+	{1}{{{\ProcessDigit{1}}}}1
+	{2}{{{\ProcessDigit{2}}}}1
+	{3}{{{\ProcessDigit{3}}}}1
+	{4}{{{\ProcessDigit{4}}}}1
+	{5}{{{\ProcessDigit{5}}}}1
+	{6}{{{\ProcessDigit{6}}}}1
+	{7}{{{\ProcessDigit{7}}}}1
+	{8}{{{\ProcessDigit{8}}}}1
+	{9}{{{\ProcessDigit{9}}}}1
+	{<=}{{\(\leq\)}}1,
+	morestring=[b]",
+	morestring=[b]',
+	morecomment=[l]//,
+}
+
+
+\lstset{
+	tabsize=4,
+	captionpos=b,
+	numbers=left,
+	commentstyle=\color{Green},
+	numberstyle=\color{gray},
+	keywordstyle=\color{blue} \textbf,%otherkeywords={xdata},
+	keywords=[2]{xdata},
+	keywordstyle=[2]\color{red}\textbf,
+	identifierstyle=\color{black},
+	stringstyle=\color{red}\ttfamily,
+	basicstyle = \ttfamily \color{black} \footnotesize,
+	inputencoding=utf8,
+	showstringspaces=false,
+	emph=[1]%
+	{%
+		infinity,
+	}, 
+	emphstyle=[1]{\color{blue}},
+	emph=[2]%
+	{%
+		forall,
+		while,
+		if,
+		else,
+		for,
+		return,
+		new,
+		NULL,
+		null,
+		int, 
+		double, 
+		float,
+		class,
+		void,
+	}, 
+	emphstyle=[2]{\color{Magenta}},
+}
