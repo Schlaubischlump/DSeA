@@ -20,7 +20,9 @@ Node rotateRight(Node y) {
 	return x;
 }
 
-Node rotateLeft(Node y) { //analog }
+Node rotateLeft(Node y) {
+    //analog
+}
 
 Node insert(Node node, int key) {
 	if (node == null) return new Node(key);

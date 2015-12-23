@@ -99,7 +99,7 @@ falls $G$ ungerichtet $\Rightarrow A = A^T$
 
 \subsection{BFS (Breadth-First Search) Breitensuche}
 \paragraph{Initialisierung}
-\begin{lstlisting}
+\begin{lstlisting}[language=C]
 forall ( v in V\{S}) {
   col[v]=white;    // Farbe  weiß = unbekannt, grau = bekannt, schwarz = vollkommen bekannt
   d[v] = infinity; // Distanz
@@ -107,7 +107,7 @@ forall ( v in V\{S}) {
 }
 col[s] = grey;     // s ist Startknoten
 d[s] = 0;
-pi[s] = null;
+pi[s] = NULL;
 \end{lstlisting}
 \begin{tabular}{ccc}
 	Queue & vs & Stack \\

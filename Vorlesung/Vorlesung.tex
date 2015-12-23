@@ -46,6 +46,32 @@
 	{<=}{{$\leq$}}1
 	{>=}{{$\geq$}}1
 }
+\lstset{
+  tabsize=4,
+  captionpos=b,
+  numbers=left,
+  commentstyle=\color{Green},
+  numberstyle=\color{gray},
+  keywordstyle=\color{blue} \textbf,%otherkeywords={xdata},
+  keywords=[2]{xdata},
+  keywordstyle=[2]\color{red}\textbf,
+  identifierstyle=\color{black},
+  stringstyle=\color{red}\ttfamily,
+  basicstyle = \ttfamily \color{black} \footnotesize,
+  inputencoding=utf8,
+  showstringspaces=false,
+  emph=[1]%
+  {%
+  	forall,
+  }, 
+  emphstyle=[1]{\color{blue}},
+  emph=[2]%
+  {%
+  	NULL,
+	null,
+  }, 
+  emphstyle=[2]{\color{Magenta}},
+}
 \makeatletter
 \g@addto@macro\bfseries{\boldmath}
 \makeatother
