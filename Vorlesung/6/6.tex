@@ -23,6 +23,7 @@ $a[k] \leq p ~~\text{für}~~links<k<i$
 \subsection{Zufallspermutation}
 \lstinputlisting[language=C]{6/Code/zufallspermutation.c}
 
+\begin{mdframed}
 \subsection{Einschub: Stochastik}
 \subsubsection{Fairer Würfel (Erwartungswert):} X sei Zufallsvariable $~\hat{=}~$ Anzahl Augen\\
 \[Pr(X=x_i)~~~~x_i \in \{1,2,3,4,5,6\} \]
@@ -33,7 +34,7 @@ $a[k] \leq p ~~\text{für}~~links<k<i$
 \[E(X) = \sum_{i=1}^{\infty} i \cdot Pr(X=i) = \frac{1}{6} \cdot \sum_{i=1}^{\infty} i \cdot (\frac{5}{6})^{i-1} \]
 Mit der Ableitung der geometrischen Reihe, $\frac{1}{(1-x)^2}$ folgt:\\
 \[= \frac{1}{6} \cdot (\frac{1}{(1-\frac{5}{6})^2}) = 6 \]
-
+\end{mdframed}
 
 
 \subsection{Laufzeitanalyse}
@@ -65,16 +66,16 @@ $T(1) = 0 $
 \[ \Rightarrow T(n) \leq \frac{n+1}{n-(k-1)} T(n-k) + 2(n+1) \sum_{i=1}^{k-2} \frac{1}{n-i} ~~~\text{endet für k = n-1}\]
 \[ T(n) = 2(n+1) \sum_{i=-1}^{n-3} \frac{1}{n-i} = 2(n+1) \sum_{j=3}^{n+1} \frac{1}{j} \leq 2 (n+1) H_{n+1} \in O(n \log n) ~~~\text{mit j=n-i} \] 
 
-\paragraph{Harmonische Reihe}
+\begin{mdframed}
+\paragraph{Einschub: Harmonische Reihe}
 \[ H_n = \sum_{i=1}^{n} \frac{1}{i} \]
 
-\begin{figure}[h]
 \includegraphics[width=\linewidth]{6/Grafik/img4.png}
-\caption{Harmonische Reihe}
-\end{figure}
+
 
 \[H_n \leq \int \frac{1}{x} dx +1 = 1 + [\ln x]_1^n = \ln(n)+1 \]
 \[\ln(n+1) \leq H_n \le	q \ln(n)+1 \]
+\end{mdframed}
 
 \pagebreak 
 
