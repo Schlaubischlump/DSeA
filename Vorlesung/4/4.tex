@@ -7,14 +7,62 @@
 
 
 \section{Master-Theorem}
-
+\begin{flalign*}
+&T(n)=T(\frac{n}{b} \cdot a + n^{\alpha})&\\
+&T(1)= 0&\\
+&T(n) = a^i T(\frac{n}{b^i}) + n^{\alpha} \sum_{j=0}^{i-1} (\frac{a}{b^{\alpha}})^j&\\
+\\
+&\text{\underline{o.B.d.A}}&\\
+&n=b^k \Leftrightarrow k = \log_b(n)&
+\end{flalign*}
 
 \subsection{Fall 1}
+$(\frac{a}{b^{\alpha}}) < 1 \Leftrightarrow a < b^{\alpha} \Leftrightarrow \log_b(a) < \alpha$
+
+\begin{mdframed}
+\begin{flalign*}
+&\sum_{j=0}^{k-1} x^j = \frac{x^k-1}{x-1}~~~~\text{für}~x \not= 1&
+\end{flalign*}
+\end{mdframed}
+
+\begin{flalign*}
+&\Rightarrow \sum_{j=0}^{k-1} (\frac{a}{b^{\alpha}})^j \leq \frac{1}{1-\frac{a}{b^{\alpha}}} = c'&\\
+\\
+&T(n) = a^k T(1) + n^{\alpha} \cdot c'&\\
+&~~~~~~~=c \cdot n^{\log_b(a)} + c' \cdot n^{\alpha} = \Theta(n^{\alpha})&\\
+\\
+&\textbf{Nebenbedingung}~~~~a^{\log_b(n)} = (b^{\log_b(a)})^{\log_b(n)} = (b^{\log_b(n)})^{\log_b(a)} = n^{\log_b(a)}&
+\end{flalign*}
+
+\pagebreak
+
 \subsection{Fall 2}
+$(\frac{a}{b^{\alpha}}) > 1 \Leftrightarrow \log_b(a) > \alpha$
+
+\begin{flalign*}
+&\sum_{j=0}^{k-1} (\frac{a}{b^{\alpha}})^j = (\frac{(\frac{a}{b^{\alpha}})^{\log_b(n)} -1}{(\frac{a}{b^{\alpha}})-1}) \leq (\frac{a}{b^{\alpha}})^{\log_b(n)} \cdot c'' = \frac{a^{\log_b(n)}}{b^{\alpha \log_b(n)}} = \frac{n^{\log_b(\alpha)}}{n^{\alpha}}&\\
+\\
+&T(n) = c \cdot n^{\log_b(a)} + n^{\alpha} \cdot \frac{n^{\log_b(a)}}{n^{\alpha}} \cdot c'' = \Theta(n^{\log_b(a)})&\\
+\end{flalign*}
+
+
 \subsection{Fall 3}
+$(\frac{a}{b^{\alpha}}) = 1 \Leftrightarrow a = b^{\alpha} \Leftrightarrow \log_b(a) = \alpha$
+
+\begin{flalign*}
+&T(n) = c \cdot n^{\log_b(a)} + n^{\alpha} \cdot \log_b(n) = \Theta(n^{\alpha} \cdot \log(n)) &
+\end{flalign*}
 
 \subsection{Beispiel: Mergesort}
+\begin{flalign*}
+&T(n) = \text{\hlr{2}} T(\frac{n}{\text{\hly{2}}^{\text{\hlg{1}}}}) + n&\\
+&T(1)=0&
+\end{flalign*}
 
+\paragraph{Ermittle} $\text{\hlr{a}}=2~~~~\text{\hly{b}}=2~~~~\text{\hlg{$\alpha$}}=1$
+\begin{flalign*}
+&\log_2(2) = 1 = \alpha \Rightarrow 3. Fall \Rightarrow \Theta(n \cdot \log(n))&
+\end{flalign*}
 
 \section{Schnelle Multiplikation langer Zahlen}
 
@@ -37,9 +85,14 @@ B = \begin{tabular}{| c | @{\hspace{2em}}c@{\hspace{2em}} | c | c | c |}
 &~~~= \sum_{i=0}^{n-1} b_i 2^i&
 \end{flalign*}
 
+
+
 \paragraph{Frage} Wie schnell können wir zwei n-stellige Binärzahlen addieren/subtrahieren/multiplizieren ?
 
 \paragraph{Addition} $\Theta(n)$
+
+\pagebreak
+
 
 \subsection{Schulmethode zur Multiplikation}
 \paragraph{Beispiel}
@@ -61,7 +114,6 @@ $n^2$ Aufwand zur Ermittlung der Partialprodukte + $n \cdot$ Kosten für die Add
 \paragraph{Ziel} $o(n^2) ~~~ O(n^{1,58}) $
 
 
-\pagebreak
 
 \subsection{Karazuba Ofman}
 A = \begin{tabular}{| c | c | c | c @{\hspace{2em}} | c | c | c |}
@@ -97,6 +149,10 @@ Sei $T(n)$ die Laufzeit dieser rekursiven Methode zur Multiplikation zweier $n$-
 &\Rightarrow \text{kein Gewinn bisher!!!}&
 \end{flalign*}
 
+
+\pagebreak
+
+
 \paragraph{Ziel} Ermittle Partialprdoukte auf anderem Weg\\
 
 1.) ($A_0$ \hly{+} $A_1$) \hlg{$\cdot$}  ($B_0$ \hly{+} $B_1$) $= A_0 B_0 + A_0 B_1 + A_1 B_0 + A_1 B_1 = P$\\
@@ -117,7 +173,6 @@ $AB = A_0 B_0$ \hly{+} $(P-(A_0 B_0) - (A_1 B_1))$ \hly{+} $A_1 B_1 2^n$
 &\Rightarrow \Theta(n^{\log_2(3)}) = \Theta(n^{1,5849625})&
 \end{flalign*}
 
-\pagebreak
 
 \subsection{Akra-Brazzi Theorem}
 
