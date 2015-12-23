@@ -1,117 +1,21 @@
 \documentclass[a4paper,11pt,twoside]{scrreprt}
-\usepackage[export]{adjustbox}
-\usepackage[T1]{fontenc}
-\usepackage{float}
-\usepackage[utf8]{inputenc}
-\usepackage[section]{placeins}
-\usepackage{hyperref}
-\usepackage{ngerman, eucal, mathrsfs, amsfonts, bbm, amsmath, amssymb, stmaryrd,graphicx, array, geometry, listings, color, multicol, wrapfig, ulem, float, subcaption}
-\usepackage{graphicx}
-\usepackage{epstopdf}
-\usepackage{mdframed}
-\usepackage[dvipsnames]{xcolor}
-\usepackage[official]{eurosym}
-\DeclareUnicodeCharacter{20AC}{\EUR{}}
+
+\input{input/paktete}
+\input{input/hyperref}
+\input{input/lstlisting}
+\input{input/macros}
+
 \geometry{left=25mm, right=15mm, bottom=25mm}
 \setlength{\parindent}{0em} 
 \setlength{\headheight}{0em} 
+\newcommand{\RM}[1]{\MakeUppercase{\romannumeral #1}}
+\renewcommand{\thefootnote}{\Roman{footnote}}
+
 \title{Datenstrukturen und effiziente Algorithmen}
 \author{Markus Vieth \and David Klopp \and Christian Stricker}
 \date{\today}
-\newcommand{\pot}{\text{pot}}
-\DeclareUnicodeCharacter{20AC}{\EUR{}}
-\newcommand{\RM}[1]{\MakeUppercase{\romannumeral #1}}
-\renewcommand{\thefootnote}{\Roman{footnote}}
-\newcommand{\satz}{\paragraph*{Satz:}}
-\hypersetup{
-	unicode = true,
-	pdfborder = {0 0 0},
-	linktoc = all,
-	colorlinks,
-	linkcolor = black,
-	citecolor = black,
-	filecolor = black,
-	urlcolor = blue
-	}
+
 	
-\newcommand\digitstyle{\color{blue}}
-\makeatletter
-\newcommand{\ProcessDigit}[1]
-{%
-  \ifnum\lst@mode=\lst@Pmode\relax%
-   {\digitstyle #1}%
-  \else
-    #1%
-  \fi
-}
-
-\lstset{
-	literate={ö}{{\"o}}1
-	{ä}{{\"a}}1
-	{ü}{{\"u}}1
-	{ß}{{\ss}}1
-	{/pi}{{$\Pi$}}1
-	{/inf}{{$\infty$}}1
-	{/eIn}{{$\in$}}1
-	{/cup}{{$\cup$}}1
-	{/leer}{{$\emptyset$}}1
-	{<=}{{$\leq$}}1
-	{>=}{{$\geq$}}1
-    	{0}{{{\ProcessDigit{0}}}}1
-    	{1}{{{\ProcessDigit{1}}}}1
-    	{2}{{{\ProcessDigit{2}}}}1
-    	{3}{{{\ProcessDigit{3}}}}1
-    	{4}{{{\ProcessDigit{4}}}}1
-    	{5}{{{\ProcessDigit{5}}}}1
-    	{6}{{{\ProcessDigit{6}}}}1
-    	{7}{{{\ProcessDigit{7}}}}1
-    	{8}{{{\ProcessDigit{8}}}}1
-    	{9}{{{\ProcessDigit{9}}}}1
-    	{<=}{{\(\leq\)}}1,
-    	morestring=[b]",
-    	morestring=[b]',
-    	morecomment=[l]//,
-}
-
-
-\lstset{
-  tabsize=4,
-  captionpos=b,
-  numbers=left,
-  commentstyle=\color{Green},
-  numberstyle=\color{gray},
-  keywordstyle=\color{blue} \textbf,%otherkeywords={xdata},
-  keywords=[2]{xdata},
-  keywordstyle=[2]\color{red}\textbf,
-  identifierstyle=\color{black},
-  stringstyle=\color{red}\ttfamily,
-  basicstyle = \ttfamily \color{black} \footnotesize,
-  inputencoding=utf8,
-  showstringspaces=false,
-  emph=[1]%
-  {%
-	infinity,
-  }, 
-  emphstyle=[1]{\color{blue}},
-  emph=[2]%
-  {%
-    	forall,
-	while,
-	if,
-	else,
-	for,
-	return,
-	new,
-  	NULL,
-	null,
-	int, 
-	double, 
-	float,
-	class,
-	void,
-  }, 
-  emphstyle=[2]{\color{Magenta}},
-}
 \makeatletter
 \g@addto@macro\bfseries{\boldmath}
 \makeatother
