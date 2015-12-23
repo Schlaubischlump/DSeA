@@ -1,7 +1,16 @@
 \part{Sortieren}
 \chapter{Vorlesung 1}
 \section{Bubblesort}
-%Grafik
+
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[width=0.8\linewidth]{1/Grafik/Bubblesort.png}
+\caption{Bubblesort}
+\end{center}
+\end{figure}
+
+
 \subsection{Pseudocode}
 \begin{lstlisting}
 void bubblesort (int[] a) {
@@ -19,7 +28,14 @@ void bubblesort (int[] a) {
 	Die Feldpositionen n-i,\ldots,n-i enthalten die korrekt sortierten Feldelemente
 \end{center}
 \paragraph{Beweis} durch Induktion nach i $\overset{i=n-1}{\Longrightarrow}$ Sortierung am Ende korrekt.
+
+
+\pagebreak
+
 \subsection{Laufzeitanalyse}
+
+$T(n) =$ Zahl der durchgeführten Elementvergleiche für eine Eingabemenge von n Elementen\\
+
 \begin{tabular}{rcc}
 	1.&Phase & n-1 \\
 	2.&Phase & n-1 \\
@@ -45,11 +61,57 @@ void bubblesort (int[] a) {
 	$2^{26}$ & 52d 
 \end{tabular}
 \[ T_{real}(n)\approx cn^2~~ c\approx10^{-6}\]
+\[T_{real} (2n) \approx c \cdot (2n)^2 = 4 cn^2 = 4T_{real}(n) \]
+\[\frac{T_{real}(2n)}{T_{real}(n)} = 4 \]
+
+\newpage
+
 \section{Heapsort}
 \paragraph{z.B.} \begin{tabular}{ccccccccccccccc}
 	21&6&4&7&12&5&3&11&14&17&19&8&9&10&42
 \end{tabular}
-\paragraph{Skizze}
-%Grafik
-\subsection{Heap-Eigenschaft}
-%Grafik
+
+%hier dürfen gerne noch die einzelnen Schritte als Grafik eingefügt werden
+
+\subsection*{Skizze}
+
+\begin{figure}[h]
+\begin{center}
+\includegraphics[width=0.8\linewidth]{1/Grafik/heap1.png}
+\caption{Heapsort (Ausgangssituation)}
+\end{center}
+\end{figure}
+
+\subsection*{Indices innerhalb der Baumstruktur}
+\begin{flalign*}
+&\lfloor \frac{i-1}{2} \rfloor&
+\end{flalign*}
+
+\begin{figure}[h]
+\vspace{-45pt}
+\hspace{35pt}
+\includegraphics[width=0.2\linewidth]{1/Grafik/HeapAufbau.png}
+\caption{Indices}
+\end{figure}
+
+\newpage
+
+\subsection*{Heap-Eigenschaft}
+
+\begin{figure}[h]
+\begin{center}
+\includegraphics[width=0.2\linewidth]{1/Grafik/HeapEigenschaft.png}\\
+$x \geq y$\\
+$x \geq z$
+\caption{Heap-Eigenschaft}
+\end{center}
+\end{figure}
+
+
+\subsection{Idee}
+\paragraph{Phase 1} Stelle die Heap-Eigenschaft überall her\\
+$\Rightarrow$ größtes Element steht in der Wurzel
+\paragraph{Phase 2} Tausche Wurzel mit letztem Feldelement\\
+(z.B. 42 mit 3)\\
+- Entferne letztes Feldelement aus dem Baum\\
+- Gehe erneut zu Phase 1
