@@ -1,3 +1,8 @@
+\newcommand{\hly}[1]{\colorbox{yellow}{#1}}
+\newcommand{\hlg}[1]{\colorbox{YellowGreen}{#1}}
+\newcommand{\hlr}[1]{\colorbox{Lavender}{#1}}
+
+
 \chapter{Vorlesung 4}
 
 
@@ -13,6 +18,116 @@
 
 \section{Schnelle Multiplikation langer Zahlen}
 
+A = \begin{tabular}{| c | @{\hspace{2em}}c@{\hspace{2em}} | c | @{\hspace{2em}}c@{\hspace{2em}}| c | c | c |}
+  \hline
+  $a_{n-1}$ & ... & $a_i$ & ... & $a_2$ & $a_1$ & $a_0$ \\
+  \hline
+\end{tabular} $~~~a_i \in B = \{0, 1\} $
+\begin{flalign*}
+&~~~= \sum_{i=0}^{n-1} a_i 2^i&
+\end{flalign*}\\
+
+
+B = \begin{tabular}{| c | @{\hspace{2em}}c@{\hspace{2em}} | c | c | c |}
+  \hline
+  $b_{n-1}$ & ... & $b_2$ & $b_1$ & $b_0$ \\
+  \hline
+\end{tabular}
+\begin{flalign*}
+&~~~= \sum_{i=0}^{n-1} b_i 2^i&
+\end{flalign*}
+
+\paragraph{Frage} Wie schnell können wir zwei n-stellige Binärzahlen addieren/subtrahieren/multiplizieren ?
+
+\paragraph{Addition} $\Theta(n)$
+
+\subsection{Schulmethode zur Multiplikation}
+\paragraph{Beispiel}
+\begin{tabular}{c c c c c c c c c c c c c | l}
+  1 & 0 & 1 & 1 & 0 & 1 & $\cdot$ & 0 & 1 & 0 & 1 & 1 & 1 & \text{}\\
+  \cline{1-13}
+  \text{} &  \text{}  & 0 & 0 & 0 & 0 & 0 & 0 &  \text{} &  \text{} &  \text{} &  \text{} &  \text{}  & \text{} \\
+  \text{} &  \text{} & \text{} & 1 & 0 & 1 & 1 & 0 & 1 &  \text{} &  \text{} &  \text{} &  \text{}  & n-Partialprodukte\\
+  \text{} &  \text{}  & \text{} &  \text{} & 0 & 0 & 0 & 0 & 0 & 0 &  \text{} &  \text{} &  \text{}  & mit höchstens\\
+  \text{} &  \text{} & \text{} &  \text{} &  \text{} & 1 & 0 & 1 & 1 & 0 & 1 &  \text{} &  \text{} & 2n Ziffern \\
+  \text{} &  \text{} & \text{} &  \text{} &  \text{} & \text{} & 1 & 0 & 1 & 1 & 0 & 1 &  \text{} & \text{}\\
+  \text{} &  \text{} & \text{} &  \text{} &  \text{} & \text{} & $\text{}_1$  & 1 & 0 & $1_1$ & 1 & 0 & 1 & \text{}\\
+  \cline{1-13}
+  \text{} &  \text{} & 1 &  0 & 0 & 0 & 0  & 0 & 0 & 1 & 0 & 1 & 1 & \text{}\\
+\end{tabular}\\
+
+$n^2$ Aufwand zur Ermittlung der Partialprodukte + $n \cdot$ Kosten für die Addition von Zahlen der Länge $2n ~~~ \Rightarrow \Theta(n^2)$ 
+
+\paragraph{Ziel} $o(n^2) ~~~ O(n^{1,58}) $
+
+
+\pagebreak
+
 \subsection{Karazuba Ofman}
+A = \begin{tabular}{| c | c | c | c @{\hspace{2em}} | c | c | c |}
+\cline{1-3}
+\cline{5-7}
+$a_{n-1}$ & ... & $a_{\frac{n}{2}}$ & \text{} &  $a_{\frac{n}{2}-1}$ & ... & $a_0$\\
+\cline{1-3}
+\cline{5-7}
+\end{tabular}\\
+
+$~~~$\begin{tabular}{ @{\hspace{4em}}c @{\hspace{8em}}c}
+$=A_1$ & $=A_0$ \\
+\end{tabular}
+%
+\begin{flalign*}
+&A=A_0 + A_1 2^{\frac{n}{2}}&\\
+\\
+&A \cdot B = (A_0 + A_1 2^{\frac{n}{2}}) (B_0 + B_1 2^{\frac{n}{2}})&\\
+&~~~~~~~= \text{\hlr{$A_0 B_0$}} + \text{\hlr{$A_0 B_1$}} 2^{\frac{n}{2}} + \text{\hlr{$A_1 B_0$}} 2^{\frac{n}{2}} + \text{\hlr{$A_1 B_1$}} 2^n&
+\end{flalign*}
+\paragraph{Legende} \hlr{\text{  }} markierte Elemente haben die Länge \hlr{$\frac{n}{2}$}
+\paragraph{Anmerkung} Addition von Zahlen der Länge $2n$ \\
+
+Sei $T(n)$ die Laufzeit dieser rekursiven Methode zur Multiplikation zweier $n$-stelliger Zahlen:\\
+\begin{flalign*}
+&T(n) = \text{\hlr{$4$}} \cdot T(\text{\hlr{$\frac{n}{2}$}}) + c \cdot n~~~~~~T(1) = c&
+\end{flalign*}
+
+\paragraph{Mastertheoreme}
+\begin{flalign*}
+&a=4~~~~b=2~~~~\alpha=1~~~~~\log_2(4) = 2 > \alpha&\\
+&\Rightarrow T(n) = \Theta(n^2)&\\
+&\Rightarrow \text{kein Gewinn bisher!!!}&
+\end{flalign*}
+
+\paragraph{Ziel} Ermittle Partialprdoukte auf anderem Weg\\
+
+1.) ($A_0$ \hly{+} $A_1$) \hlg{$\cdot$}  ($B_0$ \hly{+} $B_1$) $= A_0 B_0 + A_0 B_1 + A_1 B_0 + A_1 B_1 = P$\\
+2.) $A_0$  \hlg{$\cdot$} $B_0$\\
+3.) $A_1$  \hlg{$\cdot$} $B_1$\\
+$\Rightarrow (A_0 B_1+ A_1 B_0) = (P$  \hly{-} $(A_0 B_0)$  \hly{-} $(A_1 B_1))$\\
+
+Es verbleiben  \hlg{3} Multiplikationen und \hly{ } Additionen\\
+
+$AB = A_0 B_0$ \hly{+} $(P-(A_0 B_0) - (A_1 B_1))$ \hly{+} $A_1 B_1 2^n$
+
+
+\paragraph{Mastertheoreme}
+\begin{flalign*}
+&T(n) = 3 \cdot T(\frac{n}{2}) + n&\\
+&a=3,~~~b=2,~~~\alpha=1&\\
+&\log_2(3) > 1~~~\Rightarrow \text{2. Fall}&\\
+&\Rightarrow \Theta(n^{\log_2(3)}) = \Theta(n^{1,5849625})&
+\end{flalign*}
+
+\pagebreak
 
 \subsection{Akra-Brazzi Theorem}
+
+\paragraph{Beispiel} $T(n) = 2T(\frac{n}{2}) + \log_2(n)$
+
+\begin{flalign*}
+&T(n)= \begin{cases} 
+      aT(\frac{n}{b}) + g(n) & n > n_0 \\
+      h(n) & 1 \leq n \leq n_0
+   \end{cases}&\\
+&T(n) = \Theta(n^{\alpha} (1+ \int_1^n \frac{g(x)}{x^{\alpha+1}} dx))~~~\text{mit}~\alpha \text{, so dass gilt:}~\frac{a}{b^{\alpha}} = 1&
+\end{flalign*}
+
