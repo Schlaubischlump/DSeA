@@ -99,7 +99,7 @@ falls $G$ ungerichtet $\Rightarrow A = A^T$
 
 \subsection{BFS (Breadth-First Search) Breitensuche}
 \paragraph{Initialisierung}
-\begin{lstlisting}[language=C]
+\begin{lstlisting}[language=C, style = pseudo]
 forall ( v in V\{S}) {
   col[v]=white;    // Farbe  weiß = unbekannt, grau = bekannt, schwarz = vollkommen bekannt
   d[v] = infinity; // Distanz
@@ -123,7 +123,7 @@ pi[s] = NULL;
 	\caption{Grafik zum Beispielcode}
 	\label{fig:CodeBild}
 \end{wrapfigure}
-\begin{lstlisting}
+\begin{lstlisting}[style = pseudo]
 Queue Q;
 Q.push(s);
 while(!Q.empty()) {
