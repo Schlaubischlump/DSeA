@@ -1,13 +1,15 @@
+\setlength{\headheight}{-50pt}
 \chapter{Vorlesung}
-
+\vspace{-40pt}
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.9\linewidth]{16/Grafik/Diagramm}
 \caption{Beispiel}
 \label{fig:Diagramm}
+\vspace{-80pt}
 \end{figure}
-
-
+\clearpage
+\setlength{\headheight}{0pt}
 \subsubsection{Definition: Länge kürzesten Weges}
 $\delta(s,v)=$ Länge eines kürzesten Weges vom Startknoten $s$ zum Knoten $v$.\\
 Setze $\delta(s,v)=\infty$, falls v nicht erreichbar von s aus.
@@ -73,7 +75,7 @@ $d[u]\leq d[u']$, weil $u$ vor $u'$ aus $Q$ entfernt $\lightning$
 	q.e.d.
 \end{flushright}
 \section{Kürzeste Wege Algorithmen}
-\subsection{Dijkstra-Algorithmus}
+\section{Dijkstra-Algorithmus}
 \[ G=(V,E)~~w:E\rightarrow \mathbb{R}^+_0 \]
 \begin{figure}[h]
 \centering
