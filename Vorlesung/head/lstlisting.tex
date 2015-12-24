@@ -1,6 +1,16 @@
 \usepackage{listings, textcomp, xcolor}
 
 
+\definecolor{Code}{rgb}{0,0,0}
+\definecolor{Keywords}{rgb}{0,0,255}
+\definecolor{Strings}{rgb}{255,0,0}
+\colorlet{Comments}{Green}
+\colorlet{Numbers}{blue}
+
+%%%%%%%%%%%
+%Mache Integer farbig
+%%%%%%%%%%%
+
 \makeatletter
 
 \newif\iffirstchar\firstchartrue
@@ -29,18 +39,11 @@
 \lst@AddToHook{Output}%
 {%
 	\ifstartedbyadigit%
-	\def\lst@thestyle{\color{blue}}%
+	\def\lst@thestyle{\color{Numbers}}%
 	\fi
 	\global\firstchartrue%
 	\global\startedbyadigitfalse%
 }
-
-
-\definecolor{Code}{rgb}{0,0,0}
-\definecolor{Keywords}{rgb}{0,0,255}
-\definecolor{Strings}{rgb}{255,0,0}
-\colorlet{Comments}{Green}
-\definecolor{Numbers}{rgb}{0,0,255}
 
 \newtoks\jubo@toks
 \jubo@toks={
@@ -85,6 +88,9 @@
 	}\x
 	
 	\makeatother
+%%%%%%%%%%
+%Ende
+%%%%%%%%%%
 
 
 
