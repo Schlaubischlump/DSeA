@@ -3,11 +3,11 @@
 
 \section{Pseudocode}
 \begin{lstlisting}[style = pseudo]
-heapify ( int[] a, int i, int n) {
-  while ( 2i + 1 < n) {		//linkes Kind von i existiert
+void heapify (int[] a, int i, int n) {
+  while (2i + 1 < n) {		//linkes Kind von i existiert
     int j = 2i + 1;
-    if ( 2i + 2 < n)  		//rechtes Kind von i existiert
-      if ( a[j] < a[j+1])
+    if (2i + 2 < n)  		//rechtes Kind von i existiert
+      if (a[j] < a[j+1])
         j = j + 1;  		//j steht für Index des größten Kindes
     if ( a[i] > a[j])  		//Vater größer als Kind
       break;  			//Abbruch, weil heap bereits erfüllt
@@ -18,12 +18,12 @@ heapify ( int[] a, int i, int n) {
 \end{lstlisting}
 \subsection{Phase: Bottom-up Strategie zum Heapaufbau}
 \begin{lstlisting}[style = pseudo]
-for ( int i = n/2; i >= 0; i--)
+for (int i = n/2; i >= 0; i--)
   heapify(a,i,n);
 \end{lstlisting}
 \subsection{Phase: Sortierphase}
 \begin{lstlisting}[style = pseudo]
-for ( int i = n-1; i >= 0; i--) {
+for (int i = n-1; i >= 0; i--) {
   swap(a,0,i);
   heapify(a,0,i);
 }

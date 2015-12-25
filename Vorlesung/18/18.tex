@@ -36,9 +36,9 @@ Schrittzahl $i$ so wählen, dass $2^i \geq n$
 \paragraph{sukzessives Quadrieren:} $\mathcal{O}(n^3\log n)$
 \section{Floyd-Warshall-Algorithmus}
 \begin{lstlisting}[style = pseudo]
-for ( k = 1; k <= n; k++)
-  for( i = 1; i <= n; i++)
-    for ( j = 1; j <= n; j++)
+for (k = 1; k <= n; k++)
+  for(i = 1; i <= n; i++)
+    for (j = 1; j <= n; j++)
       d[i][j] = min(d[i][j], d[i][k]+d[k][j])
 \end{lstlisting}
 \paragraph{Laufzeit} $\mathcal{O}(n^3)$
@@ -59,7 +59,7 @@ d.h. $1\leq l_1,l_2,\ldots,l_m\leq k$
 \end{figure}
 Durch die Operation $d_{ij} = \min(d_{ij}, d_{ik}+d_{kj})$ wird die Invariante sichergestellt.
 \end{description}
-\section[Naive Lösung]{Naive Lösung des All-Pairs Problems durch $|V|$-malige Anwendung von Bellman-Ford oder Dijksta-Algorithmus}
+\section[Naive Lösung]{Naive Lösung des All-Pairs Problems durch $|V|$-malige Anwendung von Bellman-Ford oder Dijkstra-Algorithmus}
 \begin{description}
 \item[Bellman-Ford] $\mathcal{O}(|V|\cdot|V|\cdot|E|) = \mathcal{O}(|V|^2\cdot|E|)$
 \item[Dijksra] $\mathcal{O}(|V|\cdot(|V|\cdot\log|V|+|E|)) = \mathcal{O}(|V|\cdot|E|+|V|^2\cdot\log|V|)$

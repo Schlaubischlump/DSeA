@@ -1,6 +1,6 @@
 \chapter{Vorlesung}
 \satz Ausgehend von einem \underline{leeren} 2-5-Baum betrachten wir die Rebalancierungskosten $C$ (Split- und Fusionsoperationen) für eine Folge von $m$ Einfüge- oder Löschoperationen. Dann gilt: $C\in O(m)$\\
-d.h. Amortisierte Kosten der Split- und Fusionsopeartionen sind konstant.\\
+d.h. Amortisierte Kosten der Split- und Fusionsoperationen sind konstant.\\
 ! Dies bezieht sich nicht auf die Suchkosten, die in $O(\log n)$ liegen.
 \paragraph*{Beweisidee:}
 \subparagraph*{Kontoführung:}
@@ -48,7 +48,7 @@ Einfache Annahme: (einfaches uniformes Hashing)
 	\item Löschen durch "`Pointer-Umbiegen"' $\longrightarrow O(1)$
 \end{itemize}
 \subsection{Universelles Hashing}
-\paragraph*{Idee} Arbeite nicht mit einer festen Hashfunktionm sondern wähle am Anfang eine zufällige Hashfunktion aus einer Klasse von Hashfunktionen aus.
+\paragraph*{Idee} Arbeite nicht mit einer festen Hashfunktion sondern wähle am Anfang eine zufällige Hashfunktion aus einer Klasse von Hashfunktionen aus.
 \paragraph*{z.B.} \[ h_{a,b}(k)=((a\cdot k +b) mod p) mod m \]
 p sei eine hinreichend große Primzahl$~~~~0<a<p, 0\leq b < p$
 \[ \mathcal{H}_{p,m}=\{ h_{a,b}(k) | 0 < a < p, ~ 0 \leq b < p \} \]

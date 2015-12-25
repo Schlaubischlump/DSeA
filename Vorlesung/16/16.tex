@@ -44,7 +44,7 @@ Sei $Q=(v_1,v_2,\ldots,v_k)$ eine Queue, dann gilt stets:
 \subparagraph{push}
 \[ d[u] = d[v_1]\leq d[v_2]\leq\ldots\leq d[v_k]\leq d[u]+1 \]
 Beachte Kante $(u,v)$ $v$ ist weiß
-\[ v=v_{k+1} \text{ wird gepushed} \]
+\[ v=v_{k+1} \text{ wird gepusht} \]
 \[ d[v_{k+1}] = d[v_1]+1 \]
 Zustand von Q nach push
 \[ d[v_2 \leq d[v_3] \leq\ldots\leq d[v_k]\leq d[v_1]+1 = d[v_{k+1}]~~\surd \]
@@ -53,7 +53,7 @@ Nach Ablauf von BFS\footnote{Breitensuche} gilt
 \[ \forall v\in V: ~ d[v]=\delta(s,v) \]
 \subsubsection{Beweis durch Widerspruch}
 Sei $v\in V$, so dass $d[v] \neq \delta(s,v)$ am Ende des Algorithmus $\overset{Lemma2}{\Longrightarrow} d[v] > \delta(s,V)$\\
-Sei $v$ so gewählt, dass es der erste knoten ist mit der Eigenschaft, dass sein d-Wert flasch gesetzt wird. d.h. Alle d-Werte bis zu diesem Zeitpunkt sind korrekt.\\
+Sei $v$ so gewählt, dass es der erste Knoten ist mit der Eigenschaft, dass sein d-Wert falsch gesetzt wird. d.h. Alle d-Werte bis zu diesem Zeitpunkt sind korrekt.\\
 Sei $s\mapsto u'\rightarrow v$ ein kürzester Weg $s$ ui $v$\\
 Betrachte die Situation bei Bearbeitung von $u'$:
 \paragraph{1. Fall} $v$ ist in diesem Moment schwarz.

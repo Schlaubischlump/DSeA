@@ -31,7 +31,7 @@ while(!PQ.empty()) {
 \end{lstlisting}
 
 \paragraph{Satz:}
-Der Dijkstra Algorithmus berechnet alle d-Werte, so dass nach Ablauf des Algo $\forall~v\in V$ gilt: $d[v] = \delta(s,v)$.
+Der Dijkstra Algorithmus berechnet alle d-Werte, so dass nach Ablauf des Algorithmus $\forall~v\in V$ gilt: $d[v] = \delta(s,v)$.
 \pagebreak
 \paragraph{Beweis:}
 \subparagraph{Annahme:}
@@ -43,10 +43,10 @@ Der Dijkstra Algorithmus berechnet alle d-Werte, so dass nach Ablauf des Algo $\
 	\caption{Skizze}
 	\label{fig:Skizze2}
 \end{wrapfigure}
-Sei $v$ so gewählt, das $v$ der erste Knoten mit der Eigenschaft ist, der mit \textrm{deleteMin} der \textrm{PQ} entnommen wird und nach Relaxation aller von ihm ausgehenden Kanten der Menge S hinzugefügt wird.
+Sei $v$ so gewählt, dass $v$ der erste Knoten mit der Eigenschaft ist, der mit \textrm{deleteMin} der \textrm{PQ} entnommen wird und nach Relaxation aller von ihm ausgehenden Kanten der Menge S hinzugefügt wird.
 
 Betrachte einen kürzesten Weg $s \rightsquigarrow v$
-\[ d[v] > \delta(s,v) \geq\footnote{weil Kantengewichte nicht negativ sein dürfen}\delta(s,y)=d[y]=\footnote{x wurde schon zu S hinzugefügt, hat also Korrekten d-Wert $d[x] 
+\[ d[v] > \delta(s,v) \geq\footnote{weil Kantengewichte nicht negativ sein dürfen}\delta(s,y)=d[y]=\footnote{x wurde schon zu S hinzugefügt, hat also korrekten d-Wert $d[x] 
 	= \delta(s,x)$}d[x]+w(x,y)=d[y]\geq\footnote{weil v vor y aus der PQ entnommen wird.} d[v] ~~\lightning \]
 \subsection{Vorläufige Laufzeitanalyse von Dijkstra}
 \begin{tabular}{ccc}
@@ -54,11 +54,12 @@ Betrachte einen kürzesten Weg $s \rightsquigarrow v$
 	\textrm{PQ.empty} & x & $|V|$ \\
 	\textrm{PQ.deleteMin} & x & $|V|$ \\
 	\textrm{PQ.decreaseKey} & x & $|E|$ 
-\end{tabular}
-Mit balanciertem Suchbaum oder mit binärem Heap (siehe Heapsort) %Link setzen
-können diese Opeartionen alle in Zeit $\mathcal{O}(\log|V|)$ realisiert werden.\\
+\end{tabular}\\
+
+Mit balanciertem Suchbaum oder mit binärem Heap (siehe \ref{sec:heapsort})
+können diese Operationen alle in Zeit $\mathcal{O}(\log|V|)$ realisiert werden.
 $\Rightarrow$ Gesamtlaufzeit: $\mathcal{O}((|V|+|E|)\log|V|)$\\
-Wir werden später zeigen, dass Laufzeit $\mathcal{O}(|V|\log|V|+|E|)$ möglich ist.
+Wir werden später zeigen, dass eine Laufzeit von $\mathcal{O}(|V|\log|V|+|E|)$ möglich ist.
 \section{Bellman-Ford-Algorithmus}
 \[ G=(V,E)~~w:~E\rightarrow \mathbb{R} \]
 \paragraph{Voraussetzung}
@@ -100,7 +101,7 @@ Aufgrund der Induktionsannahme\footnote{Die Invariante} gilt: $d[v_i] = \delta(s
 Da alle Kanten in der inneren Schleife einmal relaxiert werden, trifft dies insbesondere auf die Kante $(v_i, v_{i+1})$ zu:
 \[ d[v_{i+1}] = d[v_i] + w(v_i, v_{i+1}) = \delta(s, v_i) + w(v_i, v_{i+1}) = \delta(s,v_{i+1}) \]
 \paragraph{Frage:}
-Warum folgt aus der Gültigkeit dieser Invariante die Korrektheit des Algo?
+Warum folgt aus der Gültigkeit dieser Invariante die Korrektheit des Algorithmus?
 \paragraph{Antwort}
 Alle kürzesten Wege benutzen höchstens $|V|-1$ Kanten, ansonsten hätten sie einen Zyklus mit Gewicht $\geq 0$, den man auch weglassen kann.
 \begin{lstlisting}

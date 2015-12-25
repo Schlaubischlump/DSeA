@@ -1,7 +1,7 @@
 \chapter{Vorlesung}
 
 
-\section{Verallgemeinerung von Akra-Brazzi}
+\section{Verallgemeinerung von Akra-Bazzi}
 
 \[T_n = \left[\sum_{i=1}^k a_i T(\frac{n}{b_i}) \right] + g(n) \]
 \paragraph{Beispiel}
@@ -28,7 +28,7 @@
 
 \vspace{30pt}
 \paragraph{Wortlaut}
-Teile die n Elemente in 5-er Gruppen. Bestimme innerhalb jeder Gruppe den Median. Bestimme nun den Median der Mediane. Wähle diesen Median als Pivot Element.
+Teile die n Elemente in 5-er Gruppen. Bestimme innerhalb jeder Gruppe den Median. Bestimme nun den Median der Mediane. Wähle diesen Median als Pivotelement.
 \[\exists \frac{3n}{10}~\text{Elemente}~\leq p \geq \exists \frac{3n}{10}~\text{Elemente}~(\pm 1~\text{wegen p})\]
 \vspace{50pt}
 
@@ -46,7 +46,7 @@ $A_1$ = Laufzeit zur rekursiven Bestimmung des Medians der Mediane\\
 $A_2$ = Laufzeit zur Aufteilung in Teilfolgen\\
 $A_3$ = Laufzeit für den Aufruf von k-Select  für größere Teilfolgen, die aber sicher $\leq n - \frac{3n}{10} - \frac{7n}{10}$ hat.\\
 
-Wende die verallgemeinerte Form von Akra-Brazzi an:\\
+Wende die verallgemeinerte Form von Akra-Bazzi an:\\
 $g(n)=n, ~~~a_1=a_2=1, ~~~b_1=5, ~~~b_2=\frac{10}{7}$\\
 \paragraph{Bestimme}
 \[\alpha = \left(\frac{1}{5}\right)^{\alpha} + \left(\frac{7}{10}\right)^{\alpha} = 1\]
