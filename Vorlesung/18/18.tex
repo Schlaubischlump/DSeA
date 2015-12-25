@@ -62,7 +62,7 @@ Durch die Operation $d_{ij} = \min(d_{ij}, d_{ik}+d_{kj})$ wird die Invariante s
 \section[Naive Lösung]{Naive Lösung des All-Pairs Problems durch $|V|$-malige Anwendung von Bellman-Ford oder Dijkstra-Algorithmus}
 \begin{description}
 \item[Bellman-Ford] $\mathcal{O}(|V|\cdot|V|\cdot|E|) = \mathcal{O}(|V|^2\cdot|E|)$
-\item[Dijksra] $\mathcal{O}(|V|\cdot(|V|\cdot\log|V|+|E|)) = \mathcal{O}(|V|\cdot|E|+|V|^2\cdot\log|V|)$
+\item[Dijkstra] $\mathcal{O}(|V|\cdot(|V|\cdot\log|V|+|E|)) = \mathcal{O}(|V|\cdot|E|+|V|^2\cdot\log|V|)$
 \end{description}
 \section{Johnson-Algorithmus}
 \paragraph{Idee:} Neugewichtung der Kanten, so dass keine negativen Kantengewichte mehr vorhanden sind. Anschließend $|V|$-mal Dijkstra-Algorithmus ausführen.
@@ -100,7 +100,7 @@ Alle kürzesten Wege $s \rightsquigarrow t$ unterscheiden sich bzgl. $w'$ im Ver
 	\item Löse single-source-shortest-Path Problem in $G'$ mit $z$ als Startknoten
 	\item setze $\pot(v) = \delta_{G'}(z,v)\footnote{berechnet mit Bellman-Ford}$
 	\item Neugewichtung
-	\item $|V|$-mal Djikstra
+	\item $|V|$-mal Dijkstra
 \end{itemize}
 \subsection{Laufzeit des Johnson-Algorithmus}
 \[ \mathcal{O}(|V|\cdot|E|+|V|\cdot(|V|\cdot\log|V|+|E|)) = \mathcal{O}(|V|\cdot|E|+|V|^2\cdot|V|) \]
