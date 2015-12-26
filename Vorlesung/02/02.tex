@@ -9,7 +9,7 @@ void heapify (int[] a, int i, int n) {
     if (2i + 2 < n)  		//rechtes Kind von i existiert
       if (a[j] < a[j+1])
         j = j + 1;  		//j steht für Index des größten Kindes
-    if ( a[i] > a[j])  		//Vater größer als Kind
+    if (a[i] > a[j])  		//Vater größer als Kind
       break;  			//Abbruch, weil heap bereits erfüllt
     swap(a,i,j); 		//Tausch zwischen Vater und Kind
     i = j;
@@ -67,7 +67,7 @@ $k :=$ Zahl der Schichten
 \begin{flalign*}
 &\sum_{l=0}^{k-1} 2^l (k-1-l) &\\
 \\
-&2^l~~~~~~~~~~~:= ~\text{Anzahl Knoten auf Level l}&\\
+&2^l := ~\text{Anzahl Knoten auf Level l}&\\
 &(k-1-l) := ~\text{Leveldifferenz zwischen l und der Blattebene}&\\
 \\
 &\sum_{l=0}^{k-1} (k-1-l) \cdot 2^l = \sum_{l=0}^{k-1} (k-1) \cdot 2^l - \sum_{l=0}^{k-1}l \cdot 2^l  = (k-1)(2^k-1)-2 \sum_{l=1}^{k-1}l2^{l-1}&
