@@ -56,7 +56,7 @@ Missbrauch der Notation !!!\\
 
 \subsection{Laufzeitanalyse}
 $T(n) =$ Zahl der von Mergesort durchgeführten Elementarvergleiche $\approx$ Laufzeit \\
-$T(n) = 2T(\frac{n}{2}) + n -1 \approx 2T(\frac{n}{2}) + n ~~~\text{mit} T(1) = 0$\\ 
+$T(n) = 2T(\frac{n}{2}) + n -1 \approx 2T(\frac{n}{2}) + n ~~~\text{mit}~T(1) = 0$\\ 
 
 \begin{mdframed}
 \paragraph{Korrekter wäre} $T(n) = T(\lfloor \frac{n}{2}  \rfloor) + T(\lceil \frac{n}{2}  \rceil) + n -1~~~$ \hfill Für ungerade Zahlen \\
