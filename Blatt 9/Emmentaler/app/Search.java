@@ -13,23 +13,23 @@ class Search{
     	
     	HashMap<Tuple, ArrayList<Tuple>> edges = createHash(cheese.length, cheese);
 		HashSet<Tuple> visited = new HashSet<Tuple>();
-		LinkedList<Tuple> queue = new LinkedList<Tuple>();
+		LinkedList<Tuple> queue = new LinkedList<Tuple>();	//queue
 		HashMap<Tuple, Tuple> pi = new HashMap<Tuple, Tuple>();
 		HashMap<Tuple, Integer> d = new HashMap<Tuple, Integer>();  //Distanzfunktion
 		visited.add(origin);
 		pi.put(origin, null);
 		d.put(origin, 0);
 		
-		queue.push(origin);
+		queue.add(origin);	//queue
 		while(queue.size() > 0) {
-			Tuple u = queue.pollFirst();
+			Tuple u = queue.poll();	//queue
 			ArrayList<Tuple> edge = edges.get(u);		
 			for ( int i = 0; i < edge.size(); i++) {
 				Tuple next = edge.get(i);
 				if (!visited.contains(next)) {
 					visited.add(next);
 					pi.put(next, u);
-					queue.push(next);
+					queue.add(next);	//queue
 					d.put(next, d.get(u)+1);  //Länge des neuen Knoten ist Länge des Entdeckers +1
 				}
 				if (next.one == 0) {
@@ -51,23 +51,23 @@ class Search{
     	
     	HashMap<Tuple, ArrayList<Tuple>> edges = createHash(cheese.length, cheese);
 		HashSet<Tuple> visited = new HashSet<Tuple>();
-		LinkedList<Tuple> stack = new LinkedList<Tuple>();
+		LinkedList<Tuple> stack = new LinkedList<Tuple>();	//stack
 		HashMap<Tuple, Tuple> pi = new HashMap<Tuple, Tuple>();
 		HashMap<Tuple, Integer> d = new HashMap<Tuple, Integer>();  //Distanzfunktion
 		visited.add(origin);
 		pi.put(origin, null);
 		d.put(origin, 0);
 		
-		stack.push(origin);
+		stack.push(origin);	//stack
 		while(stack.size() > 0) {
-			Tuple u = stack.pollLast();
+			Tuple u = stack.pop();	//stack
 			ArrayList<Tuple> edge = edges.get(u);		
 			for ( int i = 0; i < edge.size(); i++) {
 				Tuple next = edge.get(i);
 				if (!visited.contains(next)) {
 					visited.add(next);
 					pi.put(next, u);
-					stack.push(next);
+					stack.push(next);	//stack
 					d.put(next, d.get(u)+1);  //Länge des neuen Knoten ist Länge des Entdeckers +1
 				}
 				if (next.one == 0) {
