@@ -22,7 +22,7 @@ class Search{
 		
 		queue.push(origin);
 		while(queue.size() > 0) {
-			Tuple u = queue.pop();
+			Tuple u = queue.pollFirst();
 			ArrayList<Tuple> edge = edges.get(u);		
 			for ( int i = 0; i < edge.size(); i++) {
 				Tuple next = edge.get(i);
@@ -48,7 +48,41 @@ class Search{
     }
 
     public static Vector<Tuple> DFS (boolean [][][] cheese, Tuple origin){
-	return new Vector<Tuple>();
+    	
+    	HashMap<Tuple, ArrayList<Tuple>> edges = createHash(cheese.length, cheese);
+		HashSet<Tuple> visited = new HashSet<Tuple>();
+		LinkedList<Tuple> stack = new LinkedList<Tuple>();
+		HashMap<Tuple, Tuple> pi = new HashMap<Tuple, Tuple>();
+		HashMap<Tuple, Integer> d = new HashMap<Tuple, Integer>();  //Distanzfunktion
+		visited.add(origin);
+		pi.put(origin, null);
+		d.put(origin, 0);
+		
+		stack.push(origin);
+		while(stack.size() > 0) {
+			Tuple u = stack.pollLast();
+			ArrayList<Tuple> edge = edges.get(u);		
+			for ( int i = 0; i < edge.size(); i++) {
+				Tuple next = edge.get(i);
+				if (!visited.contains(next)) {
+					visited.add(next);
+					pi.put(next, u);
+					stack.push(next);
+					d.put(next, d.get(u)+1);  //Länge des neuen Knoten ist Länge des Entdeckers +1
+				}
+				if (next.one == 0) {
+					Vector<Tuple> temp = new Vector<>();
+					temp.addElement(next);
+					System.out.println("Laenge = "+d.get(next));
+					while (pi.get(next) != null) {
+						next = pi.get(next);
+						temp.addElement(next);
+					}
+					return temp;
+				}
+			}
+		}
+    	return new Vector<Tuple>();
     }
     
     
