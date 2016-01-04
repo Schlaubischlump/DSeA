@@ -5,6 +5,7 @@ import java.util.Vector;
 import java.util.ArrayList;
 import java.util.Stack;
 import java.util.LinkedList;
+import java.util.HashMap;
 
 class Search{
 
@@ -30,30 +31,36 @@ class Search{
     
     public static Vector<Tuple> BFS (boolean [][][] cheese, Tuple origin){
         boolean visited[][][] = new boolean[40][40][40];
+        HashMap<Tuple, Tuple> pi = new HashMap<Tuple, Tuple>(); // Vorgängerknoten
         Vector<Tuple> v = new Vector<Tuple>();
         LinkedList<Tuple> queue = new LinkedList<Tuple>();
         
-        v.add(origin);
+        pi.put(origin, null); //Anfangselement hat keinen Vorgänger
         visited[origin.zero][origin.one][origin.two] = true;
         
         
-        queue.push(origin);
+        queue.add(origin);
         while (queue.size() > 0) {
-            origin = queue.pollFirst();
+            Tuple u = queue.poll();
             // Prüfe ob einer der Nachbarn verfügbar ist
-            for (Tuple t : getPossibleNeighboursForOrigin(cheese, origin)) {
+            for (Tuple t : getPossibleNeighboursForOrigin(cheese, u)) {
                 int x = t.zero,y = t.one, z = t.two;
                 
                 if (visited[x][y][z] == false) {
                     visited[x][y][z] = true;
-                    t = new Tuple(x,y,z);
-                    v.add(t);
-                    queue.push(t);
+                    pi.put(t, u);
+                    queue.add(new Tuple(x,y,z));
                 }
                 
                 // Boden erreicht
-                if (y == 0)
-                    return v;
+                if (y == 0) {
+                    Tuple next = t;
+                    v.add(next);
+                    while (pi.get(next) != null) {
+                        t = pi.get(next);
+                        v.add(next);
+                    }
+                }
             }
         }
         return v;
@@ -62,30 +69,36 @@ class Search{
     
     public static Vector<Tuple> DFS (boolean [][][] cheese, Tuple origin){
         boolean visited[][][] = new boolean[40][40][40];
+        HashMap<Tuple, Tuple> pi = new HashMap<Tuple, Tuple>(); // Vorgängerknoten
         Vector<Tuple> v = new Vector<Tuple>();
         Stack<Tuple> s = new Stack<Tuple>();
         
-        v.add(origin);
+        pi.put(origin, null); //Anfangselement hat keinen Vorgänger
         visited[origin.zero][origin.one][origin.two] = true;
         
         
         s.push(origin);
         while (s.size() > 0) {
-            origin = s.pop();
+            Tuple u = s.pop();
             // Prüfe ob einer der Nachbarn verfügbar ist
-            for (Tuple t : getPossibleNeighboursForOrigin(cheese, origin)) {
+            for (Tuple t : getPossibleNeighboursForOrigin(cheese, u)) {
                 int x = t.zero,y = t.one, z = t.two;
                 
                 if (visited[x][y][z] == false) {
                     visited[x][y][z] = true;
-                    t = new Tuple(x,y,z);
-                    v.add(t);
-                    s.push(t);
+                    pi.put(t, u);
+                    s.push(new Tuple(x,y,z));
                 }
                 
                 // Boden erreicht
-                if (y == 0)
-                    return v;
+                if (y == 0) {
+                    Tuple next = t;
+                    v.add(next);
+                    while (pi.get(next) != null) {
+                        t = pi.get(next);
+                        v.add(next);
+                    }
+                }
             }
         }
         return v;
