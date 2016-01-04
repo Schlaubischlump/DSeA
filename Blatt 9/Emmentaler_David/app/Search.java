@@ -57,9 +57,10 @@ class Search{
                     Tuple next = t;
                     v.add(next);
                     while (pi.get(next) != null) {
-                        t = pi.get(next);
+                        next = pi.get(next);
                         v.add(next);
                     }
+                    return v;
                 }
             }
         }
@@ -92,12 +93,15 @@ class Search{
                 
                 // Boden erreicht
                 if (y == 0) {
+                    
+                    // hangle dich vom untersten Bodenelement nach oben um den richtigen Weg auszugeben
                     Tuple next = t;
                     v.add(next);
                     while (pi.get(next) != null) {
-                        t = pi.get(next);
+                        next = pi.get(next);
                         v.add(next);
                     }
+                    return v;
                 }
             }
         }
