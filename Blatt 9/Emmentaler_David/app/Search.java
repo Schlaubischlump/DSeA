@@ -14,15 +14,15 @@ class Search{
         ArrayList<Tuple> edges = new ArrayList<Tuple>();
         int x = origin.zero,y = origin.one, z = origin.two;
         
-        for (int i = x-1; i<= x+2; i++)
+        for (int i = x-1; i<= x+1; i++)
             if ((i >= 0 && i < 40) && i != x && !cheese[i][y][z])
                 edges.add(new Tuple(i, y, z));
         
-        for (int i = y-1; i<= y+2; i++)
+        for (int i = y-1; i<= y+1; i++)
             if ((i >= 0 && i < 40) && i != y &&!cheese[x][i][z])
                 edges.add(new Tuple(x, i, z));
         
-        for (int i = z-1; i<= z+2; i++)
+        for (int i = z-1; i<= z+1; i++)
             if ((i >= 0 && i < 40) && i != z &&  !cheese[x][y][i])
                 edges.add(new Tuple(x, y, i));
         
