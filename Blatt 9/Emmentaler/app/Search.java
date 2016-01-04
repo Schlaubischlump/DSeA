@@ -4,12 +4,46 @@ package app;
 import java.util.Vector;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedList;
 
 class Search{
 
     public static Vector<Tuple> BFS (boolean [][][] cheese, Tuple origin){
     	
-    	
+    	HashMap<Tuple, ArrayList<Tuple>> edges = createHash(cheese.length, cheese);
+		HashSet<Tuple> visited = new HashSet<Tuple>();
+		LinkedList<Tuple> queue = new LinkedList<Tuple>();
+		HashMap<Tuple, Tuple> pi = new HashMap<Tuple, Tuple>();
+		HashMap<Tuple, Integer> d = new HashMap<Tuple, Integer>();  //Distanzfunktion
+		visited.add(origin);
+		pi.put(origin, null);
+		d.put(origin, 0);
+		
+		queue.push(origin);
+		while(queue.size() > 0) {
+			Tuple u = queue.pop();
+			ArrayList<Tuple> edge = edges.get(u);		
+			for ( int i = 0; i < edge.size(); i++) {
+				Tuple next = edge.get(i);
+				if (!visited.contains(next)) {
+					visited.add(next);
+					pi.put(next, u);
+					queue.push(next);
+					d.put(next, d.get(u)+1);  //Länge des neuen Knoten ist Länge des Entdeckers +1
+				}
+				if (next.one == 0) {
+					Vector<Tuple> temp = new Vector<>();
+					temp.addElement(next);
+					System.out.println("Laenge = "+d.get(next));
+					while (pi.get(next) != null) {
+						next = pi.get(next);
+						temp.addElement(next);
+					}
+					return temp;
+				}
+			}
+		}
     	return new Vector<Tuple>();
     }
 
@@ -17,48 +51,35 @@ class Search{
 	return new Vector<Tuple>();
     }
     
-    private static Integer encodeTupel ( Tuple tupel, int n) {
-    	return tupel.zero*n*n + tupel.one*n + tupel.two;
-    }
-    
-    private static Tuple decodeTupel ( Integer value, int n) {
-    	return new Tuple (getX(value,n), getY(value,n), getZ(value,n));
-    }
-    
-    private static int getX (Integer value, int n) {
-    	return value / (n * n);
-    }
-    
-    private static int getY (Integer value, int n) {
-    	return (value - getX(value, n)*n*n) / n;
-    }
-    
-    private static int getZ ( Integer value, int n) {
-    	return (value - getX(value, n) * n * n - -getY(value, n) * n);
-    }
     
   //hilfmethode zur Erzeugung der Mashmap der möglichen Züge in einem Puzzle
-  	private static HashMap<Integer, ArrayList<Integer>> createHash(int n) {
+  	private static HashMap<Tuple, ArrayList<Tuple>> createHash(int n, boolean [][][] cheese) {
 
   		//Erstelle Hashmap
-  		HashMap<Integer, ArrayList<Integer>> edges = new HashMap<Integer, ArrayList<Integer>>();
+  		HashMap<Tuple, ArrayList<Tuple>> edges = new HashMap<Tuple, ArrayList<Tuple>>();
   		for (int x = 0; x < n; x++)
   			for (int y = 0; y < n; y++)
   				for ( int z = 0; z < n; z++) {
-  				ArrayList<Integer> temp = new ArrayList<Integer>();
-  				edges.put(z+n*y+n*n*x, temp);
-  				if ( x > 0)
-  					temp.add((x-1)*n*n+y*n+z);
-  				if ( x < n-1)
-  					temp.add((x+1)*n*n+y*n+z);
-  				if ( y > 0)
-  					temp.add(x*n*n+(y-1)*n+z);
-  				if ( y < n-1)
-  					temp.add(x*n*n+(y+1)*n+z);
-  				if ( z > 0)
-  					temp.add(x*n*n+y*n+(z-1));
-  				if ( z < n-1)
-  					temp.add(x*n*n+y*n+(z+1));
+  					ArrayList<Tuple> temp = new ArrayList<Tuple>();
+  					edges.put(new Tuple(x,y,z), temp);
+  					if ( x > 0)
+  						if (!cheese[x-1][y][z])
+  							temp.add(new Tuple((x-1), y, z));
+  					if ( x < n-1)
+  						if (!cheese[x+1][y][z])
+  							temp.add(new Tuple((x+1), y, z));
+  					if ( y > 0)
+  						if (!cheese[x][y-1][z])
+  							temp.add(new Tuple( x, (y-1), z));
+  					if ( y < n-1)
+  						if (!cheese[x][y+1][z])
+  							temp.add(new Tuple( x, (y+1), z));
+  					if ( z > 0)
+  						if (!cheese[x][y][z-1])
+  							temp.add(new Tuple( x ,y, (z-1)));
+  					if ( z < n-1)
+  						if (!cheese[x][y][z+1])
+  							temp.add(new Tuple( x, y, (z+1)));
   				}
   		return edges;
   	}
