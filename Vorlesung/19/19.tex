@@ -1,0 +1,49 @@
+%Thema im Praktikum soll dynamische Programmierung werden
+\chapter{Vorlesung}
+\section{Minimal aufspannende Bäume MST}	%Werden 2 Algorithmen machen
+\paragraph{Eingabe}
+\[ G=(V,E)~~E~\text{ungerichtet}~~(u,v)\in E \Rightarrow (v,u)\in E\text{ mögliche Notation } \{ u,v \} \]
+$ w:E\rightarrow \mathbb{R}$
+\paragraph{Gesucht}
+\[ \text{Baum }T \subseteq E\]
+\[ G_T=(V,T) \text{zusammenhängend (zykelfrei)} \]
+\[ w(T) = \sum_{e\in T} w(e) \text{minimal} \]
+\begin{figure}
+\centering
+\begin{subfigure}[h]{0.3\textwidth}
+	\includegraphics[width=\linewidth]{19/Grafik/Spannbaum}
+	\caption{Beispiel für einen Spannbaum in einem Graphen}
+	\label{fig:Spannbaum}
+\end{subfigure}
+\begin{subfigure}[h]{0.3\textwidth}
+	\includegraphics[width=\linewidth]{19/Grafik/SpannbaumBeispiel2}
+	\caption{Beispiel für einen Spannbaum}
+	\label{fig:Spannbaum2}
+\end{subfigure}
+\end{figure}
+
+%Bild1 und 2
+\paragraph{Frage} $|T|= $?
+\paragraph{Antwort} $|T| = |V|-1$
+\subsection{Greedy-Algorithmen zur Lösung des MST-Problems:}
+Starte mit $T=\emptyset$, nehme sukzessive Kanten zu $T$ hinzu, so dass nach $|V|-1$ Schritten der gesuchte MST entstanden ist. 
+Dabei benötigen wir ein Kriterium, das sicherstellt, dass gewählte Kanten zur Gesamtlösung dazugehören.
+\subsection{Schnitt-Lemma:}
+Betrachte eine Aufteilung (Schnitt) der Knotenmenge $V$ in $V$ und $\overline{S} = V\setminus S$ \\und Kanten $(u,v) \in E \cap S\times \overline{S}$\\
+Sei $e \in E \cap S \times \overline{S}$ mit $w(e) \leq w(e') ~\forall ~e' \in E \cap S\times \overline{S}$ dann gibt es einen MST mit $e \in$ MST
+\subsection{Beweis für das Schnitt-Lemma}
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.5\linewidth]{19/Grafik/SpannbaumBeweis}
+\caption{}
+\label{fig:SpannbaumBeweis}
+\end{figure}
+
+Sei e eine "`sichere"' Kante aus dem Schnitt-Lemma.\\
+o.B.d.A. $u\in S$ und $v \in \overline{S}$.\\
+Es gibt eine Zykel in $T\cup \{e\}$ und darin eine Kante $e'\in S\times \overline{S}$ mit $w(e') \geq w(e)$.\\
+Ersetze $T'=T\cup\{e\}\setminus\{ e' \}$\\
+$w(T') \leq w(T) \Rightarrow w(T') = w(T)$ weil $T$ ein MST.
+\begin{flushright}
+	q.e.d.
+\end{flushright}
