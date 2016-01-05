@@ -33,9 +33,9 @@ class Search{
 					d.put(next, d.get(u)+1);  //Länge des neuen Knoten ist Länge des Entdeckers +1
 				}
 				if (next.one == 0) {
-					Vector<Tuple> temp = new Vector<>();
+					Vector<Tuple> temp = new Vector<Tuple>();
 					temp.addElement(next);
-					System.out.println("Laenge = "+d.get(next));
+					System.out.println("BFS: Laenge = "+d.get(next));
 					while (pi.get(next) != null) {
 						next = pi.get(next);
 						temp.addElement(next);
@@ -71,9 +71,9 @@ class Search{
 					d.put(next, d.get(u)+1);  //Länge des neuen Knoten ist Länge des Entdeckers +1
 				}
 				if (next.one == 0) {
-					Vector<Tuple> temp = new Vector<>();
+					Vector<Tuple> temp = new Vector<Tuple>();
 					temp.addElement(next);
-					System.out.println("Laenge = "+d.get(next));
+					System.out.println("DFS: Laenge = "+d.get(next));
 					while (pi.get(next) != null) {
 						next = pi.get(next);
 						temp.addElement(next);
