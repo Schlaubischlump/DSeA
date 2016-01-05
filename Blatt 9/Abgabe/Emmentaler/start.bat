@@ -1,1 +1,1 @@
-java.exe -cp ".;lwjgl/jar/*;" -Djava.library.path=lwjgl/native/windows app.App
+/Users/David/Documents/UNI/3. Semester/DSeA/Abgaben/Blatt 9/Abgabe/Emmentaler_David/start.bat

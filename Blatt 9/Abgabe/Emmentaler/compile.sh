@@ -1,1 +1,1 @@
-javac -cp '.:lwjgl/jar/*' app/App.java
+/Users/David/Documents/UNI/3. Semester/DSeA/Abgaben/Blatt 9/Abgabe/Emmentaler_David/compile.sh
