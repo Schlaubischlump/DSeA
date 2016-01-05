@@ -47,3 +47,29 @@ $w(T') \leq w(T) \Rightarrow w(T') = w(T)$ weil $T$ ein MST.
 \begin{flushright}
 	q.e.d.
 \end{flushright}
+\subsection{Algorithmus von Kruskal}
+sortiere Kanten nach ihrem Gewicht aufsteigend\\
+$T=\emptyset$\\
+
+\begin{wrapfigure}{r}{0.5\linewidth}
+	\centering
+	\includegraphics[width=\linewidth]{19/Grafik/SpannbaumBeispiel3}
+	\caption{Reihenfolge grün$\rightarrow$rot$\rightarrow$blau$\rightarrow$braun}
+	\label{fig:Beispiel3}
+	\vspace{-500pt}
+\end{wrapfigure}
+\begin{lstlisting}
+forall (u,v) /eIn E in sortierter Reihenfolge {
+	if (find(u) == find(v) ) continue;
+	T = T$\cup${(u,v)};
+	union(u,v);
+}
+\end{lstlisting}
+\subsubsection{Effizienz von Kruskal}
+\paragraph{Sortieren:} $\mathcal{O}(|E|\cdot\log|E|) = \mathcal{O}(|E|\log|V|)$\\
+$2|E|$ viele find-Operationen $\mathcal{O}(1)$\\
+$\underline{|V|-1}$ viele union-Operationen $\mathcal{O}(|V|)$ naiv\\
+$\mathcal{O}(|E|\log|V|+|E|\cdot 1 + (|V|-1)|V|) =$\\ $\mathcal{O}(|E|\log|V|+$\sout{$|V|^2$}$)$\\
+\subsubsection{Idee zur Aufbau einer Union-Find-Datnstruktur}
+Jeder Knoten trägt eine Komponentennummer, die in einem Feld vermerkt ist. Die find-Operation ist durch einen Feld-Zugriff realisierbar. Um die union-Operation zu realisieren, verwalten wird die Knoten einer Komponente in einer einfach verketteten Liste und merken uns die Listenlänge. Wenn zwei Komponenten fusionieren, benennen wir die Komponente mit der kleineren Knotenzahl um, indem wir die zugehörige Liste durchlaufen und die Umbenennung im Feld vornehmen. Und die beiden betroffenen Listen müssen konkateniert werden.
+\paragraph{Beobachtung:} Ein einzelner Knoten erfährt höchstens $\log|V|$ viele Umbenennungen seiner Komponentennummer, da sich bei jeder Umbenennung die Größe der Komponente zu der er gehört, verdoppelt.
