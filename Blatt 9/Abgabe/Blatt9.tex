@@ -1,7 +1,7 @@
 \documentclass[a4paper,11pt,twoside]{article}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
-\usepackage{ngerman, eucal, mathrsfs, amsfonts, bbm, amsmath, amssymb, stmaryrd,graphicx, array, geometry, listings, color}
+\usepackage{ngerman, eucal, mathrsfs, amsfonts, bbm, amsmath, amssymb, stmaryrd,graphicx, array, geometry, listings, xcolor}
 \usepackage{graphicx}
 \usepackage[official]{eurosym}
 \DeclareUnicodeCharacter{20AC}{\EUR{}}
@@ -18,25 +18,41 @@
 \definecolor{orange}{rgb}{0.8,0.3,0.3}
 \definecolor{yac}{rgb}{0.6,0.6,0.1}
 \definecolor{green}{rgb}{0,.5,0}
-\lstset{
-	basicstyle=\scriptsize\ttfamily,
+
+\lstdefinestyle{c}{
 	keywordstyle=\bfseries\ttfamily\color{blue},
 	stringstyle=\color{orange}\ttfamily,
 	commentstyle=\color{green}\ttfamily,
-	emph={@Override}, 
+	emph={@Override, while, forall, if}, 
 	emphstyle=\color{green}\texttt,
-	emph={[2]Node,T,Comparable,AbstractNode,System, Thread,Random, Tree, Integer, Math, String, InterruptedException, Map, Entry, Point, TreeMap, PrintWriter, Scanner, FileReader, FileInputStream, FileNotFoundException, InputStreamReader, UnsupportedEncodingException, DecimalFormat, ArrayList, HashSet, LinkedList, IOException, HashMap, MapTest, MyHashMap, Puzzle, MyQueue, StringBuilder, NoSuchElementException, E},
+	emph={[2]List, Queue},
 	emphstyle={[2]\color{yac}\texttt},
+	}
+\lstset{
+	basicstyle=\ttfamily,
 	showstringspaces=false,
-	flexiblecolumns=false,
+	flexiblecolumns=true,
 	tabsize=2,
 	numbers=left,
 	numberstyle=\tiny,
 	numberblanklines=false,
 	stepnumber=1,
 	numbersep=10pt,
-	xleftmargin=15pt
+	xleftmargin=15pt,
+	breaklines=true,
+	inputencoding=utf8
 }
+
+\lstdefinestyle{java}{
+	emph={@Override}, 
+	emphstyle=\color{teal}\texttt,
+	emph={[2]Node,T,Comparable,AbstractNode,System, Thread,Random, Tree, Integer, Math, String, InterruptedException, Map, Entry, Point, TreeMap, PrintWriter, Scanner, FileReader, FileInputStream, FileNotFoundException, InputStreamReader, UnsupportedEncodingException, DecimalFormat, ArrayList, HashSet, LinkedList, IOException, HashMap, MapTest, MyHashMap, Puzzle, MyQueue, StringBuilder, NoSuchElementException, List, Queue, Vector, Tuple,Search, IllegalArgumentException},
+	emphstyle={[2]\color{yac}\texttt},
+	texcl=true,
+	keywordstyle=\color{blue}\ttfamily,
+	stringstyle=\color{red}\ttfamily,
+	commentstyle=\color{green}\ttfamily
+	}
 
 \lstset{literate=
 	{á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
@@ -62,7 +78,7 @@
 
 \section*{Aufgabe 1}
 \subsection*{a) Pseudo-Code}
-\lstinputlisting{Code/levelGraph.c}
+\lstinputlisting[language = c, style = c]{Code/levelGraph.c}
 Der Algorithmus funktioniert analog zur Breitensuche, allerdings wird eine Kante nur dann hinzugefügt zum Levelgraph, wenn die Distanz des Nachbarknotens größer ist als die Distanz des aktuellen Knoten zum Ursprung (z. 14-15). Die Laufzeit verhält sich daher identisch zur Breitensuche und ist somit linear: $O(|V| + |E|)$.
 
 \subsection*{b)}
@@ -75,7 +91,11 @@ Der Graph beinhaltet alle mögliche kürzesten Wegen zu einem Knoten, daher kön
 
 \section*{Aufgabe 2}
 \subsection*{ii)}
-\lstinputlisting{Emmentaler/app/Search.java}
+\subsubsection*{Search.java}
+\lstinputlisting[language = java, style = java]{Emmentaler/app/Search.java}
+\subsubsection*{Tuple.java}
+\lstinputlisting[language = java, style = java]{Emmentaler/app/Tuple.java}
+
 
 \subsection*{iii)}
 Für die Breitensuche ergibt sich eine Weglänge von 56, für die Tiefensuche eine Länge von 2317. Laut Vorlesung liefert die Breitensuche stets den kürzeren Weg. 

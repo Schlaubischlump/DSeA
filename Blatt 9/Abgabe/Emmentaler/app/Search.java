@@ -9,9 +9,9 @@ import java.util.LinkedList;
 
 class Search{
 
-    public static Vector<Tuple> BFS (boolean [][][] cheese, Tuple origin){
-    	
-    	HashMap<Tuple, ArrayList<Tuple>> edges = createHash(cheese.length, cheese);
+	public static Vector<Tuple> BFS (boolean [][][] cheese, Tuple origin){
+
+		HashMap<Tuple, ArrayList<Tuple>> edges = createHash(cheese.length, cheese);
 		HashSet<Tuple> visited = new HashSet<Tuple>();
 		LinkedList<Tuple> queue = new LinkedList<Tuple>();	//queue
 		HashMap<Tuple, Tuple> pi = new HashMap<Tuple, Tuple>();
@@ -19,7 +19,7 @@ class Search{
 		visited.add(origin);
 		pi.put(origin, null);
 		d.put(origin, 0);
-		
+
 		queue.add(origin);	//queue
 		while(queue.size() > 0) {
 			Tuple u = queue.poll();	//queue
@@ -44,12 +44,12 @@ class Search{
 				}
 			}
 		}
-    	return new Vector<Tuple>();
-    }
+		return new Vector<Tuple>();
+	}
 
-    public static Vector<Tuple> DFS (boolean [][][] cheese, Tuple origin){
-    	
-    	HashMap<Tuple, ArrayList<Tuple>> edges = createHash(cheese.length, cheese);
+	public static Vector<Tuple> DFS (boolean [][][] cheese, Tuple origin){
+
+		HashMap<Tuple, ArrayList<Tuple>> edges = createHash(cheese.length, cheese);
 		HashSet<Tuple> visited = new HashSet<Tuple>();
 		LinkedList<Tuple> stack = new LinkedList<Tuple>();	//stack
 		HashMap<Tuple, Tuple> pi = new HashMap<Tuple, Tuple>();
@@ -57,7 +57,7 @@ class Search{
 		visited.add(origin);
 		pi.put(origin, null);
 		d.put(origin, 0);
-		
+
 		stack.push(origin);	//stack
 		while(stack.size() > 0) {
 			Tuple u = stack.pop();	//stack
@@ -82,40 +82,40 @@ class Search{
 				}
 			}
 		}
-    	return new Vector<Tuple>();
-    }
-    
-    
-  //hilfmethode zur Erzeugung der Mashmap der möglichen Züge in einem Puzzle
-  	private static HashMap<Tuple, ArrayList<Tuple>> createHash(int n, boolean [][][] cheese) {
+		return new Vector<Tuple>();
+	}
 
-  		//Erstelle Hashmap
-  		HashMap<Tuple, ArrayList<Tuple>> edges = new HashMap<Tuple, ArrayList<Tuple>>();
-  		for (int x = 0; x < n; x++)
-  			for (int y = 0; y < n; y++)
-  				for ( int z = 0; z < n; z++) {
-  					ArrayList<Tuple> temp = new ArrayList<Tuple>();
-  					edges.put(new Tuple(x,y,z), temp);
-  					if ( x > 0)
-  						if (!cheese[x-1][y][z])
-  							temp.add(new Tuple((x-1), y, z));
-  					if ( x < n-1)
-  						if (!cheese[x+1][y][z])
-  							temp.add(new Tuple((x+1), y, z));
-  					if ( y > 0)
-  						if (!cheese[x][y-1][z])
-  							temp.add(new Tuple( x, (y-1), z));
-  					if ( y < n-1)
-  						if (!cheese[x][y+1][z])
-  							temp.add(new Tuple( x, (y+1), z));
-  					if ( z > 0)
-  						if (!cheese[x][y][z-1])
-  							temp.add(new Tuple( x ,y, (z-1)));
-  					if ( z < n-1)
-  						if (!cheese[x][y][z+1])
-  							temp.add(new Tuple( x, y, (z+1)));
-  				}
-  		return edges;
-  	}
+
+	//hilfmethode zur Erzeugung der Mashmap der möglichen Züge in einem Puzzle
+	private static HashMap<Tuple, ArrayList<Tuple>> createHash(int n, boolean [][][] cheese) {
+
+		//Erstelle Hashmap
+		HashMap<Tuple, ArrayList<Tuple>> edges = new HashMap<Tuple, ArrayList<Tuple>>();
+		for (int x = 0; x < n; x++)
+			for (int y = 0; y < n; y++)
+				for ( int z = 0; z < n; z++) {
+					ArrayList<Tuple> temp = new ArrayList<Tuple>();
+					edges.put(new Tuple(x,y,z), temp);
+					if ( x > 0)
+						if (!cheese[x-1][y][z])
+							temp.add(new Tuple((x-1), y, z));
+					if ( x < n-1)
+						if (!cheese[x+1][y][z])
+							temp.add(new Tuple((x+1), y, z));
+					if ( y > 0)
+						if (!cheese[x][y-1][z])
+							temp.add(new Tuple( x, (y-1), z));
+					if ( y < n-1)
+						if (!cheese[x][y+1][z])
+							temp.add(new Tuple( x, (y+1), z));
+					if ( z > 0)
+						if (!cheese[x][y][z-1])
+							temp.add(new Tuple( x ,y, (z-1)));
+					if ( z < n-1)
+						if (!cheese[x][y][z+1])
+							temp.add(new Tuple( x, y, (z+1)));
+				}
+		return edges;
+	}
 
 }
