@@ -8,7 +8,7 @@
 \geometry{left=25mm, right=15mm, bottom=25mm}
 \setlength{\parindent}{0em} 
 \setlength{\headheight}{0em} 
-\title{Datenstrukturen und effiziente Algorithmen\\ Blatt 9}
+\title{Datenstrukturen und effiziente Algorithmen\\ Blatt 10}
 \author{Markus Vieth, David Klopp, Christian Stricker}
 \date{\today}
 
@@ -77,28 +77,11 @@
 \markboth{Markus Vieth,  David Klopp, Christian Stricker}{Markus Vieth, David Klopp, Christian Stricker}
 
 \section*{Aufgabe 1}
-\subsection*{a) Pseudo-Code}
-\lstinputlisting[language = c, style = c]{Code/levelGraph.c}
-Der Algorithmus funktioniert analog zur Breitensuche, allerdings wird eine Kante nur dann hinzugefügt zum Levelgraph, wenn die Distanz des Nachbarknotens größer ist als die Distanz des aktuellen Knoten zum Ursprung (z. 14-15). Die Laufzeit verhält sich daher identisch zur Breitensuche und ist somit linear: $O(|V| + |E|)$.
 
-\subsection*{b)}
-Der Levelgraph soll lediglich kürzeste Wege enthalten. Eine Kante von rechts nach links würde bedeuten, dass der Weg länger wird als der bisherige Weg. Dieser Weg sollte dementsprechend nicht im Levelgraph beinhaltet sein, da dieser nur kürzeste Wege enthält.
-
-\subsection*{c)}
-Der Graph beinhaltet alle mögliche kürzesten Wegen zu einem Knoten, daher können auch bei erneuten Generierung keine neuen kürzesten Wege gefunden werden oder wegfallen, sofern sich der Graph nicht geändert hat. D.h der Graph ist eindeutig. 
-
-\pagebreak
 
 \section*{Aufgabe 2}
-\subsection*{ii)}
-\subsubsection*{Search.java}
-\lstinputlisting[language = java, style = java]{Emmentaler/app/Search.java}
-\subsubsection*{Tuple.java}
-\lstinputlisting[language = java, style = java]{Emmentaler/app/Tuple.java}
 
 
-\subsection*{iii)}
-Für die Breitensuche ergibt sich eine Weglänge von 56, für die Tiefensuche eine Länge von 2317. Laut Vorlesung liefert die Breitensuche stets den kürzeren Weg. 
-
+\section*{Aufgabe 3}
 
 \end{document}
