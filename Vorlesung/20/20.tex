@@ -42,16 +42,34 @@ class Partition
 		size[y] = size[y] + size[x];
 	}
 \end{lstlisting}
+
 %Grafik1 eigentlich bei line 33
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.3\linewidth]{20/Grafik/img1}
+\end{figure}
+
 \subsubsection{Laufzeit Kruskal}
 \[ \mathcal{O}(|E|\cdot\log|V|+|E|+|V|\cdot\log|V|) \]
 \[ \mathcal{O}(|E|\cdot\log|V|) \]
 \subsection{Prim-Algorithmus zur Berechnung eines MST}
-%Grafik
-\[ \overline{S} = V \setminus S \]
-%Grafik3
-\[ T=T\cup \{ (u,v) \} \]
-\[ T_{MST}=\{ (v,\pi(v))~|~v\in V\setminus\{ s \} \]
+
+%Grafik 2 und 3
+\begin{figure}[h]
+\centering
+\begin{subfigure}[h]{0.4\textwidth}
+	\includegraphics[width=\linewidth]{20/Grafik/img2}
+	\caption*{}
+	\[ \overline{S} = V \setminus S \]
+\end{subfigure}
+\begin{subfigure}[h]{0.4\textwidth}
+	\includegraphics[width=\linewidth]{20/Grafik/img3}
+	\caption*{}
+	\[ T=T\cup \{ (u,v) \} \]
+	\[ T_{MST}=\{ (v,\pi(v))~|~v\in V\setminus\{ s \} \]
+\end{subfigure}
+\end{figure}
+
 \begin{lstlisting}
 PriotityQueue PQ;
 forall(v $\in$ V) {
@@ -87,3 +105,12 @@ Korrektheit von Prim folgt unmittelbar aus dem Schnitt-Lemma, denn der Algorithm
 	$|E|\times$\texttt{PQ.decreaseKey}&$\mathcal{O}(1)$
 \end{tabular}
 In Summe $\mathcal{O}(|E|+|V|\cdot\log|V|)$
+
+\newpage
+\subsection{Beispiel des Prim-Algorithmus:}
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.65\linewidth]{20/Grafik/BspPrim}
+	\caption*{}
+\end{figure}
+
