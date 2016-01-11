@@ -14,13 +14,7 @@ class SpanningTree {
         UnionFind uf = new UnionFind(cityCount);
         // here should be something intelligent
 
-        for (int i = 0; i < cityCount; i++) {
-            for (int j = 0; j < cityCount; j++) {
-                if ( i != j) {
-                    edges.add(new WeightedEdge(euclid(cities.get(i),cities.get(j)), new Tuple(i,j)));
-                }
-            }
-        }
+        
 
         // sort all edges 
         Collections.sort(edges);
@@ -31,7 +25,7 @@ class SpanningTree {
             int v = edges.get(i).edge.y;
             if (uf.find(u) == uf.find (v))
                 continue;
-            mst.add(edges.get(i).edge);
+            mst.add(edges.get(i);
             uf.union(u,v);
 
         }
