@@ -7,6 +7,12 @@
 	next&$-1$&$-1$&$-1$&$\ldots$&$-1$\\ \hline	
 \end{tabular}
 $n=|V|$\\
+
+\begin{wrapfigure}{r}{0.5\textwidth}
+	\vspace{200pt}
+	\centering
+	\includegraphics[width=\linewidth]{20/Grafik/img1}
+\end{wrapfigure}
 \begin{lstlisting}
 class Partition
 	int[] ref,size,next;
@@ -42,16 +48,12 @@ class Partition
 		size[y] = size[y] + size[x];
 	}
 \end{lstlisting}
-
 %Grafik1 eigentlich bei line 33
-\begin{figure}[h]
-\centering
-\includegraphics[width=0.3\linewidth]{20/Grafik/img1}
-\end{figure}
 
 \subsubsection{Laufzeit Kruskal}
 \[ \mathcal{O}(|E|\cdot\log|V|+|E|+|V|\cdot\log|V|) \]
 \[ \mathcal{O}(|E|\cdot\log|V|) \]
+\pagebreak
 \subsection{Prim-Algorithmus zur Berechnung eines MST}
 
 %Grafik 2 und 3

@@ -11,6 +11,7 @@ class SpanningTree {
         // final mst and vector of all edges
         Vector<Tuple> mst = new Vector<Tuple>();
         Vector<WeightedEdge> edges = new Vector<WeightedEdge>();
+        Vector<WeightedEdge> virtualCities = new Vector<WeightedEdge>();
         UnionFind uf = new UnionFind(cityCount);
         // here should be something intelligent
 
@@ -20,6 +21,7 @@ class SpanningTree {
                     edges.add(new WeightedEdge(euclid(cities.get(i),cities.get(j)), new Tuple(i,j)));
                 }
             }
+            virtualCities.add(new WeightedEdge(euclid(cities.get(i),cities.get(i+cityCount)),new Tuple(i,i+cityCount)));
         }
 
         // sort all edges 
@@ -33,6 +35,7 @@ class SpanningTree {
                 continue;
             mst.add(edges.get(i).edge);
             uf.union(u,v);
+            //Vielleicht noch eine HashMap<Tripel, int> erzeugen, welche die Nächste virtuelle Stadt für eine Partition speichert
 
         }
         return mst;
