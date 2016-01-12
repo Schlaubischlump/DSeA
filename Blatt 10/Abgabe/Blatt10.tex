@@ -78,8 +78,30 @@
 
 \section*{Aufgabe 1}
 
+Die Breitensuche kann das Single-Source-Shortest-Path-Problem schneller lösen. Die Breitensuche hat eine Laufzeit von O(|V|+|E|), wogegen der Dijkstra-Algorithmus eine Laufzeit von O(|V | log |V | + |E|) hat. Dies kommt durch die Suche des kleinsten Elements in der Warteschlange/Einsortieren des nächsten gefundenen Knotens in die Warteschlange. Die Breitensuche nimmt immer das nächste Element aus der Warteschlange und spart dadurch die Zeit zum Suchen. Sowohl die Breitensuche als auch der Dijkstra-Algorithmus findet immer die kürzesten Wege von einem Startknoten aus.
+Wenn man den kürzesten Weg mithilfe der Tiefensuche sucht, findet man meistens schneller eine Lösung. Da die Tiefensuche nach einem gefundenen Weg abbricht, ist dieser Weg mit einer großen Wahrscheinlich nicht der kürzester Weg. Je größer der Graph und je mehr Wege es gibt, desto unwahrscheinlicher ist es, das die Tiefensuche die korrekte Lösung für das Problem löst. (Einzige Ausnahme ist, es gibt nur einen Weg und somit ist dies der kürzester Weg. Dies ist aber nur ein spezial -Fall, der selten vorkommt.) 
+
 
 \section*{Aufgabe 2}
+\subsection*{a)}
+\includegraphics*[scale=0.8]{Bilder/2a_Dijkstra.png}\\
+Legende:\\
+- Blau : Knoten in der Warteschlange\\
+- Gelb : Der derzeitige ausgewählte Knoten\\
+- Grün : Abgearbeiteter Knoten\\
+\subsection*{c)} 
+\includegraphics*[scale=1]{Bilder/2b_Prim.png}\\
+Legende:\\
+- Gelb : Besuchte Knoten\\
+- Grün : Gewählte Kante\\
+- Blau : Potenzielle Kante\\
+\\
+Der Prim-Algorithmus sucht eine Vernetzung aller Knoten, sodass die Gesamtlänge des Netzes minimal wird. Der Startpunkt ist bei diesem Algorithmus egal, es kommt immer zu dem selben Ergebnis. Dies ist z.B. nützlich beim Aufstellen von Strommasten, um die Kosten zu minimieren, trotzdem alle Orte mit Strom zu versorgen.
+Der Dijkstra-Algorithmus hingegen sucht den kürzesten Weg von einem bestimmten Startknoten aus zu allen anderen Knoten. Hilfreich ist dies z.B. Bei Onlineversandhändler. Diese haben ein lokales Lager(bestimmten Startknoten) und suchen den kürzesten Weg zu ggf allen anderen Orten(Knoten). Ein \glqq langer Weg\grqq ~über die Autobahn ist meist schneller als durch viele enge, zusammen liegenden Orten zu fahren. Deshalb ist die Gesamtlänge der Strecke im Spannbaums meist länger als beim Prim-Algorithmus.
+
+\subsection*{d)}
+Siehe Teilaufgabe c)
+\includegraphics*[scale=1]{Bilder/2c_Unterschied.png}
 
 
 \section*{Aufgabe 3}

@@ -64,7 +64,7 @@ $T(n) = 2T(\frac{n}{2}) + n -1 \approx 2T(\frac{n}{2}) + n ~~~\text{mit}~T(1) = 
 \end{mdframed}
 
 \begin{flalign*}
-&T(n) = 2 \cdot 2 T \left(\frac{n}{2} \right) + n \stackrel{\text{(1)}}{=} 2 \left( 2 T \left(\frac{n}{4} + \frac{n}{2}\right) + n \right) = 4 T\left(\frac{n}{4} \right) + 2n&\\
+&T(n) = 2 \cdot 2 T \left(\frac{n}{2} \right) + n \stackrel{\text{(1)}}{=} 2 \left( 2 T \left(\frac{n}{4} \right)+ \frac{n}{2}\right) + n \right) = 4 T\left(\frac{n}{4} \right) + 2n&\\
 &~~~~~~~\stackrel{\text{(2)}}{=} 4 \cdot \left(2T \left(\frac{n}{8}\right) + \frac{n}{4} \right) + 2n = 8T\left(\frac{n}{8} \right) + 3n = ... = 2^i \cdot T \left(\frac{n}{2^i} \right)  + in&\\
 \\
 &T\left(\frac{n}{2} \right) = 2 T\left(\frac{n}{4}\right) + \frac{n}{2}~~~~~~(1)& \\
