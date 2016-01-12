@@ -1,1 +1,1 @@
-/Users/David/Documents/UNI/3. Semester/DSeA/Abgaben/Blatt 9/Abgabe/Emmentaler_David/start_osx.sh
+/usr/libexec/java_home -v 1.6 --exec java -cp '.:lwjgl/jar/*:' -Djava.library.path=lwjgl/native/macosx app.App
