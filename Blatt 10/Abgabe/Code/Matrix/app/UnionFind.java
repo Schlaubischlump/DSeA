@@ -17,21 +17,25 @@ class UnionFind extends AbstractUnionFind {
             next[i] = -1;
         }   
 }
+
     public int find(int repr){
 
         // here should be something intelligent
         return ref[repr];
     }
     
+    //Entspricht dem Pseudo-Code aus der Vorlesung
     public boolean union(int i, int j){
+
         // here should also be something intelligent
-    	//boolean result = false;
         int x = ref[i];
         int y = ref[j];
         
-        //Kein swap von x und , da ref auch als Speicher für die kürzeste Verbindung dient, wird eine eventuelle schlechtere Laufzeit tolleriert.
+        if (size[x] > size[y]) {
+            x = ref[j];
+            y = ref[i];
+        }
 
-        //siehe Vorlesung
         int h = next[y];
         next[y] = x;
         int z = y;
@@ -40,6 +44,7 @@ class UnionFind extends AbstractUnionFind {
             z = next[z];
             ref[z] = y;
         }
+
         next[z] = h;
         size[y] = size[y] + size[x];
 

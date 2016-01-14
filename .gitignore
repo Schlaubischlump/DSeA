@@ -178,3 +178,8 @@ hs_err_pid*
 *.iml
 out/
 lwjgl/
+lwjgl
+*/lwjgl
+*/lwjgl/
+*/lwjgl/*
+lwjgl*
