@@ -2,9 +2,9 @@ package app;
 
 class UnionFind extends AbstractUnionFind {
 
-    int[] ref;
-    int[] size;
-    int[] next;
+    private int[] ref;
+    private int[] size;
+    private int[] next;
 
     UnionFind(int n){
         ref = new int[n];
@@ -17,28 +17,21 @@ class UnionFind extends AbstractUnionFind {
             next[i] = -1;
         }   
 }
-
     public int find(int repr){
 
         // here should be something intelligent
         return ref[repr];
     }
-
-    //returns true if i was choosen, false else
+    
     public boolean union(int i, int j){
-
         // here should also be something intelligent
-
-    	boolean result = false;
+    	//boolean result = false;
         int x = ref[i];
         int y = ref[j];
         
-        if (size[x] > size[y]) {
-            x = ref[j];
-            y = ref[i];
-            result = true;
-        }
+        //Kein swap von x und , da ref auch als Speicher für die kürzeste Verbindung dient, wird eine eventuelle schlechtere Laufzeit tolleriert.
 
+        //siehe Vorlesung
         int h = next[y];
         next[y] = x;
         int z = y;
@@ -47,10 +40,9 @@ class UnionFind extends AbstractUnionFind {
             z = next[z];
             ref[z] = y;
         }
-
         next[z] = h;
         size[y] = size[y] + size[x];
 
-        return result;
+        return true;
     }
 }

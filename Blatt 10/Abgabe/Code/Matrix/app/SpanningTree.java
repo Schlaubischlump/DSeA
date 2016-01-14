@@ -15,6 +15,7 @@ class SpanningTree {
         UnionFind uf = new UnionFind(cityCount);
         // here should be something intelligent
 
+        //Erstelle Kantenmengen für die Cities untereinander und jeweils zwischen Citiy unt virtual city
         for (int i = 0; i < cityCount; i++) {
             for (int j = 0; j < cityCount; j++) {
                 if ( i != j) {
@@ -31,13 +32,33 @@ class SpanningTree {
         for (int i = 0; i < edges.size(); i++) {
             int u = edges.get(i).edge.x;
             int v = edges.get(i).edge.y;
+            
+            // Setze die Stadt mit der kürzesten Verbindung zur Oberfläche als v
+            if (virtualCities.get(uf.find(u)).compareTo(virtualCities.get(uf.find(v))) < 0) {
+            	u = edges.get(i).edge.y;
+                v = edges.get(i).edge.x;
+            }
+            
+            
+            
+            //Wenn schon Verbunden (wenn auch nicht direkt) ist die Kante uninteressant
             if (uf.find(u) == uf.find (v))
                 continue;
-            mst.add(edges.get(i).edge);
-            uf.union(u,v);
-            //Vielleicht noch eine HashMap<Tripel, int> erzeugen, welche die Nächste virtuelle Stadt für eine Partition speichert
-
+            
+            //Wenn die bestehende Verbindung zur Oberfläche beider Knoten kürzer ist, als die neue, ist die Kante uninteressant
+            if(edges.get(i).compareTo(virtualCities.get(uf.find(v))) < 0 && edges.get(i).compareTo(virtualCities.get(uf.find(u))) < 0) {
+            	mst.add(edges.get(i).edge);
+            	uf.union(u,v);
+            }
         }
+        
+
+        //Füge für jede Partition die kürzeste Verbindung zur Oberfläche hinzu
+        for (int i = 0; i < cityCount; i++) {
+        	mst.add(new Tuple(uf.find(i),uf.find(i)+cityCount));
+        }
+        
+        
         return mst;
     }
 
