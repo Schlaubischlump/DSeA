@@ -1,4 +1,5 @@
 \chapter{Vorlesung}
+\section{Priority-Queue mittels Fibonacci-Heaps (Fortsetzung)}
 \subsection{Lemma}
 Für jeden Knoten $x$ in einem Fibonacci-Heap gilt, dass die Zahl aller Knoten im Unterbaum von $x$ mindestens $\Phi^k$ beträgt, wobei $k = \grad(x)$.
 \subsection{Beweis}
@@ -35,7 +36,7 @@ Wir zeigen
 \[ k=0~:~S_0\geq f_2=1~~\checkmark \]
 \[ k=1~:~S_1\geq f_3=2~~\checkmark \]
 \[ S_k \geq 2+\sum_{i=2}^{k}f_i\text{, da wegen Induktions-Annahme }S_{i-2}\geq f_{(i-2+2)}=f_i \text{ für }i<k \]
-\paragraph{Zu zeigen}
+\paragraph{Zu zeigen:}
 \[ 2 + \sum_{i=2}^{k}f_i \geq f_{k+2} \]
 \paragraph{Es gilt:}
 \[ 1+\sum_{i=1}^{k}f_i=f_{k+2} \]
@@ -45,4 +46,40 @@ Wir zeigen
 \begin{flushright}
 	q.e.d.
 \end{flushright}
-Aus dem Lemma folgt, dass in einem Fibonacci-Heap für $n$\footnote{$\Phi^k\leq n$} Elemente zu keinem Zeitpunkt einen Knoten vom Grad $\log_\phi n = k$ auftauchen kann. Insbesondere ist die Wurzelliste nach einer Konsolidierung auch nur $\log_\Phi n$ lang, weil dort nur Knoten unterschiedlichen Grades auftauchen. 
+
+Aus dem Lemma folgt, dass in einem Fibonacci-Heap für $n$\footnote{$\Phi^k\leq n$} Elemente zu keinem Zeitpunkt ein Knoten vom Grad $\log_\phi n = k$ auftauchen kann. Insbesondere ist die Wurzelliste nach einer Konsolidierung auch nur $\log_\Phi n$ lang, weil dort nur Knoten unterschiedlichen Grades auftauchen. 
+
+
+\pagebreak
+
+\subsection{Satz}
+Mit einem Fibonacci-Heap lassen sich die Operationen \texttt{insert}, \texttt{deleteMin} und \texttt{decreaseKey} mit folgenden amortisierten Kosten realisieren:\\
+\begin{tabular}{ll}
+	\texttt{insert}&$\mathcal{O}(1)$\\
+	\texttt{deletemin}&$\mathcal{O}(\log n)$\\
+	\texttt{decreaseKey}&$\mathcal{O}(1)$
+\end{tabular} 
+
+\subsection{Beweis}
+Wir verwenden die Bankkonto-Methode zur amortisierten Analyse nach folgendem Schema:\\
+Jeder Knoten in der Wurzelliste wird mit einer RE\footnote{Rechen Einheit} bespart und jeder markierte Knoten der einen Kindknoten verloren hat wird mit 2 RE bespart.
+\paragraph{Bemerkung}
+Wurzelknoten tragen keine Markierung, obwohl sie eventuell Kindknoten verloren haben.\\
+
+Wir zeigen nun, dass die oben genannten Kosten für die einzelnen Operationen ausreichen, damit im gesamten Verlauf das Kontoführungsschema, ohne Schulden machen zu müssen, aufrecht erhalten werden kann.\\
+\begin{description}
+	\item[\texttt{insert}] Einfügen in Wurzelliste $+1$RE Investition $\in\mathcal{O}(1)$\\
+	\item[\texttt{deleteMin}] Alle Kindknoten des gelöschten Knotens wandern in die Wurzelliste.\\ Dafür müssen wir $\log_\Phi n$ viele RE investieren. Die Konkatenation der doppelt verketteten Listen kostet nur konstante Zeit. Der ganze Konsolidierungsprozess kann bezahlt werden durch die RE auf den Wurzelknoten. Die anschließende Minimumsuche kostet nur $\mathcal{O}(\log n)$, weil die Wurzelliste höchstens $\log_\Phi n$ viele Elemente hat.
+	\item[\texttt{decreaseKey}] $ $
+	\paragraph{Behauptung} Es genügen 4 RE pro Operation\\
+	Vorgehensweise:
+	\begin{itemize}
+		\item 1RE für die Aufnahme eines abgelösten Knotens in die Wurzelliste
+		\item 2RE für die Markierung des Vaterknotens
+		\item 1RE für "`sonstige"' konstante Kosten(Pointeraktualisierungen).
+	\end{itemize}
+	Ein Vaterknoten, der schon markiert ist, hat auf Grund der Gültigkeit der Bankkontoführung schon 2RE und bekommt vom abgelösten Kindknoten noch 2 RE. Damit hat er 4RE für seine eigene Ablösung zur Verfügung. Dieses Schema lässt sich also fortsetzen und die Kosten einer Ablösekaskade lassen sich damit decken.
+\end{description}
+\begin{flushright}
+	q.e.d.
+\end{flushright}
