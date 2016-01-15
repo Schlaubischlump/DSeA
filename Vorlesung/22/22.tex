@@ -12,7 +12,7 @@ Seien $y_1, y_2,\ldots,y_k$ die aktuellen Kindknoten von $x$, nummeriert in der 
 $y_i$ kann nur Kind von $x$ werden, wenn $x$ und $y_i$ gleichen Grad haben. $\Rightarrow\grad(y_i)\geq i-1$\\
 Da $y_i$ im Folgenden höchstens einen Kindknoten verlieren kann, gilt:
 \[ \grad(y_i) \geq i-2 \]
-Sei $S_k$ die Mindestanzahl von knoten in einem Unterbaum eines Knoten $x$ vom Grad $k$
+Sei $S_k$ die Mindestanzahl von Knoten in einem Unterbaum eines Knoten $x$ vom Grad $k$
 \[ S_k \geq 1+1+\sum_{i=2}^{k} S_{i-2} \]
 Wir zeigen
 \[ S_k\overset{(2)}{\geq} f_{k+2}\footnote{$k-2$-te Fibonacci Zahl}\overset{(1)}{\geq}\Phi^k \]
@@ -45,4 +45,4 @@ Wir zeigen
 \begin{flushright}
 	q.e.d.
 \end{flushright}
-Aus dem Lemma folgt, dass in einem Fibonacci-Heap für $n$\footnote{$\Phi^k\leq n$} Elemente zu keinem Zeitpunkt einen Knoten vom Grad $\log_\phi n = k$ auftauchen kann. insbesondere ist die Wurzelliste nach einer Konsolidierung auch nur $\log_\Phi n$ lang, weil dort nur Knoten unterschiedlichen Grades auftauchen. 
+Aus dem Lemma folgt, dass in einem Fibonacci-Heap für $n$\footnote{$\Phi^k\leq n$} Elemente zu keinem Zeitpunkt einen Knoten vom Grad $\log_\phi n = k$ auftauchen kann. Insbesondere ist die Wurzelliste nach einer Konsolidierung auch nur $\log_\Phi n$ lang, weil dort nur Knoten unterschiedlichen Grades auftauchen. 
