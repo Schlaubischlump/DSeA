@@ -1,4 +1,5 @@
-\chapter{Vorlesung}
+%\chapter{Vorlesung}
+\subsection{Kontoführungsschema für einen 2-5 Baum} %Ergänzung von Markus
 \satz Ausgehend von einem \underline{leeren} 2-5-Baum betrachten wir die Rebalancierungskosten $C$ (Split- und Fusionsoperationen) für eine Folge von $m$ Einfüge- oder Löschoperationen. Dann gilt: $C\in O(m)$\\
 d.h. Amortisierte Kosten der Split- und Fusionsoperationen sind konstant.\\
 ! Dies bezieht sich nicht auf die Suchkosten, die in $O(\log n)$ liegen.
@@ -8,7 +9,8 @@ d.h. Amortisierte Kosten der Split- und Fusionsoperationen sind konstant.\\
 	\hline \rule[-2ex]{0pt}{5.5ex} 1 & 2 & 3 & 4 & 5 & 6 \\ 
 	\hline \rule[-2ex]{0pt}{5.5ex} 2€ & 1€ & 0€ & 0€ & 1€ & 2€ \\ 
 	\hline 
-\end{tabular} \\
+\end{tabular}
+\vspace{5pt} \\
 regelmäßige Einzahlung: 1€\\
 Durch eine Einfüge- oder Löschoperation steigt oder fällt der Knotengrad des direkt betroffenen Knotens um höchstens 1. $\Rightarrow$ 1€ Einzahlung reicht zur Aufrechterhaltung dieses Sparplanes.\\
 Jetzt Beseitigung der temporären 1- und 6-Knoten:\\
