@@ -2,9 +2,9 @@ package app;
 
 class UnionFind extends AbstractUnionFind {
 
-    int[] ref;
-    int[] size;
-    int[] next;
+    private int[] ref;
+    private int[] size;
+    private int[] next;
 
     UnionFind(int n){
         ref = new int[n];
@@ -23,20 +23,17 @@ class UnionFind extends AbstractUnionFind {
         // here should be something intelligent
         return ref[repr];
     }
-
-    //returns true if i was choosen, false else
+    
+    //Entspricht dem Pseudo-Code aus der Vorlesung
     public boolean union(int i, int j){
 
         // here should also be something intelligent
-
-    	boolean result = false;
         int x = ref[i];
         int y = ref[j];
         
         if (size[x] > size[y]) {
             x = ref[j];
             y = ref[i];
-            result = true;
         }
 
         int h = next[y];
@@ -51,6 +48,6 @@ class UnionFind extends AbstractUnionFind {
         next[z] = h;
         size[y] = size[y] + size[x];
 
-        return result;
+        return true;
     }
 }
