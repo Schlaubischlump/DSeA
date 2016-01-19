@@ -1,0 +1,48 @@
+\documentclass[a4paper,11pt,twoside]{scrartcl}
+\input{../../head/package}
+\input{../../head/listing}
+\input{../../head/format}
+
+\title{Datenstrukturen und effiziente Algorithmen\\ Blatt 11}
+\author{Markus Vieth, David Klopp, Christian Stricker}
+\date{\today}
+
+
+
+\begin{document}
+
+\maketitle
+\cleardoublepage
+\pagestyle{myheadings}
+\markboth{Markus Vieth,  David Klopp, Christian Stricker}{Markus Vieth, David Klopp, Christian Stricker}
+
+\section*{Aufgabe 1}
+Die Anzahl der Buchstaben beträgt 2252.
+\subsection*{Python-Code}
+\lstinputlisting[style=python,basicstyle=\small\ttfamily]{Code/wordCount.py}
+
+\section*{Aufgabe 2}
+
+\subsection*{Pseudo-Code}
+\lstinputlisting[style=c,basicstyle=\small\ttfamily]{Code/linearList.c}
+
+\subsection*{Beschreibung}
+Füge drei Knoten in den Fibonacci-Heap ein. Der erste Knoten ist hierbei um 1 größer, der zweite um 1 kleiner und der dritte um 2 kleiner als das aktuelle Minimum. Lösche nun den Minimumknoten, aktualisiere ihn und setzte den Wert des Größten Kindes des neuen Minimumknotens auf das aktuelle Minimum -2. Es ergibt sich somit ein neues Minimum, das in die Wurzelliste aufgenommen wird. Dieses wird nun abschließend gelöscht. In jedem Schritt wird so also genau ein Knoten in den Heap eingefügt. Es ergibt sich somit eine vertikale Liste.
+
+%\subsection*{Beispiel}
+
+\section*{Aufgabe 3}
+Alle Methoden beziehen sich auf eine Klasse Fibonacci-Heap.
+
+\subsection*{Insert}
+\begin{lstlisting}[style=c,basicstyle=\small\ttfamily]
+// Fügt neues Element rechts des Minimums in die Wurzelliste ein
+void insert(Node n) {
+	m = getMin();
+	n.right = m.right;
+	m.right = n;
+	n.left = m;
+}
+\end{lstlisting}
+
+\end{document}
