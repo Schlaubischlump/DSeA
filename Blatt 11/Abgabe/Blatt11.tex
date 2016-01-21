@@ -134,5 +134,61 @@ Füge alle Elemente unsortiert in ein Array ein. Laufzeit: $O(1)$.\\
 Wende nun Radix-Sort auf das Array an, um es zu sortieren. Laufzeit: $O(n)$. (Siehe hierzu VL 11)\\
 Die Heap-Eigenschaft ist nun für alle Knoten erfüllt.
 
+\section*{Zusatz 1}
+\subsection*{a)}
+\paragraph{Behauptung}
+$(E,M) = (\{ a,b,c,d \}, \{ \emptyset,\{ a \},\{ b \},\{ c \}\{ d \}\}  )$ ist ein Matroid.
+\paragraph{Beweis}
+\subparagraph{zu zeigen: Nicht-Leerheit}
+\[ \emptyset\in M=\{  \emptyset,\{ a \},\{ b \},\{ c \}\{ d \}\} \} \]
+\subparagraph{zu zeigen: Vererbung}
+Die Teilmengen einer einelementigen Menge sind die Menge selbst und die leere Menge. Somit ist offensichtlich, dass auch diese Bedingung erfüllt ist.
+\subparagraph{zu zeigen: Austausch}
+Sei $X$ eine der einelementigen Mengen aus $M$. Das einzige Element mit geringerer Kardinalität ist die leere Menge.
+\[\Rightarrow \exists x\in X\setminus\emptyset=X | \{ x \}\cup\emptyset=X\in M \]
+$\Rightarrow$ $(E,M)$ ist ein Matroid.
+\subsection*{b)}
+\paragraph{Nich-Leerheit}
+$M$ muss die leere Menge enthalten $\Rightarrow$ $M':=\{ \emptyset,\{a,b \},\{ c,d \}\}\subseteq M$.
+\paragraph{Vererbung}
+Sei $\mathcal{P}(X)$ die Potenzmenge der Menge $X$\\
+\[ M'\cup\mathcal{P}(\emptyset)\cup\mathcal{P}(\{a,b\})\cup\mathcal{P}(\{c,d\}) = \{ \emptyset,\{a,b \},\{ c,d \},\{ a \},\{ b \},\{ c \},\{ d \} \}=:M''\subseteq M \]
+\paragraph{Austausch}
+Wie in Teilaufgabe a) erklärt, muss die leere Menge nicht weiter betrachtet werden, da mit dieser lediglich die einelementigen Mengen erzeugt werden können.
+\begin{description}
+	\item[$A=\{v\},B=\{v,w\}$ mit $v,w\in E$] $B\setminus A = \{w\}, \{w\}\cup A = \{v,w\}$
+	\item[$A=\{a\},B=\{c,d\}$] $B\setminus A = \{c,d\} \Rightarrow \{c\}\cup\{a\}=\{a,c\}\in M \veebar \{d\}\cup\{a\}=\{a,d\}\in M$
+	\item[$A=\{b\},B=\{c,d\}$] $B\setminus A = \{c,d\} \Rightarrow \{c\}\cup\{b\}=\{b,c\}\in M \veebar \{d\}\cup\{b\}=\{b,d\}\in M$
+	\item[$A=\{c\},B=\{a,b\}$] $B\setminus A = \{a,b\} \Rightarrow \{a\}\cup\{c\}=\{a,c\}\in M \veebar \{b\}\cup\{c\}=\{b,c\}\in M$
+	\item[$A=\{d\},B=\{a,b\}$] $B\setminus A = \{a,b\} \Rightarrow \{a\}\cup\{d\}=\{a,d\}\in M \veebar \{b\}\cup\{d\}=\{b,d\}\in M$
+\end{description}
+\[\Rightarrow M=\{ \emptyset,\{a,b \},\{ c,d \},\{ a \},\{ b \},\{ c \},\{ d \},\{a,c\},\{b,d\} \}\veebar M=\{ \emptyset,\{a,b \},\{ c,d \},\{ a \},\{ b \},\{ c \},\{ d \},\{a,d\},\{b,c\} \}\]
+$\Rightarrow(E,M)$ ist der kleinste Matroid, welcher den Anforderungen entspricht.
+\begin{flushright}
+	q.e.d.
+\end{flushright}
+\pagebreak
+\section*{Zusatz 2}
+\subsection*{a)}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\linewidth]{Images/Matroid}
+\caption{graphischer Matroid}
+\label{fig:Matroid}
+\end{figure}
 
+Die Teilmengen größter Kardinalität sind $M_1:=\{ (a,b),(b,c),(c,d) \},M_2:=\{ (a,b),(b,c),(d,a) \},\\M_3:=\{ (a,b),(c,d),(d,a) \},M_4:=\{ (b,c),(c,d),(d,a) \}$. Es handelt sich dabei um die möglichen Spannbäume des Graphen $G$.
+\subsection*{b)}
+Es handelt sich um den Algorithmus von Kruskal. Der Algorithmus gibt $B=\{ (a,b),(b,c),(c,d) \}$ aus. Die Abfrage verhindert das Bilden von Zyklen.
+\subsection*{c)}
+Das Sortieren der Kanten hat im Allgemeinen (also ohne Radix-Sort) eine Laufzeit in $\mathcal{O}(|E| \log |E|)$. Die Schleife läuft über die Menge aller Kanten, also $|E|$ mal. Innerhalb der Schleife gibt es die Abfrage mit der Laufzeit $f(|E|)$ und die Einfüge-Operation, welche mit passender Datenstruktur in konstanter Zeit ausgeführt werden kann. Somit ergibt sich eine Laufzeit in $\mathcal{O}(|E|\log|E|+|E|f(|E|))$.
+\subsection*{d)}
+
+\begin{wrapfigure}{l}{0.3\linewidth}
+	\centering
+	\includegraphics[width=0.5\linewidth]{Images/Beispiel}
+	\caption{Sei n eine beliebigen Länge}
+	\label{fig:Beispiel}
+\end{wrapfigure}
+Nein, der Algorithmus ist nicht eindeutig. Man denke sich einen dreieckigen Graphen mit den Kanten $E:=\{ (a,b),(b,c),(c,a) \}$ welche ein einheitliches Kantengewicht aufweisen. Das Ergebnis ist nun vom Sortierverfahren abhängig. So liefern allein stabile und instabile Algorithmen verschiedene Ergebnisse. Mögliche Lösungen wären $L_1:=\{ (a,b),(b,c) \},L_2:=\{ (a,b),(c,a)\},L_3:=\{ (b,c),(c,d) \}$
 \end{document}
