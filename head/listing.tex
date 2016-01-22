@@ -9,12 +9,25 @@
 \definecolor{yac}{rgb}{0.6,0.6,0.1}
 \definecolor{green}{rgb}{0,.5,0}
 
+\lstdefinestyle{python}{
+	language = python,
+	keywordstyle=\bfseries\ttfamily\color{blue},
+	stringstyle=\color{orange}\ttfamily,
+	commentstyle=\color{green}\ttfamily,
+	emph={@Override, while, forall}, 
+	emphstyle=\color{green}\texttt,
+	emph={[2]List, Queue},
+	emphstyle={[2]\color{yac}\texttt},
+}
+
+
 \lstdefinestyle{c}{
+	language = c,
 	keywordstyle=\bfseries\ttfamily\color{blue},
 	stringstyle=\color{orange}\ttfamily,
 	commentstyle=\color{green}\ttfamily,
 	emph={@Override, while, forall, if}, 
-	emphstyle=\color{green}\texttt,
+	emphstyle=\color{blue}\texttt,
 	emph={[2]List, Queue},
 	emphstyle={[2]\color{yac}\texttt},
 }

@@ -1,0 +1,195 @@
+\documentclass[a4paper,11pt,twoside]{scrartcl}
+\input{../../head/package}
+\input{../../head/listing}
+\input{../../head/format}
+\input{../../head/math}
+
+\title{Datenstrukturen und effiziente Algorithmen\\ Blatt 11}
+\author{Markus Vieth, David Klopp, Christian Stricker}
+\date{\today}
+
+
+
+\begin{document}
+
+\maketitle
+\cleardoublepage
+\pagestyle{myheadings}
+\markboth{Markus Vieth,  David Klopp, Christian Stricker}{Markus Vieth, David Klopp, Christian Stricker}
+
+\section*{Aufgabe 1}
+\subsection*{Python-Code}
+\lstinputlisting[style=python,basicstyle=\small\ttfamily]{Code/wordCount.py}
+
+Die Anzahl der Buchstaben beträgt 2252.
+
+
+
+\section*{Aufgabe 2}
+
+\subsection*{Pseudo-Code}
+\lstinputlisting[style=c,basicstyle=\small\ttfamily]{Code/linearList.c}
+
+\subsection*{Beschreibung}
+Füge drei Knoten in den Fibonacci-Heap ein. Der erste Knoten ist hierbei um 1 größer, der zweite um 1 kleiner und der dritte um 2 kleiner als das aktuelle Minimum. Lösche nun den Minimumknoten, aktualisiere ihn und setzte den Wert des Größten Kindes des neuen Minimumknotens auf das aktuelle Minimum -2. Es ergibt sich somit ein neues Minimum, das in die Wurzelliste aufgenommen wird. Dieses wird nun abschließend gelöscht. In jedem Schritt wird so also genau ein Knoten in den Heap eingefügt. Es ergibt sich somit eine vertikale Liste.
+
+%\subsection*{Beispiel}
+
+\pagebreak
+
+\section*{Aufgabe 3}
+
+\subsection*{a)}
+
+\subsubsection*{Hilfsmethode}
+\begin{lstlisting}[style=c,basicstyle=\small\ttfamily]
+int left(int i) {
+	return 2i+1;
+}
+
+int right(int i) {
+	return  2i+2;
+}
+
+int parent(int i) {
+	return floor((i-1)/2);
+}
+
+// Heap-Eigenschaft herstellen
+void heapify(Array b, int i) {
+	// kleinstes Element des Asts finden 
+	int min = i
+	if (left(i) < b.size && b[left(i)].key < b[min].key)
+		min = left(i)
+	if (right(i) < b.size && b[right(i)].key < b[min].key)
+		min = right(i)
+		
+	// wenn ein kleines Element existiert dann stelle die Heap-Eigenschaft her
+	if (min != i) {
+		b.swap(i, min)
+		// verfahre kaskadenartig weiter
+		heapify(b, min)
+	}
+}
+
+\end{lstlisting}
+
+\subsubsection*{decreaseKey}
+\begin{lstlisting}[style=c,basicstyle=\small\ttfamily]
+bool decrease(Array b, int i, newKey) {
+	// neuer Schlüssel muss kleiner sein als alter
+	if (newKey > b[i].key)
+		return false;
+	
+	// Schlüssel setzten
+ 	b[i].key = newKey;
+	
+	// Heap-Eigenschaft herstellen
+	while (i > 0 && b[i].key < b[parent(i)].key)) {
+    		b.swap(i, parent(i));
+    		i = parent(i);
+	}
+	return true;
+}
+\end{lstlisting}
+
+
+\pagebreak
+
+
+\subsubsection*{deleteMin}
+\begin{lstlisting}[style=c,basicstyle=\small\ttfamily]
+int deleteMin(Array b) {
+	if (i<b.size)
+		return -1; // Index out of bounds
+	min = b[0];
+	b.swap(i, -1); // sei -1 der Index des letzten Elements
+	b.size -= 1 // verringere die Array Größe um 1
+
+	// Heap-Eigenschaft herstellen
+	if ((b.size > 0)
+		heapify(b, i)
+	return min;	
+}
+\end{lstlisting}
+
+
+\subsubsection*{insert}
+\begin{lstlisting}[style=c,basicstyle=\small\ttfamily]
+void insert(Array b, newKey) {
+	int i = b.size
+	b.size += 1;
+	// setzte b auf den höchst möglichen Wert
+	b.key = MAX_INT 
+	// Update den Wert und die Heap-Eigenschaft mit decrease
+	decrease(b, i, newKey)
+}
+\end{lstlisting}
+
+
+\subsection*{b)}
+Die Laufzeit für die decreaseKey Operation beträgt $O(Baumtiefe) = O(\log(n))$. Unter der Annahme, dass das Resizen des Arrays in konstanter Zeit realisiert werden kann, beträgt somit die Laufzeit für insert ebenfalls $O(\log(n))$. Ausschlaggebend für die deleteMin Operation ist die heapify Methode, da sich der Rest der Implementierung in konstanter Zeit realisieren lässt. Die Laufzeit für heapify und somit auch für deleteMin beträgt ebenfalls $O(Baumtiefe) = O(\log(n))$.
+
+\subsection*{c)}
+Füge alle Elemente unsortiert in ein Array ein. Laufzeit: $O(1)$.\\
+Wende nun Radix-Sort auf das Array an, um es zu sortieren. Laufzeit: $O(n)$. (Siehe hierzu VL 11)\\
+Die Heap-Eigenschaft ist nun für alle Knoten erfüllt.
+
+\section*{Zusatz 1}
+\subsection*{a)}
+\paragraph{Behauptung}
+$(E,M) = (\{ a,b,c,d \}, \{ \emptyset,\{ a \},\{ b \},\{ c \}\{ d \}\}  )$ ist ein Matroid.
+\paragraph{Beweis}
+\subparagraph{zu zeigen: Nicht-Leerheit}
+\[ \emptyset\in M=\{  \emptyset,\{ a \},\{ b \},\{ c \}\{ d \}\} \} \]
+\subparagraph{zu zeigen: Vererbung}
+Die Teilmengen einer einelementigen Menge sind die Menge selbst und die leere Menge. Somit ist offensichtlich, dass auch diese Bedingung erfüllt ist.
+\subparagraph{zu zeigen: Austausch}
+Sei $X$ eine der einelementigen Mengen aus $M$. Das einzige Element mit geringerer Kardinalität ist die leere Menge.
+\[\Rightarrow \exists x\in X\setminus\emptyset=X | \{ x \}\cup\emptyset=X\in M \]
+$\Rightarrow$ $(E,M)$ ist ein Matroid.
+\subsection*{b)}
+\paragraph{Nich-Leerheit}
+$M$ muss die leere Menge enthalten $\Rightarrow$ $M':=\{ \emptyset,\{a,b \},\{ c,d \}\}\subseteq M$.
+\paragraph{Vererbung}
+Sei $\mathcal{P}(X)$ die Potenzmenge der Menge $X$\\
+\[ M'\cup\mathcal{P}(\emptyset)\cup\mathcal{P}(\{a,b\})\cup\mathcal{P}(\{c,d\}) = \{ \emptyset,\{a,b \},\{ c,d \},\{ a \},\{ b \},\{ c \},\{ d \} \}=:M''\subseteq M \]
+\paragraph{Austausch}
+Wie in Teilaufgabe a) erklärt, muss die leere Menge nicht weiter betrachtet werden, da mit dieser lediglich die einelementigen Mengen erzeugt werden können.
+\begin{description}
+	\item[$A=\{v\},B=\{v,w\}$ mit $v,w\in E$] $B\setminus A = \{w\}, \{w\}\cup A = \{v,w\}$
+	\item[$A=\{a\},B=\{c,d\}$] $B\setminus A = \{c,d\} \Rightarrow \{c\}\cup\{a\}=\{a,c\}\in M \veebar \{d\}\cup\{a\}=\{a,d\}\in M$
+	\item[$A=\{b\},B=\{c,d\}$] $B\setminus A = \{c,d\} \Rightarrow \{c\}\cup\{b\}=\{b,c\}\in M \veebar \{d\}\cup\{b\}=\{b,d\}\in M$
+	\item[$A=\{c\},B=\{a,b\}$] $B\setminus A = \{a,b\} \Rightarrow \{a\}\cup\{c\}=\{a,c\}\in M \veebar \{b\}\cup\{c\}=\{b,c\}\in M$
+	\item[$A=\{d\},B=\{a,b\}$] $B\setminus A = \{a,b\} \Rightarrow \{a\}\cup\{d\}=\{a,d\}\in M \veebar \{b\}\cup\{d\}=\{b,d\}\in M$
+\end{description}
+\[\Rightarrow M=\{ \emptyset,\{a,b \},\{ c,d \},\{ a \},\{ b \},\{ c \},\{ d \},\{a,c\},\{b,d\} \}\veebar M=\{ \emptyset,\{a,b \},\{ c,d \},\{ a \},\{ b \},\{ c \},\{ d \},\{a,d\},\{b,c\} \}\]
+$\Rightarrow(E,M)$ ist der kleinste Matroid, welcher den Anforderungen entspricht.
+\begin{flushright}
+	q.e.d.
+\end{flushright}
+\pagebreak
+\section*{Zusatz 2}
+\subsection*{a)}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\linewidth]{Images/Matroid}
+\caption{graphischer Matroid}
+\label{fig:Matroid}
+\end{figure}
+
+Die Teilmengen größter Kardinalität sind $M_1:=\{ (a,b),(b,c),(c,d) \},M_2:=\{ (a,b),(b,c),(d,a) \},\\M_3:=\{ (a,b),(c,d),(d,a) \},M_4:=\{ (b,c),(c,d),(d,a) \}$. Es handelt sich dabei um die möglichen Spannbäume des Graphen $G$.
+\subsection*{b)}
+Es handelt sich um den Algorithmus von Kruskal. Der Algorithmus gibt $B=\{ (a,b),(b,c),(c,d) \}$ aus. Die Abfrage verhindert das Bilden von Zyklen.
+\subsection*{c)}
+Das Sortieren der Kanten hat im Allgemeinen (also ohne Radix-Sort) eine Laufzeit in $\mathcal{O}(|E| \log |E|)$. Die Schleife läuft über die Menge aller Kanten, also $|E|$ mal. Innerhalb der Schleife gibt es die Abfrage mit der Laufzeit $f(|E|)$ und die Einfüge-Operation, welche mit passender Datenstruktur in konstanter Zeit ausgeführt werden kann. Somit ergibt sich eine Laufzeit in $\mathcal{O}(|E|\log|E|+|E|f(|E|))$.
+\subsection*{d)}
+
+\begin{wrapfigure}{l}{0.3\linewidth}
+	\centering
+	\includegraphics[width=0.5\linewidth]{Images/Beispiel}
+	\caption{Sei n eine beliebigen Länge}
+	\label{fig:Beispiel}
+\end{wrapfigure}
+Nein, der Algorithmus ist nicht eindeutig. Man denke sich einen dreieckigen Graphen mit den Kanten $E:=\{ (a,b),(b,c),(c,a) \}$ welche ein einheitliches Kantengewicht aufweisen. Das Ergebnis ist nun vom Sortierverfahren abhängig. So liefern allein stabile und instabile Algorithmen verschiedene Ergebnisse. Mögliche Lösungen wären $L_1:=\{ (a,b),(b,c) \},L_2:=\{ (a,b),(c,a)\},L_3:=\{ (b,c),(c,d) \}$
+\end{document}
