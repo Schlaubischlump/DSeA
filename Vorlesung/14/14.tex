@@ -3,7 +3,7 @@
 Könnte ein boshafter Mitspieler n Schlüssel bei gegebener fester Hashfunktion wählen, so würde er solche wählen, die auf den gleichen Slot unter gegebener Hashfunktion abgebildet werden. $\rightsquigarrow$ Durchschnittliche Ablaufzeit von $O(n)$
 \paragraph{Idee} zufällige Wahl der Hashfunktion aus einer Familie von Funktionen derart, dass die Wahl unabhängig von den zu speichernden Schlüssel ist (universelles Hashing).
 \subsection{Definition}
-Sei $\mathcal{H}$ eine endliche Menge von Hashfunktionen, welche ein gegebenes Universum $U$ von Schlüsseln auf $\{ 0,\ldots,m-1 \}$ abbildet. Sie heißt universell, wenn für jedes Paar von Schlüsseln $k,l\in U~~l\neq k$ die Anzahl der Hashfunktionen $h\in \mathcal{H}$ mit $h(l)=h(k)$ höchstens $\frac{|\mathcal{H}|}{m}$. Anders: Für ein zufälliges $h\in\mathcal{H}$ beträgt die Wahrscheinlichkeit, dass zwei unterschiedliche Schlüssel $k,l$ kollidieren nicht mehr als $\frac{1}{m}$ ist.
+Sei $\mathcal{H}$ eine endliche Menge von Hashfunktionen, welche ein gegebenes Universum $U$ von Schlüsseln auf $\{ 0,\ldots,m-1 \}$ abbildet. Sie heißt universell, wenn für jedes Paar von Schlüsseln $k,l\in U~~l\neq k$ die Anzahl der Hashfunktionen $h\in \mathcal{H}$ mit $h(l)=h(k)$ höchstens $\frac{|\mathcal{H}|}{m}$. Anders: Für ein zufälliges $h\in\mathcal{H}$ beträgt die Wahrscheinlichkeit, dass zwei unterschiedliche Schlüssel $k,l$ kollidieren, nicht mehr als $\frac{1}{m}$.
 \subsection{Beispiel}
 $p$ Primzahl, so groß, dass alle möglichen Schlüssel $k\in U$ im $0,\ldots,p-1$ liegen. $\mathbb{Z}/p\mathbb{Z}$ bezeichnet den Restklassenring $\mod{p}$ (weil $p$ prim, ist $\mathbb{Z}/p\mathbb{Z}$ ein Körper).
 $\mathbb{Z}/p\mathbb{Z}^*$ ist die Einheitengruppe.
