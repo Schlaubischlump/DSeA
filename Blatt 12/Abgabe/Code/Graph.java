@@ -152,7 +152,6 @@ public class Graph {
 						temp.push(next);
 						//System.out.println("Erzeuge Pfad");
 					}
-					System.out.println("fertig");
 					return temp;
 				}
 			}
@@ -167,9 +166,7 @@ public class Graph {
 		}
 		LinkedList<Vertex> p = this.findPath(start, end);
 		while(p != null){
-			System.out.println("do be do");
 			int c = Integer.MAX_VALUE;
-			System.out.println("Pfad gefunden");
 			LinkedList<Edge> pTemp = new LinkedList<Edge>(); 
 			Vertex last = p.removeFirst();
 			while (!p.isEmpty()) {
@@ -180,7 +177,6 @@ public class Graph {
 				last = next;
 			}
 
-			System.out.println("c ist "+c+" groﬂ");
 			while(!pTemp.isEmpty()) {
 				Edge edge = pTemp.removeFirst();
 				edge.capacity -= c;
@@ -230,7 +226,7 @@ public class Graph {
 
 	public static void main(String... args) {
 		System.out.println("Es sei s = 6 und t = 7" );
-		System.out.println("Teilaufgabe b)");
+		System.out.println("Tailaufgabe b)");
 		Graph test = new Graph();
 		for (int i = 0; i < 8; i++)
 			test.addVertex();
@@ -245,15 +241,16 @@ public class Graph {
 		test.addEdge(6, 0, 13, 12);
 		test.addEdge(6, 2, 13, 9);
 		test.addEdge(6, 4, 13, 0);
-		
+		System.out.println("Ausgangssituation");
 		test.print();
 		
 		test.fordFulkerson(6, 7);
+		System.out.println("Ergebnis");
 		
 		test.print();
 		
 
-		System.out.println("Teilaufgabe d)");
+		System.out.println("Tailaufgabe d)");
 		test = new Graph();
 		for (int i = 0; i < 8; i++)
 			test.addVertex();
@@ -268,12 +265,13 @@ public class Graph {
 		test.addEdge(6, 0, 1, 0);
 		test.addEdge(6, 2, 1, 0);
 		test.addEdge(6, 4, 1, 0);
+		System.out.println("Ausgangssituation");
 		
 		test.print();
 		
 		test.fordFulkerson(6, 7);
+		System.out.println("Ergebnis");
 		
 		test.print();
-		
 	}
 }
