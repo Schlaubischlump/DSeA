@@ -21,7 +21,7 @@
 \subsection*{Python-Code}
 \lstinputlisting[style=python,basicstyle=\small\ttfamily]{Code/wordCount.py}
 
-Die Anzahl der Buchstaben beträgt 2252.
+Die Anzahl der Buchstaben beträgt 2250.
 
 
 
@@ -100,15 +100,15 @@ bool decrease(Array b, int i, newKey) {
 \subsubsection*{deleteMin}
 \begin{lstlisting}[style=c,basicstyle=\small\ttfamily]
 int deleteMin(Array b) {
-	if (i<b.size)
+	if (b.size<1)
 		return -1; // Index out of bounds
 	min = b[0];
-	b.swap(i, -1); // sei -1 der Index des letzten Elements
+	b.swap(0, -1); // sei -1 der Index des letzten Elements
 	b.size -= 1 // verringere die Array Größe um 1
 
 	// Heap-Eigenschaft herstellen
 	if ((b.size > 0)
-		heapify(b, i)
+		heapify(b, 0)
 	return min;	
 }
 \end{lstlisting}
@@ -131,9 +131,11 @@ void insert(Array b, newKey) {
 Die Laufzeit für die decreaseKey Operation beträgt $O(Baumtiefe) = O(\log(n))$. Unter der Annahme, dass das Resizen des Arrays in konstanter Zeit realisiert werden kann, beträgt somit die Laufzeit für insert ebenfalls $O(\log(n))$. Ausschlaggebend für die deleteMin Operation ist die heapify Methode, da sich der Rest der Implementierung in konstanter Zeit realisieren lässt. Die Laufzeit für heapify und somit auch für deleteMin beträgt ebenfalls $O(Baumtiefe) = O(\log(n))$.
 
 \subsection*{c)}
-Füge alle Elemente unsortiert in ein Array ein. Laufzeit: $O(1)$.\\
-Wende nun Radix-Sort auf das Array an, um es zu sortieren. Laufzeit: $O(n)$. (Siehe hierzu VL 11)\\
-Die Heap-Eigenschaft ist nun für alle Knoten erfüllt.
+%%%Keine Konstante Keylänge, deswegen geht unten genannter Vorschlag mit Radixsort nicht%%%
+%Füge alle Elemente unsortiert in ein Array ein. Laufzeit: $O(1)$.\\
+%Wende nun Radix-Sort auf das Array an, um es zu sortieren. Laufzeit: $O(n)$. (Siehe hierzu VL 11)\\
+%Die Heap-Eigenschaft ist nun für alle Knoten erfüllt.
+
 
 \section*{Zusatz 1}
 \subsection*{a)}
