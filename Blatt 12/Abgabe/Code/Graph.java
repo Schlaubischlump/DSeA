@@ -78,7 +78,7 @@ class Vertex {
 
 	@Override
 	public boolean equals(Object o){
-		if (o != null) {
+		if (o != null || o instanceof Vertex) {
 			return this.hashCode() == o.hashCode();
 		}
 		return false;
