@@ -18,15 +18,31 @@
 \markboth{Markus Vieth,  David Klopp, Christian Stricker}{Markus Vieth, David Klopp, Christian Stricker}
 
 \section*{Aufgabe 1}
- \subsection{a)} 
-  Definiere zwei Farben (hier rot und blau)\\
-  Wähle einen beliebigen Knoten als ''CurrentVertex'' und setze ihn auf blau.\\
-  Wiederhole:\\
-	  Füge alle Nachbarknoten in eine Warteschlange.
-	  Falls CurrentVertex blau und mindestens einer der Nachbarknoten auch blau, gebe false zurück, ansonsten setze alle Knoten auf rot.\\
-	  Falls CurrentVertex rot und mindestens einer der Nachbarknoten auch rot, gebe false zurück, ansonsten setze alle Knoten auf blau.\\
-  Falls die Liste leer ist, gebe True zurück.
-   
+\subsection*{a)} 
+Definiere zwei Farben (hier rot und blau)\\
+Wähle einen beliebigen Knoten als ''CurrentVertex'' und setze ihn auf blau.\\
+
+\begin{lstlisting}
+Wiederhole {
+	Füge alle Nachbarknoten in eine Warteschlange.
+	Falls CurrentVertex blau und mindestens einer der Nachbarknoten auch blau {
+		Rückgabe: FALSE
+	} ansonsten {
+		setze alle Nachbarknoten auf rot
+	}
+	
+	Falls CurrentVertex rot und mindestens einer der Nachbarknoten auch rot {
+		Rückgabe: FALSE
+	} ansonsten {
+		setze alle Nachbarknoten auf blau
+	}
+	Wähle den nächsten Knoten aus der Warteschlange als CurrentVertex
+}
+
+Falls die Liste leer ist {
+	Rückgabe: TRUE
+}
+\end{lstlisting}
 
 
 
