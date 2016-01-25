@@ -129,7 +129,7 @@ public class Graph {
 		stack.push(origin);
 
 		while(stack.size() > 0) {
-			//System.out.println("Der Stack ist noch "+stack.size()+" Elemente gross!");
+			//System.out.println("Der Stack ist noch "+stack.size()+" Elemente groﬂ!");
 			Vertex u = stack.pop();
 			Vector<Edge> edges = u.edges;
 			edges.addAll(u.restEdges);
