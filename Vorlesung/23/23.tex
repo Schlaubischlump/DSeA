@@ -54,12 +54,12 @@ $G_M = (V_1\cup V_2\cup \{ s \}, E')$
  \subsection{Beweis:}
  \paragraph{"'$A\Rightarrow B$"'}
 \begin{description}
- 	\item[$\neg B \Rightarrow \neg A$] Es gibt $M$-augm. Pfad $\Rightarrow$ $M$ ist kein maximum Matching
+ 	\item[$\neg B \Rightarrow \neg A$] Es gibt $M$-augmentierenden Pfad $\Rightarrow$ $M$ ist kein maximum Matching
  \end{description}
- \paragraph{"'$A\Leftrightarrow B$"'}
+ \paragraph{"'$A\Leftarrow B$"'}
  \subparagraph{$\neg A \Rightarrow \neg B$}
  Sei $M$ noch kein maximum Matching.
- \subparagraph{z.z.} Es gibt ein $M$-augm. Pfad\\
+ \subparagraph{z.z.} Es gibt ein $M$-augmentierenden Pfad\\
  $M^*$ sei ein maximum Matching, d.h. $|M^*| > |M|$.\\
  Betrachte den Graphen $\tilde{G} = (V_1\cup V_2, M\oplus M^*)$\\
  Alle Knoten in $\tilde{G}$ haben höchstens Grad 2, ansonsten wäre ein Knoten inzident zu zwei Kanten aus dem Gleichen Matching $M$ oder $M^*$.\\
@@ -71,7 +71,7 @@ $G_M = (V_1\cup V_2\cup \{ s \}, E')$
 \label{fig:Diagramm7}
 \end{figure}
 
- \subparagraph{z.z.} Es gibt in $\tilde{G}$ mindestens einen $M$-augment. Pfad $p$, der mehr Kanten aus $M^*$ als aus $M$ besitzt. Dies gilt, weil ansonsten $|M^*| \leq |M|$
+ \subparagraph{z.z.} Es gibt in $\tilde{G}$ mindestens einen $M$-augmentierenden Pfad $p$, der mehr Kanten aus $M^*$ als aus $M$ besitzt. Dies gilt, weil ansonsten $|M^*| \leq |M|$
  \begin{flushright}
  	q.e.d.
  \end{flushright}
@@ -80,7 +80,7 @@ $G_M = (V_1\cup V_2\cup \{ s \}, E')$
  M = $\emptyset$;
  do {
 	 P = findAugmPath($G_M$);
-	 if (P = = NULL) break;
+	 if (P == NULL) break;
 	 M = M $\oplus$ P;
  } while(true);
  \end{lstlisting}
@@ -95,17 +95,17 @@ $G_M = (V_1\cup V_2\cup \{ s \}, E')$
 
  %Grafik9
  \section{Laufzeit}
- \[ \mathcal{O}(\min(|V_1|,|V_2|)\cdot(|V|+|E|) \]
+ \[ \mathcal{O}\left( \min(|V_1|,|V_2|)\cdot(|V|+|E|) \right)\]
  \[ =\mathcal{O}(|V|\cdot|E|) \]
  \section{Hopcroft-Karp-Algorithmus}
  erzielt Laufzeit von $\mathcal{O}(\sqrt{|V|}\cdot |E|)$\\
  \begin{lstlisting}
 M = $\emptyset$;
 do {
-	$G_L$ = buildLevelGraph($G_M$);			//Knotendisjunkte $M$-augm. Pfade
+	$G_L$ = buildLevelGraph($G_M$);			//Knotendisjunkte $M$-augmentierende Pfade
 	$\mathcal{P}$ = findAugmPath($G_L$);				//$\mathcal{P}=P_1 \dot{\cup}P_2\dot{\cup}\ldots\dot{\cup}P_k$
 	M = M $\oplus$ \mathcal{P};
 } while($\mathcal{P} \neq \emptyset$);
  \end{lstlisting}
- $G_L$ kann mittels BFS in Zeit $\mathcal{O} (|V|+|E|)$ konstruiert werden. Zum Auffinden einer maximalen Menge von $M$-augmentierenden Pfaden in $G_L$ verwenden wir DFS und entfernen jedes mal den gefunden Pfad$P_i$ aus $G_L$. DFS sorgt dafür, dass $P_i$ in Zeit $\mathcal{O}(|P_i|)$ gefunden und gelöscht werden kann.\\
+ $G_L$ kann mittels BFS in Zeit $\mathcal{O} (|V|+|E|)$ konstruiert werden. Zum Auffinden einer maximalen Menge von $M$-augmentierenden Pfaden in $G_L$ verwenden wir DFS und entfernen jedes mal den gefunden Pfad $P_i$ aus $G_L$. DFS sorgt dafür, dass $P_i$ in Zeit $\mathcal{O}(|P_i|)$ gefunden und gelöscht werden kann.\\
  $\Rightarrow$ \texttt{findAugmPaths($G_L$)} hat nur Laufzeit $\mathcal{O}(|E|)$

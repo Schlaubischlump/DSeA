@@ -4,7 +4,7 @@
 \input{../../head/format}
 \input{../../head/math}
 
-\title{Datenstrukturen und effiziente Algorithmen\\ Blatt 11}
+\title{Datenstrukturen und effiziente Algorithmen\\ Übung 11}
 \author{Markus Vieth, David Klopp, Christian Stricker}
 \date{\today}
 
@@ -17,23 +17,61 @@
 \pagestyle{myheadings}
 \markboth{Markus Vieth,  David Klopp, Christian Stricker}{Markus Vieth, David Klopp, Christian Stricker}
 
+
 \section*{Aufgabe 1}
-\subsection*{Python-Code}
-\lstinputlisting[style=python,basicstyle=\small\ttfamily]{Code/wordCount.py}
+\subsection{Mergebale Heap}
+\texttt{insert, Min, ExtractMin, Union, Make-Heap}
+\paragraph{zusätzlich} \texttt{DecreaseKey, Delete}\\
+\begin{tabular}{c|c|c|c|c|c|c|c}
+	 &\texttt{Make-Heap}&\texttt{Insert}&\texttt{Min}&\texttt{Extr.Min}&\texttt{Union}&\texttt{Dec.-Key}&\texttt{Del} \\ \hline
+	 Fib-Heap&$1$&$1$&$1$&$\log n$&$1$&$1$&$\log n$ \\ \hline
+	 Bin-Heap&$1$&$\log n$&$1$&$\log n$&$n$&$\log n$&$\log n$ 
+\end{tabular}
 
-Die Anzahl der Buchstaben beträgt 2250.
+Zyklische doppelt verkettete Liste von Wurzelknoten\\
+Darunter Bäume
+\begin{itemize}
+	\item Kinder eines Knoten ebenfalls zylisch doppelt verkettete Liste
+	\item Jeder Knoten Pointer zum Vater (außer Wurzel) und zum Kind/ zur Kinderliste
+\end{itemize}
+keine Sortierung in Wurzelliste/Kindliste\\
+Heap hat zudem Attribute \texttt{min} und \texttt{size}
+\begin{description}
+	\item[$\forall$ Knoten:]  $\#$Kinder(direkt) ''rank''/''degree''
+	\item[ ]bool marked (false zu Beginn)
+\end{description}
+\begin{description}
+	\item[insert:] neuer Node in Wurzelliste einfügen, H.min und H.size anpassen $\Rightarrow$ konstant
+	\item[Min:] min-pointer zurückgeben $\Rightarrow$ konstant
+	\item[Union:] Wurzellisten zusammenführen, Min und Size anpassen $\Rightarrow$ konstant
+	\item[Extract-min] $ $\\ \begin{description}
+		\item[Für size $< 2$] Min zurückgeben wenn vorhanden, danach leerer Heap
+		\item[Für size $\geq 2$] gib min zurück, setze min auf anderen Knoten in Wurzelliste, consolidate, min und size updaten
+	\end{description} $\Rightarrow~~\log n$ 
+	
+	\paragraph{Consolidate}
+	\subparagraph{Ziel}
+	Nach Consolidierung sollen in der Wurzellsite keine zwei Knoten mit dem selben Rang sein.\\
+	Node-Pointer-Array mit Größe $\log(size)$
+	\item[decreaseKey] Setze Key auf neuen Wert, wenn Heapeigenschaft verletzt:
+	\begin{lstlisting}
+		do {
+			Nehme x in Wurzellsite auf, entferne x aus der Kindesliste seines Parents
+			Wenn x.p nicht makietr war:
+				makiere x.p
+				break
+			sonst x = x.p
+			Nehme x in Wurzellsite auf
+		}while true
+	\end{lstlisting}
+	$\Rightarrow$ amort konstant
+	\item[Delete] \begin{lstlsiting}
+		decreaseKey mit $-\infty$ ($\infty$ bei Maxheap)
+		extractMin
+	\end{lstlsiting}
+	$\Rightarrow~~\log n$ 
+\end{description}
 
-
-
-\section*{Aufgabe 2}
-
-\subsection*{Pseudo-Code}
-\lstinputlisting[style=c,basicstyle=\small\ttfamily]{Code/linearList.c}
-
-\subsection*{Beschreibung}
-Füge drei Knoten in den Fibonacci-Heap ein. Der erste Knoten ist hierbei um 1 größer, der zweite um 1 kleiner und der dritte um 2 kleiner als das aktuelle Minimum. Lösche nun den Minimumknoten, aktualisiere ihn und setzte den Wert des Größten Kindes des neuen Minimumknotens auf das aktuelle Minimum -2. Es ergibt sich somit ein neues Minimum, das in die Wurzelliste aufgenommen wird. Dieses wird nun abschließend gelöscht. In jedem Schritt wird so also genau ein Knoten in den Heap eingefügt. Es ergibt sich somit eine vertikale Liste.
-
-%\subsection*{Beispiel}
 
 \pagebreak
 
@@ -100,15 +138,15 @@ bool decrease(Array b, int i, newKey) {
 \subsubsection*{deleteMin}
 \begin{lstlisting}[style=c,basicstyle=\small\ttfamily]
 int deleteMin(Array b) {
-	if (b.size<1)
+	if (i<b.size)
 		return -1; // Index out of bounds
 	min = b[0];
-	b.swap(0, -1); // sei -1 der Index des letzten Elements
+	b.swap(i, -1); // sei -1 der Index des letzten Elements
 	b.size -= 1 // verringere die Array Größe um 1
 
 	// Heap-Eigenschaft herstellen
 	if ((b.size > 0)
-		heapify(b, 0)
+		heapify(b, i)
 	return min;	
 }
 \end{lstlisting}
@@ -131,11 +169,9 @@ void insert(Array b, newKey) {
 Die Laufzeit für die decreaseKey Operation beträgt $O(Baumtiefe) = O(\log(n))$. Unter der Annahme, dass das Resizen des Arrays in konstanter Zeit realisiert werden kann, beträgt somit die Laufzeit für insert ebenfalls $O(\log(n))$. Ausschlaggebend für die deleteMin Operation ist die heapify Methode, da sich der Rest der Implementierung in konstanter Zeit realisieren lässt. Die Laufzeit für heapify und somit auch für deleteMin beträgt ebenfalls $O(Baumtiefe) = O(\log(n))$.
 
 \subsection*{c)}
-%%%Keine Konstante Keylänge, deswegen geht unten genannter Vorschlag mit Radixsort nicht%%%
-%Füge alle Elemente unsortiert in ein Array ein. Laufzeit: $O(1)$.\\
-%Wende nun Radix-Sort auf das Array an, um es zu sortieren. Laufzeit: $O(n)$. (Siehe hierzu VL 11)\\
-%Die Heap-Eigenschaft ist nun für alle Knoten erfüllt.
-
+Füge alle Elemente unsortiert in ein Array ein. Laufzeit: $O(1)$.\\
+Wende nun Radix-Sort auf das Array an, um es zu sortieren. Laufzeit: $O(n)$. (Siehe hierzu VL 11)\\
+Die Heap-Eigenschaft ist nun für alle Knoten erfüllt.
 
 \section*{Zusatz 1}
 \subsection*{a)}
