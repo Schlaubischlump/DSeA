@@ -43,7 +43,9 @@ Falls die Liste leer ist {
 	Rückgabe: TRUE
 }
 \end{lstlisting}
-
+\subsection*{b)}
+\subsubsection*{BipartiterGraph.java}
+\lstinputlisting[style=java,basicstyle=\scriptsize\ttfamily]{Code/BipartiterGraph.java}
 \section*{Aufgabe 2}
 
 
@@ -63,5 +65,38 @@ Falls die Liste leer ist {
   \end{tabular}
 \end{center}
 Der Input ist niemals größer als die maximale Kapazität. Für alle Knoten bis auf $s$ und $t$ stimmt die Anzahl des Inputs mit der des Outputs  überein. Es handelt sich daher um einen gültigen Fluss.
+\pagebreak
+\subsection*{b)}
+Nein, der eingezeichnete Fluss ist nicht maximal.
+\begin{figure}[h]
+\centering
+\includegraphics[width=\linewidth]{Grafik/Diagramm1}
+\caption{Ford-Fulkerson}
+\label{fig:Ford-Fulkerson}
+\end{figure}
+\subsection*{c)}
+Siehe grüne, gestrichelte Linie. Der Schnitt geht durch die Kanten 0-1,3-t,5-t und entspricht dem maximalen Fluss (29).
+\pagebreak
+\subsection*{d)}
 
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.75\linewidth]{Grafik/Diagramm2}
+	\caption{Matching}
+	\label{fig:Matching}
+\end{figure}
+In diesem Fall handelt es sich um ein Matching Problem. Wir haben die beiden Partitionen $A:=\{0,2,4\}~~B:=\{1,3,5\}$. Die lässt sich durch folgende Feststellungen belegen:
+\begin{itemize}
+	\item Es gibt nur Pfade von $A$ nach $B$
+	\item Es gibt keine Pfade innerhalb von $A$ oder $B$
+	\item $s$ ist mit allen Knoten aus $A$ verbunden und zu $t$ führen nur Kanten aus $B$
+\end{itemize}
+Entfernt man die Knoten $s$ und $t$, sowie alle mit diesen verbunden Kanten, erhält man einen bipartiten Graphen. Entfernt man nun noch alle Kanten mit einem Durchfluss von $0$ und macht aus den gerichteten Kanten ungerichtete, hat man ein maximales Matching.
+\subsection*{Zusatzaufgabe: ResidualGraph.java}
+\lstinputlisting[style=java,basicstyle=\scriptsize\ttfamily]{Code/ResidualGraph.java}
+%\clearpage
+%$ $
+%\clearpage
+\subsection*{Zusatzaufgabe: ResidualGraph.java}
+\lstinputlisting[style=java,basicstyle=\ttfamily\scriptsize]{Code/ResidualGraph.java}
 \end{document}
