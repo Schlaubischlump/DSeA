@@ -22,7 +22,7 @@
 Definiere zwei Farben (hier rot und blau)\\
 Wähle einen beliebigen Knoten als ''CurrentVertex'' und setze ihn auf blau.\\
 
-\begin{lstlisting}
+\begin{lstlisting}[basicstyle=\scriptsize\ttfamily]
 Wiederhole {
 	Füge alle Nachbarknoten in eine Warteschlange.
 	Falls CurrentVertex blau und mindestens einer der Nachbarknoten auch blau {
@@ -44,15 +44,34 @@ Falls die Liste leer ist {
 }
 \end{lstlisting}
 \subsection*{b)}
-\subsubsection*{BipartiterGraph.java}
+\subsubsection*{\footnotesize BipartiterGraph.java}
 \lstinputlisting[style=java,basicstyle=\scriptsize\ttfamily]{Code/BipartiterGraph.java}
 \section*{Aufgabe 2}
+\subsection*{Behauptung}
+Die Umdefinierung ändert nichts an den Aussagen in der Vorlesung
+\subsection*{Beweis}
+\subsubsection*{Aussage}
+Alle Knoten in $\tilde{G}$ haben höchstens Grad 2, ansonsten wäre ein Knoten inzident zu zwei Kanten aus dem Gleichen Matching $M$ oder $M^*$.
+\subsubsection*{Überprüfung}
+An dieser Aussage ändert sich nichts. Man kann das gleiche Argument verwenden.
 
+\subsubsection*{Aussage}
+$\tilde{G}$ besteht aus einzelnen Knoten, Pfaden gerader oder ungerader Länge und Zyklen gerader Länge.
+\subsubsection*{Überprüfung}
+Die einzelnen Knoten sind trivial. Pfade gerader oder ungerader Länge, also Pfade im allgemeinen, können weiterhin bestehen. Auch Zykel können weiterhin entstehen, mit Ausnahme jener mit ungerader Länge, da hier jede Kante abwechselnd aus den Matchings stammen müsste. Dies geht aber nur für gerade Matchings auf. Die Vereinigung hat auch hier keine Auswirkung, da Knoten mit einer Kante aus der Schnittmenge nur den Grad 1 haben kann.
 
+\subsubsection*{Aussage}
+Es gibt in $\tilde{G}$ mindestens einen $M$-augmentierenden Pfad $p$, der mehr Kanten aus $M^*$ als aus $M$ besitzt. Dies gilt, weil ansonsten $|M^*| \leq |M|$
+\subsubsection*{Überprüfung}
+Auch diese Aussage gilt in beiden Fällen, unter der Annahme, dass man Kanten aus der Schnittmenge entweder gar nicht oder zu beiden Matchings zählt.
 \section*{Aufgabe 3}
 \subsection*{a)} 
 
+
+
+
 \begin{center}
+	{\scriptsize\vspace{-20pt}
   \begin{tabular}{| c || c | c | c |}
     \hline
     Knoten & Input & Output & Differenz\\ \hline
@@ -63,20 +82,29 @@ Falls die Liste leer ist {
     4 & 0       & 0       & 0 \\ \hline
     5 & 0 + 3 & 3       & 0 \\ \hline
   \end{tabular}
+}
 \end{center}
+
+$ $\\
+
+\begin{wrapfigure}{R}{0.65\linewidth}
+	\centering
+	\includegraphics[width=0.9\linewidth]{Grafik/Diagramm1}
+	\caption{Ford-Fulkerson}
+	\label{fig:Ford-Fulkerson}
+	\vspace*{-120pt}
+\end{wrapfigure}
+
+$ $\\
+
 Der Input ist niemals größer als die maximale Kapazität. Für alle Knoten bis auf $s$ und $t$ stimmt die Anzahl des Inputs mit der des Outputs  überein. Es handelt sich daher um einen gültigen Fluss.
-\pagebreak
 \subsection*{b)}
 Nein, der eingezeichnete Fluss ist nicht maximal.
-\begin{figure}[h]
-\centering
-\includegraphics[width=\linewidth]{Grafik/Diagramm1}
-\caption{Ford-Fulkerson}
-\label{fig:Ford-Fulkerson}
-\end{figure}
 \subsection*{c)}
 Siehe grüne, gestrichelte Linie. Der Schnitt geht durch die Kanten 0-1,3-t,5-t und entspricht dem maximalen Fluss (29).
+
 \pagebreak
+
 \subsection*{d)}
 
 \begin{figure}[H]
