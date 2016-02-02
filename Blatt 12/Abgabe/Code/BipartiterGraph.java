@@ -33,41 +33,10 @@ public class BipartiterGraph implements UndirectedGraph{
 			this.edge.add(edge);
 		}	
 	}
-	
-	/*class Graph{
-		Vector<Vertex> vertex;
-		
-		public Graph(){
-			this.vertex = new Vector<Vertex>();
-		}
-		
-		public void addVertex(Vertex vertex){
-			this.vertex.add(vertex);
-		}		
-		
-		
-	}*/
 
-	public BipartiterGraph(){		//Fügt Kanten und Knoten hinzu und überprüft den Graphen
-		insertVertex(1);			
-		insertVertex(2);
-		insertVertex(3);
-		insertVertex(4);
-		insertVertex(5);
-		insertVertex(6);
-		insertVertex(7);
-		insertVertex(8);
-		insertEdge(1,1);
-		insertEdge(1,2);
-		insertEdge(2,3);
-		insertEdge(3,5);
-		insertEdge(5,8);
-		insertEdge(2,8);
-		insertEdge(2,4);
-		insertEdge(4,6);
-		insertEdge(1,7);
-		System.out.println(isBipartite());
-	}
+	public BipartiterGraph(){
+    
+    }
 	
 	@Override
 	public void insertVertex(int value) {		
